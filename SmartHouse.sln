@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36212.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6C83A596-D32D-B35F-00DD-F0C99B673980}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{0509A61A-7BD8-431F-B0A4-30F6B24A1EF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CE0D972C-7ED8-4A06-BF7A-340958EFBC19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHouse.domain", "src\SmartHouse.domain\SmartHouse.domain.csproj", "{1DB69F04-4482-D540-ECE7-2023BD32A65B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHouse-test", "test\SmartHouse-test\SmartHouse-test.csproj", "{B2D516DE-D3A7-0141-C672-3059C813D434}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DB69F04-4482-D540-ECE7-2023BD32A65B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB69F04-4482-D540-ECE7-2023BD32A65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB69F04-4482-D540-ECE7-2023BD32A65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB69F04-4482-D540-ECE7-2023BD32A65B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D516DE-D3A7-0141-C672-3059C813D434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D516DE-D3A7-0141-C672-3059C813D434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D516DE-D3A7-0141-C672-3059C813D434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D516DE-D3A7-0141-C672-3059C813D434}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1DB69F04-4482-D540-ECE7-2023BD32A65B} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
+		{B2D516DE-D3A7-0141-C672-3059C813D434} = {CE0D972C-7ED8-4A06-BF7A-340958EFBC19}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E2CF45D-0698-459A-BF8D-541B6D54368C}
+	EndGlobalSection
+EndGlobal

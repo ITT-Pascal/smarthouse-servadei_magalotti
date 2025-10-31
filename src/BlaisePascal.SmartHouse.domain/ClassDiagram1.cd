@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SmartHouse.domain.Ecolamp">
-    <Position X="9.25" Y="2.25" Width="1.5" />
+    <Position X="9.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAAgAAgAAAAAAEAAAAAAQAAAAACAAAAIIAAAAA=</HashCode>
       <FileName>Ecolamp.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -12,6 +12,13 @@
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAgAAAAAAEAAAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Lamp1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SmartHouse.domain.Lampclasse">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lamp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

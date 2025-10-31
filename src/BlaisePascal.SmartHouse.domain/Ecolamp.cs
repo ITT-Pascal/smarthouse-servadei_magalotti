@@ -11,7 +11,7 @@ namespace SmartHouse.domain
         private const int MIN_BRIGHTNESS = 1;
 
         public bool IsOn { get; private set; }
-
+        
         public DateTime TurnOnHour { get; private set; }  
 
         public bool IsPowerSaveMode { get; private set; }
@@ -63,5 +63,7 @@ namespace SmartHouse.domain
             if(TurnOnHour.Hour>=3)
                 SwitchPowerSaveMode();
         }
+   
+   
     }
 }

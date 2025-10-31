@@ -6,7 +6,7 @@
         const int MAX_BRIGHTNESS = 10;
 
         //Properties
-        public  bool IsOn { get; private set; }
+        public bool IsOn { get; private set; }
         public int Brightness { get; private set; }
 
         //Constructor
@@ -23,20 +23,24 @@
                 IsOn = false;
             else
                 IsOn = true;
+            Brightness = MAX_BRIGHTNESS;
+
         }
 
         public void increaseBrightness()
         {
-            Brightness = Math.Min(Brightness + 1, MAX_BRIGHTNESS);
+            if (IsOn == true)
+                if (Brightness >= MAX_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Max Brightness"); }
+            Brightness += 1;
+
         }
 
         public void decreaseBrightness()
         {
-            Brightness = Math.Max(Brightness - 1, MIN_BRIGHTNESS);
-        }
-    }
+            if (IsOn == true)
+                if (Brightness <= MIN_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Min Brightness"); }
+            Brightness -= 1;
 
-    public class Lampclasse
-    {
+        }
     }
 }

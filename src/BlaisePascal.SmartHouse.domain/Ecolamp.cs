@@ -12,9 +12,12 @@ namespace SmartHouse.domain
 
         public bool IsOn { get; private set; }
 
-        public DateTime Hour { get; private set; }  
+        public DateTime TurnOnHour { get; private set; }  
 
         public bool IsPowerSaveMode { get; private set; }
+
+        public int Brightness { get; set; }
+        
 
         public Ecolamp()
         {
@@ -28,19 +31,23 @@ namespace SmartHouse.domain
                 IsOn = false;
             else
                 IsOn = true;
-                Hour = DateTime.Now;
+                TurnOnHour = DateTime.Now;
 
 
         }
 
         public void increaseBrightness()
         {
-            throw new System.NotImplementedException();
+            if (IsOn == true)
+                if (Brightness >= maxBrightness) { throw new ArgumentOutOfRangeException("You can't ecxeed the Max Brightness"); }
+                Brightness += 1;
         }
 
         public void decreaseBrightness()
         {
-            throw new System.NotImplementedException();
+            if (IsOn == true)
+                if (Brightness <= MIN_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Min Brightness"); }
+                Brightness -= 1;
         }
 
         public void SwitchPowerSaveMode()
@@ -48,12 +55,12 @@ namespace SmartHouse.domain
             maxBrightness = 5;
             IsPowerSaveMode =true;
             
-           
+            throw new System.NotImplementedException();
         }
 
         public void ShuldBeActivatedPowerSaveMode()
         {
-            if(Hour.Hour>=3)
+            if(TurnOnHour.Hour>=3)
                 SwitchPowerSaveMode();
         }
     }

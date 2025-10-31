@@ -3,7 +3,7 @@
   <Class Name="SmartHouse.domain.Ecolamp">
     <Position X="9.25" Y="2.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAgAAgAAAAAAEAAAAAAQAAAAACAAAAIIAAAAA=</HashCode>
+      <HashCode>AAAgAAAAgAAgAAAAAAEAAQAAAQAAAAICAAAAIIAAAAA=</HashCode>
       <FileName>Ecolamp.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -12,13 +12,6 @@
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAgAAAAAAEAAAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Lamp1.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SmartHouse.domain.Lampclasse">
-    <Position X="4.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Lamp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

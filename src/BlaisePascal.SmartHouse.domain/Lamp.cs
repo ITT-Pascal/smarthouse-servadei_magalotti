@@ -2,8 +2,8 @@
 {
     public class Lamp
     {
-        const int MinBrightness = 1;
-        const int MaxBrightness = 10;
+        const int MIN_BRIGHTNESS = 1;
+        const int MAX_BRIGHTNESS = 10;
 
         //Properties
         public  bool IsOn { get; private set; }
@@ -13,7 +13,7 @@
         public Lamp()
         {
             IsOn = false;
-            Brightness = MaxBrightness;
+            Brightness = MAX_BRIGHTNESS;
         }
 
         //Methods
@@ -27,14 +27,16 @@
 
         public void increaseBrightness()
         {
-            Brightness = Math.Min(Brightness + 1, MaxBrightness);
+            Brightness = Math.Min(Brightness + 1, MAX_BRIGHTNESS);
         }
 
         public void decreaseBrightness()
         {
-            Brightness = Math.Max(Brightness - 1, MinBrightness);
+            Brightness = Math.Max(Brightness - 1, MIN_BRIGHTNESS);
         }
     }
 
-    
+    public class Lampclasse
+    {
+    }
 }

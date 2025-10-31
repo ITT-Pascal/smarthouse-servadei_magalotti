@@ -35,4 +35,6 @@
             Brightness = Math.Max(Brightness - 1, MinBrightness);
         }
     }
+
+    
 }

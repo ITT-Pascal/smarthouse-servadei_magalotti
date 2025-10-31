@@ -5,7 +5,7 @@
         const int MIN_BRIGHTNESS = 1;
         const int MAX_BRIGHTNESS = 10;
 
-        //Properties
+        //Properties   
         public bool IsOn { get; private set; }
         public int Brightness { get; private set; }
 

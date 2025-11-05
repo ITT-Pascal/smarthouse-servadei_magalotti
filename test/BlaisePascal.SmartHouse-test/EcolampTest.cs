@@ -63,7 +63,8 @@ namespace SmartHouse_test
                 }
                 Assert.Equal(1, lamp.Brightness);
             }
-        
+
+            
 
 
 

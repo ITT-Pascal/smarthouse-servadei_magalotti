@@ -11,7 +11,7 @@ namespace SmartHouse.domain
     {
         public Lamp lamp1 { get; private set; }
         public Lamp lamp2 { get; private set; }
-        public bool AreBothLampsOn { get; private set; }    
+        public bool AreBothLampsOn  => AreBothOn();   
         public TwoLampDevice()
         {
             lamp1 = new Lamp();
@@ -24,14 +24,19 @@ namespace SmartHouse.domain
         }
         public void AlternateStatesLamp()
         {
-            if (lamp1.IsOn != false)
+            if (lamp1.IsOn == true )
             {
-                lamp1.switchOnOff();
+                if (lamp2.IsOn == true)
+                {
+                    lamp2.switchOnOff();
+                }
             }
             else
             {
-                lamp2.switchOnOff();
-
+                if (lamp2.IsOn == false)
+                {
+                    lamp2.switchOnOff();
+                }        
 
             }
         }
@@ -39,17 +44,46 @@ namespace SmartHouse.domain
         {
             if (lamp1.IsOn == true && lamp2.IsOn == true)
             { 
-                AreBothLampsOn = true;
+                return true;
 
             }
             else
             {
-                AreBothLampsOn = false;
+                return false;
             }
-                return AreBothLampsOn;  
+                
 
-        }   
+        }
 
+        public void SwitchBothOn()
+        {
+            if ( AreBothLampsOn == true)
+            {
+                if (lamp1.IsOn == true)
+                {
+                    lamp1.switchOnOff();
+                }
+
+                if (lamp2.IsOn == true)
+                {
+                    lamp2.switchOnOff();
+                }
+
+            }
+            else
+            {
+                if (lamp1.IsOn == false)
+                {
+                    lamp1.switchOnOff();
+                }
+
+                if (lamp2.IsOn == false)
+                {
+                    lamp2.switchOnOff();
+                }
+
+            }
+        }
         public void IncreaseBrightnessBoth()
         {
             lamp1.increaseBrightness();
@@ -59,6 +93,16 @@ namespace SmartHouse.domain
         {
             lamp1.decreaseBrightness();
             lamp2.decreaseBrightness();
+        }
+
+        public void IncreaseOneLampBrightness(Lamp currentLamp )
+        {
+            currentLamp.increaseBrightness();
+        }
+
+        public void DecreaseOneLampBrightness(Lamp currentLamp)
+        {
+            currentLamp.decreaseBrightness();
         }
     }
 }

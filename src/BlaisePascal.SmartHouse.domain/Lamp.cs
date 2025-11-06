@@ -30,16 +30,29 @@
         public void increaseBrightness()
         {
             if (IsOn == true)
-                if (Brightness >= MAX_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Max Brightness"); }
-            Brightness += 1;
+                if (Brightness >= MIN_BRIGHTNESS)
+                {
+                    Brightness = MAX_BRIGHTNESS;
+                }
+                else
+                {
+                    Brightness += 1;
+                }
 
         }
 
         public void decreaseBrightness()
         {
             if (IsOn == true)
-                if (Brightness <= MIN_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Min Brightness"); }
-            Brightness -= 1;
+                if (Brightness <= MIN_BRIGHTNESS)
+                {
+                    Brightness = MIN_BRIGHTNESS; 
+                }
+                else
+                {
+                    Brightness -= 1;
+                }
+                
 
         }
     }

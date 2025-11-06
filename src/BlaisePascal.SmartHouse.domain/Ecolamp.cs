@@ -7,22 +7,22 @@ namespace SmartHouse.domain
 {
     public class Ecolamp
     {
-        private int maxBrightness = 10;
+        public int maxBrightness { get; private set; } = 10;
         private const int MIN_BRIGHTNESS = 1;
 
         public bool IsOn { get; private set; }
-        
-        public DateTime TurnOnHour { get; private set; }  
-
+        public int Brightness { get; set; }
+        public DateTime TurnOnHours { get; private set; }  
         public bool IsPowerSaveMode { get; private set; }
 
-        public int Brightness { get; set; }
+        
         
 
         public Ecolamp()
         {
             IsOn = false;
             IsPowerSaveMode = false;
+            Brightness = maxBrightness ; 
         }   
 
         public void switchOnOff()
@@ -31,7 +31,7 @@ namespace SmartHouse.domain
                 IsOn = false;
             else
                 IsOn = true;
-                TurnOnHour = DateTime.Now;
+                TurnOnHours = DateTime.UtcNow;
 
 
         }
@@ -39,29 +39,68 @@ namespace SmartHouse.domain
         public void increaseBrightness()
         {
             if (IsOn == true)
-                if (Brightness >= maxBrightness) { throw new ArgumentOutOfRangeException("You can't ecxeed the Max Brightness"); }
-                Brightness += 1;
+                if (Brightness +1 >= maxBrightness)
+                {
+                    Brightness = maxBrightness;
+                }
+                else
+                {
+                    Brightness += 1;
+                }
+
         }
 
         public void decreaseBrightness()
         {
             if (IsOn == true)
-                if (Brightness <= MIN_BRIGHTNESS) { throw new ArgumentOutOfRangeException("You can't ecxeed the Min Brightness"); }
-                Brightness -= 1;
+                if (Brightness -1 <= MIN_BRIGHTNESS)
+                {
+                    Brightness = MIN_BRIGHTNESS;
+                }
+                else
+                {
+                    Brightness -= 1;
+                }
+
+
         }
+    
 
         public void SwitchPowerSaveMode()
         {
-            maxBrightness = 5;
-            IsPowerSaveMode =true;
+            if(IsPowerSaveMode == false)
+            {
+                maxBrightness = 5;
+                IsPowerSaveMode = true;
+
+                if (Brightness > maxBrightness)
+                {
+
+                    Brightness = maxBrightness;
+                }
+            }
+            else
+            {
+                maxBrightness = 10;
+                IsPowerSaveMode = false;
+
+                
+            }
             
-            throw new System.NotImplementedException();
+            
         }
 
         public void ShuldBeActivatedPowerSaveMode()
         {
-            if(TurnOnHour.Hour>=3)
-                SwitchPowerSaveMode();
+            if (DateTime.UtcNow - TurnOnHours >= TimeSpan.FromMinutes(180))
+            {
+
+
+                if (IsPowerSaveMode == false)
+                {
+                    SwitchPowerSaveMode();
+                }
+            }
         }
    
    

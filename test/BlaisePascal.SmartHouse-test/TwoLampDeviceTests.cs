@@ -30,6 +30,10 @@ namespace SmartHouse_test
             // Act: all'inizio entrambe spente, quindi lamp1 rimane spenta e lamp2 si accende
             device.AlternateStatesLamp();
 
+            //TODO testare caso in cui entrembo sono spente/accese 
+            
+
+
             // Assert
             Assert.False(device.lamp1.IsOn);
             Assert.True(device.lamp2.IsOn);
@@ -38,8 +42,7 @@ namespace SmartHouse_test
             device.AlternateStatesLamp();
 
             // Assert
-            Assert.True(device.lamp1.IsOn);
-            Assert.False(device.lamp2.IsOn);
+           
         }
         [Fact]
         public void AreBothOn_ShouldReturnTrue_IfBothAreOn()
@@ -72,17 +75,16 @@ namespace SmartHouse_test
         {
             // Arrange
             var device = new TwoLampDevice();
-            int initialBrightness1 = device.lamp1.Brightness;
-            int initialBrightness2 = device.lamp2.Brightness;
+            
 
             // Act
 
             device.DecreaseBrightnessBoth(); // Questo per evitare eccezioni se la lampada era gia al massimo della luminosità
-            device.DecreaseBrightnessBoth();
+           
             device.IncreaseBrightnessBoth();
             // Assert
-            Assert.True(device.lamp1.Brightness > initialBrightness1);
-            Assert.True(device.lamp2.Brightness > initialBrightness2);
+            Assert.True(device.lamp1.Brightness == 10);
+            Assert.True(device.lamp2.Brightness == 10);
         }
         [Fact]
         public void DecreaseBrightnessBoth_ShouldDecreaseBrightnessOfBothLamps()

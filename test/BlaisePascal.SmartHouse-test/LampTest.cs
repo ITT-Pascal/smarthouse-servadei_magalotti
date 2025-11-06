@@ -25,7 +25,9 @@ namespace SmartHouse_test
 
         public void increaseBrightness_WhenBrightnessIsLessThanMax_ItIncreasesByOne()
         {
+
             Lamp lamp = new Lamp();
+            lamp.switchOnOff();
             lamp.decreaseBrightness();
             lamp.increaseBrightness();
             Assert.Equal(10, lamp.Brightness);
@@ -34,7 +36,9 @@ namespace SmartHouse_test
         [Fact]
         public void increaseBrightness_WhenBrightnessIsMax_ItRemainsMax()
         {
+
             Lamp lamp = new Lamp();
+            lamp.switchOnOff();
             lamp.increaseBrightness();
             Assert.Equal(10, lamp.Brightness);
         }
@@ -43,6 +47,7 @@ namespace SmartHouse_test
         public void decreaseBrightness_WhenBrightnessIsMoreThanMin_ItDecreasesByOne()
         {
             Lamp lamp = new Lamp();
+            lamp.switchOnOff();
             lamp.decreaseBrightness();
             Assert.Equal(9, lamp.Brightness);
         }
@@ -51,6 +56,7 @@ namespace SmartHouse_test
         public void decreaseBrightness_WhenBrightnessIsMin_ItRemainsMin()
         {
             Lamp lamp = new Lamp();
+            lamp.switchOnOff();
             for (int i = 0; i < 11; i++)
             {
                 lamp.decreaseBrightness();

@@ -32,6 +32,7 @@ namespace SmartHouse_test
             public void increaseBrightness_WhenBrightnessIsLessThanMax_ItIncreasesByOne()
             {
                 Ecolamp ecolamp = new Ecolamp();
+                ecolamp.switchOnOff();
                 ecolamp.decreaseBrightness();
                 ecolamp.increaseBrightness();
                 Assert.Equal(10, ecolamp.Brightness);
@@ -41,6 +42,7 @@ namespace SmartHouse_test
             public void increaseBrightness_WhenBrightnessIsMax_ItRemainsMax()
             {
                 Ecolamp lamp = new Ecolamp();
+                lamp.switchOnOff();
                 lamp.increaseBrightness();
                 Assert.Equal(10, lamp.Brightness);
             }
@@ -49,6 +51,7 @@ namespace SmartHouse_test
             public void decreaseBrightness_WhenBrightnessIsMoreThanMin_ItDecreasesByOne()
             {
                 Ecolamp lamp = new Ecolamp();
+                lamp.switchOnOff();
                 lamp.decreaseBrightness();
                 Assert.Equal(9, lamp.Brightness);
             }
@@ -57,11 +60,22 @@ namespace SmartHouse_test
             public void decreaseBrightness_WhenBrightnessIsMin_ItRemainsMin()
             {
                 Ecolamp lamp = new Ecolamp();
+                lamp.switchOnOff();
                 for (int i = 0; i < 11; i++)
                 {
                     lamp.decreaseBrightness();
                 }
                 Assert.Equal(1, lamp.Brightness);
+            }
+
+            [Fact]
+            public void increaseBrightness_WhenPowerSaveModeIsActiveted_ItMaxBrightnessIs5()
+            {
+                Ecolamp lamp = new Ecolamp();
+                lamp.switchOnOff();
+                lamp.SwitchPowerSaveMode();
+                
+                Assert.Equal(5, lamp.maxBrightness);
             }
 
             

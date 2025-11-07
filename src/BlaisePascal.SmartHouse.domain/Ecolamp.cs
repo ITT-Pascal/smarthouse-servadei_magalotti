@@ -8,6 +8,7 @@ namespace SmartHouse.domain
     public class Ecolamp
     {
         public int maxBrightness { get; private set; } = 10;
+
         private const int MIN_BRIGHTNESS = 1;
 
         public bool IsOn { get; private set; }

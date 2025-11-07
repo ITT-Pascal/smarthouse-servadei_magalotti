@@ -30,7 +30,7 @@
         public void increaseBrightness()
         {
             if (IsOn == true)
-                if (Brightness >= MIN_BRIGHTNESS)
+                if (Brightness >= MAX_BRIGHTNESS)
                 {
                     Brightness = MAX_BRIGHTNESS;
                 }

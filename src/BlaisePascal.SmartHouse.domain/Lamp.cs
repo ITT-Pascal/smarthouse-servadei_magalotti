@@ -1,17 +1,21 @@
 ﻿namespace SmartHouse.domain
 {
-    public class Lamp
+    public class Lamp:MainLamps
     {
         const int MIN_BRIGHTNESS = 1;
         const int MAX_BRIGHTNESS = 10;
 
         //Properties   
+        public Guid IdLamp { get; private set; }
         public bool IsOn { get; private set; }
         public int Brightness { get; private set; }
 
+        public bool IsEco;
         //Constructor
         public Lamp()
         {
+            IsEco = false;
+            IdLamp = Guid.NewGuid();    
             IsOn = false;
             Brightness = MAX_BRIGHTNESS;
         }

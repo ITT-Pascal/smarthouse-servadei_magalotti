@@ -5,12 +5,13 @@ using System.Text;
 
 namespace SmartHouse.domain
 {
-    public class Ecolamp
+    public class Ecolamp: MainLamps
     {
         public int maxBrightness { get; private set; } = 10;
 
         private const int MIN_BRIGHTNESS = 1;
-
+        public bool IsEco;
+        public Guid IdEcoLamp { get; private set; }
         public bool IsOn { get; private set; }
         public int Brightness { get; set; }
         public DateTime TurnOnHours { get; private set; }  
@@ -21,6 +22,8 @@ namespace SmartHouse.domain
 
         public Ecolamp()
         {
+            IsEco = true;
+            IdEcoLamp= Guid.NewGuid();  
             IsOn = false;
             IsPowerSaveMode = false;
             Brightness = maxBrightness ; 

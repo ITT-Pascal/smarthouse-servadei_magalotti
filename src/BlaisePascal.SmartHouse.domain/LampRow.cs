@@ -24,14 +24,14 @@ namespace SmartHouse.domain
 
         public void AggiungiLamp() 
         {
-            Lamp Lamp1 = new Lamp();
-            LampsTot.Add(new Lamp());
+            Lamp Lamp1 = new Lamp("Lampada",false);
+            LampsTot.Add(new Lamp("Lampada", false));
            
         }
         public void AggiungiEcoLamp() 
         { 
-            Ecolamp EcoLamp1 = new Ecolamp();
-            LampsTot.Add(new Ecolamp());
+            Ecolamp EcoLamp1 = new Ecolamp("EcoLampada",true);
+            LampsTot.Add(new Ecolamp("EcoLampada",true));
            
         
         }

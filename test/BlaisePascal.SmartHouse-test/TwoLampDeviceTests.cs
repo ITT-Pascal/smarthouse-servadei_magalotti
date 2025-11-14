@@ -62,7 +62,7 @@ namespace SmartHouse_test
         {
             // Arrange
             var device = new TwoLampDevice();
-            device.lamp1.switchOnOff(); // solo lamp1 accesa
+            device.lamp1.SwitchOnOff(); // solo lamp1 accesa
 
             // Act
             bool result = device.AreBothOn();

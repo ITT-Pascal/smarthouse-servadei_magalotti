@@ -13,13 +13,13 @@ namespace SmartHouse.domain
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
         */
         
-        public List<MainLamps> LampsTot { get; private set; }
+        public List<LampModel> LampsTot { get; private set; }
 
         public LampRow() 
         { 
           
        
-        List<MainLamps> LampsTotT = new List<MainLamps>();   
+        List<LampModel> LampsTotT = new List<LampModel>();   
         }
 
         public void AggiungiLamp() 
@@ -96,7 +96,7 @@ namespace SmartHouse.domain
         { 
             if(isLamp == true)
             {
-                LampsTot.IS
+                throw new NotImplementedException();    
             }
         
         

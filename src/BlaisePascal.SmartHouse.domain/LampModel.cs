@@ -6,36 +6,36 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class MainLamps
+    public class LampModel //base class
     {
-        public Guid IdLamps { get; private set; }
-        public bool IsOn { get; private set; }
+        //properties
+        public Guid IdLamps { get; protected set; }
+        public bool IsOn { get; protected set; }
         public int Brightness { get; set; }
-        public bool IsEco { get; private set; }
-        public string LampsName { get; private set; }
-
-        public MainLamps(string lampsName, bool isEco)
+        public bool IsEco { get; protected set; }
+        public string Name { get; protected set; }
+        //constructor
+        public LampModel(string lampsName, bool isEco)
         {
             IdLamps = Guid.NewGuid();
-            LampsName = lampsName;
+            Name = lampsName;
             IsEco = isEco;
             IsOn = false;
-            
         }
-
-        public virtual void SwitchOnOff ()
+        //methods
+        public virtual void SwitchOnOff()
         {
             {
                 if (IsOn)
                     IsOn = false;
                 else
                     IsOn = true;
-               
-
             }
-
-
         }
-
     }
 }
+
+        
+
+    
+

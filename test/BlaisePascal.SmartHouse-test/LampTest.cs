@@ -2,17 +2,17 @@ using SmartHouse.domain;
 namespace SmartHouse_test
 
 {
-    public class LampTest
+    public class LampTests
     {
         [Fact]
         public void switchIsOnOff_WhenIsOnIsFalse_ItChangesItToTrue()
         {
 
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
 
             //Assert
             Assert.True(lamp.IsOn);
@@ -22,11 +22,11 @@ namespace SmartHouse_test
         public void switchIsOnOff_WhenIsOnIsTrue_ItChangesItToFalse()
         {
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
+            lamp.SwitchOnOff();
 
             //Assert
             Assert.False(lamp.IsOn);
@@ -37,10 +37,10 @@ namespace SmartHouse_test
         public void increaseBrightness_WhenBrightnessIsLessThanMax_ItIncreasesByOne()
         {
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
             lamp.decreaseBrightness();
             lamp.increaseBrightness();
 
@@ -52,10 +52,10 @@ namespace SmartHouse_test
         public void increaseBrightness_WhenBrightnessIsMax_ItRemainsMax()
         {
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
             lamp.increaseBrightness();
 
             //Assert
@@ -67,10 +67,10 @@ namespace SmartHouse_test
         {
 
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
             lamp.decreaseBrightness();
 
             //Assert
@@ -82,10 +82,10 @@ namespace SmartHouse_test
         {
 
             //Arrange
-            Lamp lamp = new Lamp();
+            Lamp lamp = new Lamp("Lampada", false);
 
             //Act
-            lamp.switchOnOff();
+            lamp.SwitchOnOff();
             for (int i = 0; i < 11; i++)
             {
                 lamp.decreaseBrightness();

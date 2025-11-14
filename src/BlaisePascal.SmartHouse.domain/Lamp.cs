@@ -6,30 +6,18 @@
         const int MAX_BRIGHTNESS = 10;
 
         //Properties   
-        public Guid IdLamp { get; private set; }
-        public bool IsOn { get; private set; }
-        public int Brightness { get; private set; }
-
-        public bool IsEco;
+        
+        
+    
         //Constructor
-        public Lamp()
+        public Lamp(string lampsName,bool isEco):base(lampsName,isEco)
         {
-            IsEco = false;
-            IdLamp = Guid.NewGuid();    
-            IsOn = false;
             Brightness = MAX_BRIGHTNESS;
+
         }
 
         //Methods
-        public void switchOnOff()
-        {
-            if (IsOn)
-                IsOn = false;
-            else
-                IsOn = true;
-            Brightness = MAX_BRIGHTNESS;
-
-        }
+        
 
         public void increaseBrightness()
         {

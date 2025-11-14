@@ -10,35 +10,34 @@ namespace SmartHouse.domain
         public int maxBrightness { get; private set; } = 10;
 
         private const int MIN_BRIGHTNESS = 1;
-        public bool IsEco;
-        public Guid IdEcoLamp { get; private set; }
-        public bool IsOn { get; private set; }
-        public int Brightness { get; set; }
+       
+        
+        
         public DateTime TurnOnHours { get; private set; }  
         public bool IsPowerSaveMode { get; private set; }
 
         
         
 
-        public Ecolamp()
+        public Ecolamp(string lampsName, bool isEco) : base(lampsName, isEco)
         {
-            IsEco = true;
-            IdEcoLamp= Guid.NewGuid();  
-            IsOn = false;
+           
             IsPowerSaveMode = false;
             Brightness = maxBrightness ; 
         }   
 
-        public void switchOnOff()
+        public override void SwitchOnOff()
         {
+            base.SwitchOnOff();
             if (IsOn)
-                IsOn = false;
-            else
-                IsOn = true;
+            {
                 TurnOnHours = DateTime.UtcNow;
-
-
+            }
         }
+        
+
+
+        
 
         public void increaseBrightness()
         {

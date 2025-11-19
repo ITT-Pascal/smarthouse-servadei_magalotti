@@ -13,7 +13,7 @@ namespace SmartHouse.domain
         //Properties
         public LampModel lamp1 { get; private set; }
         public LampModel lamp2 { get; private set; }
-        public bool AreBothLampsOn  => AreBothOn(); 
+        public bool AreBothLampsOn  => AreBothOn();
         //Constructor
         public TwoLampDevice()
         {
@@ -100,7 +100,7 @@ namespace SmartHouse.domain
             currentLamp.increaseBrightness();
         }
 
-        public void DecreaseOneLampBrightness(LampModel currentLamp)
+        public void DecreaseOneLampBrightness(Lamp currentLamp)
         {
             currentLamp.decreaseBrightness();
         }

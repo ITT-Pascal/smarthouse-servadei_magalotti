@@ -12,61 +12,47 @@ namespace SmartHouse.domain
         /*public List<Lamp> Lamps = new List<Lamp> { }; 
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
         */
-        
+        //Properties
         public List<LampModel> LampsTot { get; private set; }
-
+        //Costructor
         public LampRow() 
         { 
-          
-       
-        List<LampModel> LampsTotT = new List<LampModel>();   
+            List<LampModel> LampsTotT = new List<LampModel>();   
         }
-
+        //methods
         public void AggiungiLamp() 
         {
             Lamp Lamp1 = new Lamp("Lampada",false);
             LampsTot.Add(new Lamp("Lampada", false));
-           
         }
         public void AggiungiEcoLamp() 
         { 
             Ecolamp EcoLamp1 = new Ecolamp("EcoLampada",true);
             LampsTot.Add(new Ecolamp("EcoLampada",true));
-           
-        
         }
-
-
-
         public void aggiungiLampadeDaltipo(bool IsLamp)
         {
             if(IsLamp== true)
             {
                 AggiungiLamp();
             }
-            
             AggiungiEcoLamp();
-
-
         }
         public void AccendiLampInBaseAllaPosizione(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
                 if (LampsTot[Position].IsOn == false)
                 {
-                
                 LampsTot[Position].SwitchOnOff();
-                
                 }
         }
         public void SpegniLampInBaseAllaPosizione(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
-                if (LampsTot[Position].IsOn == true)
-                {
+            if (LampsTot[Position].IsOn == true)
+            {
                 LampsTot[Position].SwitchOnOff();
-
-                }
+            }
         }
         public void AccendiTutte()
         {
@@ -88,8 +74,6 @@ namespace SmartHouse.domain
                 }
             }
         }
-
-
 //TODO 
         public void SpegniLamp(bool isLamp)
             
@@ -101,7 +85,5 @@ namespace SmartHouse.domain
         
         
         }    
-
-        
     }
 }

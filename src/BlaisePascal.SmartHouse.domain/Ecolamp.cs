@@ -22,13 +22,18 @@ namespace SmartHouse.domain
         //methods
         public override void SwitchOnOff()
         {
-            base.SwitchOnOff();
+            {
+                if (IsOn)
+                    IsOn = false;
+                else
+                    IsOn = true;
+            }
             if (IsOn)
             {
                 TurnOnHours = DateTime.UtcNow;
             }
         }
-        public void increaseBrightness()
+        public override void increaseBrightness()
         {
             if (IsOn == true)
             {
@@ -38,7 +43,7 @@ namespace SmartHouse.domain
                     Brightness += 1;
             }
         }
-        public void decreaseBrightness()
+        public override void decreaseBrightness()
         {
             if (IsOn == true)
             {

@@ -11,7 +11,16 @@
             Brightness = MAX_BRIGHTNESS;
         }
         //Methods
-        public void increaseBrightness()
+        public override void SwitchOnOff()
+        {
+            {
+                if (IsOn)
+                    IsOn = false;
+                else
+                    IsOn = true;
+            }
+        }
+        public override void increaseBrightness()
         {
             if (IsOn == true)
             {
@@ -21,7 +30,7 @@
                     Brightness += 1;
             }
         }
-        public void decreaseBrightness()
+        public override void decreaseBrightness()
         {
             if (IsOn == true)
             {

@@ -23,15 +23,10 @@ namespace SmartHouse.domain
             IsOn = false;
         }
         //methods
-        public virtual void SwitchOnOff()
-        {
-            {
-                if (IsOn)
-                    IsOn = false;
-                else
-                    IsOn = true;
-            }
-        }
+        public virtual void SwitchOnOff() { }//vuoti poichè gli hanno tutte e 2 le classe derivate pero ognuna lo implementa in modo diverso
+        public virtual void increaseBrightness() { }
+        public virtual void decreaseBrightness() { }
+
     }
 }
 

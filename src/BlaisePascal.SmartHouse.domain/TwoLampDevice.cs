@@ -13,13 +13,17 @@ namespace SmartHouse.domain
         //Properties
         public LampModel lamp1 { get; private set; }
         public LampModel lamp2 { get; private set; }
-        public bool AreBothLampsOn  => AreBothOn();
+        public bool AreBothLampsOn  => AreBothOn(); 
         //Constructor
         public TwoLampDevice()
         {
-            lamp1 = new LampModel("LampadaNormale", false);
-            lamp2 = new LampModel("LampadaEco", true);
+            // Default sensato per i test: si possono comunque passare tipi diversi con l'overload sotto
+            lamp1 = new Lamp("LampadaNormale", false);
+            lamp2 = new Ecolamp("LampadaEco", true);
         }
+
+        
+
         //Methods
         public void SwitchOnOffBothLamps()
         {
@@ -91,12 +95,12 @@ namespace SmartHouse.domain
             lamp2.decreaseBrightness();
         }
 
-        public void IncreaseOneLampBrightness(Lamp currentLamp )
+        public void IncreaseOneLampBrightness(LampModel currentLamp )
         {
             currentLamp.increaseBrightness();
         }
 
-        public void DecreaseOneLampBrightness(Lamp currentLamp)
+        public void DecreaseOneLampBrightness(LampModel currentLamp)
         {
             currentLamp.decreaseBrightness();
         }

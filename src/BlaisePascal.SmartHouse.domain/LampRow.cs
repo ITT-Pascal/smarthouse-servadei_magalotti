@@ -10,6 +10,17 @@ namespace SmartHouse.domain
 {
     public class LampRow 
     {
+        /*
+
+        AbstractLamp? FindLampWithMinIntensity() -> return della lampada con minima intensità
+        List<AbstractLamp> FindLampsByIntensityRange(int min, int max) -> return delle lampade con intensità in un certo range
+        List<AbstractLamp> FindAllOn() -> return delle lampade che si trovano in stato acceso
+        List<AbstractLamp> FindAllOff() -> return delle lampade che sono trovano in stato spento
+        AbstractLamp? FindLampById(Guid id) -> return della lampada con Guid specificato
+        List<AbstractLamp> SortByIntensity(bool descending) -> return delle lampade
+        */
+
+
         /*public List<Lamp> Lamps = new List<Lamp> { }; 
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
         */
@@ -146,6 +157,20 @@ namespace SmartHouse.domain
                         LampsTot[i].Brightness = brightness;
             }
         }
+        public LampModel FindLampWithMaxIntensity()
+        {
+            LampModel model = null;
+            int highestBrightness = 0;
+            for(int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].Brightness > highestBrightness)
+                    highestBrightness = LampsTot[i].Brightness;
+                    model = LampsTot[i];
+            }
+            return model;
+        }
+
+
         //TODO 
         public void SpegniLamp(bool isLamp)
             

@@ -4,11 +4,24 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
     public class LampRow
     {
+
+        /* FUNZIONI DA FARE PER LAMPS ROW
+        SwitchOff(Guid id) -> spegne solo la lampada con il Guid specificato
+        SwitchOff(string name) -> spegne solo la lampada con il name specificato
+        RemoveLampInPosition(Guid id, int position) -> rimuove una nuova lampada in una posizione specifica
+        RemoveLampInPosition(string name, int position) -> rimuove una nuova lampada in una posizione specifica
+        SetIntensityForAllLamps(int intensity) -> setta l'intensità di ogni lampada ad una intensità specifica
+        SetIntensityForLamp(Guid id, int intensity) -> setta l'intensità di una lampada specifica ad una intensità specifica
+        SetIntensityForLamp(string name, int intensity) -> setta l'intensità di una lampada specifica ad una intensità specifica
+        */
+
+
         /*public List<Lamp> Lamps = new List<Lamp> { }; 
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
         */

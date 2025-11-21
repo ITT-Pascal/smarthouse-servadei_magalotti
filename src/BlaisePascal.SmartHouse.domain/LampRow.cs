@@ -8,19 +8,8 @@ using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
-    public class LampRow
+    public class LampRow 
     {
-
-        /* FUNZIONI DA FARE PER LAMPS ROW
-        SwitchOff(Guid id) -> spegne solo la lampada con il Guid specificato
-        SwitchOff(string name) -> spegne solo la lampada con il name specificato
-        RemoveLampInPosition(Guid id, int position) -> rimuove una nuova lampada in una posizione specifica
-        RemoveLampInPosition(string name, int position) -> rimuove una nuova lampada in una posizione specifica
-        SetIntensityForAllLamps(int intensity) -> setta l'intensità di ogni lampada ad una intensità specifica
-        SetIntensityForLamp(Guid id, int intensity) -> setta l'intensità di una lampada specifica ad una intensità specifica
-        SetIntensityForLamp(string name, int intensity) -> setta l'intensità di una lampada specifica ad una intensità specifica
-        */
-
 
         /*public List<Lamp> Lamps = new List<Lamp> { }; 
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
@@ -87,7 +76,78 @@ namespace SmartHouse.domain
                 }
             }
         }
-//TODO 
+        public void SwitchOff(Guid id)
+        {
+            
+            for (int i = 0; i< LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetId() == id)
+                {
+                    if (LampsTot[i].IsOn == true)
+                        LampsTot[i].SwitchOnOff();
+                }                  
+            }
+        }
+        public void SwitchOff(string name)
+        {
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetName() == name)
+                {
+                    if (LampsTot[i].IsOn == true)
+                        LampsTot[i].SwitchOnOff();
+                }
+            }
+        }
+        public void RemoveLampInPosition(Guid id, int position)
+        {
+            if (position < 0) throw new ArgumentOutOfRangeException("position");
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetId() == id)
+                {
+                    LampsTot.Remove(LampsTot[position]);
+                }
+            }
+        }
+        public void RemoveLampInPosition(string name, int position)
+        {
+            if (position < 0) throw new ArgumentOutOfRangeException("position");
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetName() == name)
+                {
+                    LampsTot.Remove(LampsTot[position]);
+                }
+            }
+        }
+        public void SetIntensityForAllLamps(int brightness)
+        {
+            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
+            for (int i = 0; i<LampsTot.Count(); i++)
+            {
+                LampsTot[i].Brightness = brightness;                  
+            }
+        }
+        public void SetIntensityForLamp(Guid id, int brightness)
+        {
+            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetId() == id)
+                    LampsTot[i].Brightness = brightness;                                  
+            }
+        }
+        public void SetIntensityForLamp(string name, int brightness)
+        {
+            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
+            for (int i = 0; i < LampsTot.Count(); i++)            
+            {
+                if (LampsTot[i].GetName() == name)
+                        LampsTot[i].Brightness = brightness;
+            }
+        }
+        //TODO 
         public void SpegniLamp(bool isLamp)
             
         { 

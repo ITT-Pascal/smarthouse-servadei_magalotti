@@ -27,6 +27,8 @@ namespace SmartHouse.domain
         public virtual void increaseBrightness() { }
         public virtual void decreaseBrightness() { }
 
+        public Guid GetId() { return IdLamps; }
+        public string GetName() { return Name; }      
     }
 }
 

@@ -10,7 +10,6 @@ namespace SmartHouse.domain
 {
     public class LampRow 
     {
-
         /*public List<Lamp> Lamps = new List<Lamp> { }; 
         public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
         */

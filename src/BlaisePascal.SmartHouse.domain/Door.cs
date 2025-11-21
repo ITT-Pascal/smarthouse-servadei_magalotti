@@ -59,7 +59,12 @@ namespace SmartHouse.domain
 
         public void Unlock()
         {
-            IsLocked = false;
+            if (IsLocked) 
+            {
+                IsLocked = false;
+            }
+            throw new InvalidOperationException("Door is already unlocked.");
+
         }
 
         public void SwitchOpenClose()

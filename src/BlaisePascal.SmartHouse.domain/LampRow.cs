@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -12,11 +13,10 @@ namespace SmartHouse.domain
     {
         /*
 
-        AbstractLamp? FindLampWithMinIntensity() -> return della lampada con minima intensità
-        List<AbstractLamp> FindLampsByIntensityRange(int min, int max) -> return delle lampade con intensità in un certo range
-        List<AbstractLamp> FindAllOn() -> return delle lampade che si trovano in stato acceso
-        List<AbstractLamp> FindAllOff() -> return delle lampade che sono trovano in stato spento
-        AbstractLamp? FindLampById(Guid id) -> return della lampada con Guid specificato
+            
+            
+
+   
         List<AbstractLamp> SortByIntensity(bool descending) -> return delle lampade
         */
 
@@ -169,11 +169,80 @@ namespace SmartHouse.domain
             }
             return model;
         }
+        public LampModel FindLampWithMinIntensity()
+        {
+            LampModel model = null;
+            int lowestBrightness = 10;
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].Brightness < lowestBrightness)
+                    lowestBrightness = LampsTot[i].Brightness;
+                model = LampsTot[i];
+            }
+            return model;
+        }
+        public List<LampModel> FindLampsByIntensityRange(int min, int max)
+        {
+            List<LampModel> brightnessLampFinder = new List<LampModel>();
+            if (min > max) throw new ArgumentException("the min value cannot be higher than the max value");
 
+            for(int i = 0; i<LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].Brightness >= min && LampsTot[i].Brightness <= max)
+                {
+                    brightnessLampFinder.Add(LampsTot[i]);
+                }
+            }
+            return brightnessLampFinder;
+        }
+        public List<LampModel> FindAllOn()
+        {
+            List<LampModel> IsOnLampList = new List<LampModel>();
+            for (int i = 0; i<LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].IsOn == true)
+                {
+                    IsOnLampList.Add(LampsTot[i]);
+                }
+            }
+            return IsOnLampList;  
+        }
+        public List<LampModel> FindAllOff()
+        {
+            List<LampModel> IsOffLampList = new List<LampModel>();
+            for (int i = 0; i < LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].IsOn == false)
+                {
+                    IsOffLampList.Add(LampsTot[i]);
+                }
+            }
+            return IsOffLampList;
+        }
+        public LampModel? FindLampById(Guid id)
+        {
+            LampModel model = null;
+            for (int i = 0; i<LampsTot.Count(); i++)
+            {
+                if (LampsTot[i].GetId() == id)
+                    model = LampsTot[i];    
+            }    
+            return model;
+        }
+        //TODO
+        //List<AbstractLamp> SortByIntensity(bool descending) -> return delle lampade
+        public List<LampModel> SortByIntensity(bool descending)
+        {
+            if (descending == true)
+            {
+                for (int i = 0; i < LampsTot.Count(); i++)
+                {
 
+                }
+            }
+        }
         //TODO 
-        public void SpegniLamp(bool isLamp)
-            
+        public void SpegniLamp(bool isLamp)    
         { 
             if(isLamp == true)
             {

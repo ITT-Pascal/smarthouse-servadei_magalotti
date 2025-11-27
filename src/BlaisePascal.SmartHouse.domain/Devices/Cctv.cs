@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,12 +20,17 @@ namespace SmartHouse.domain
             Name = name;
             IdCctv = Guid.NewGuid();
             IsOn = false;
+            Status = DeviceStatus.Unknown;
         }
         public Cctv(string name, Guid idCctv, bool isOn)
         {
             Name = name;
             IdCctv = idCctv;
             IsOn = isOn;
+            if (isOn)
+                Status = DeviceStatus.On;
+            else
+                Status = DeviceStatus.Unknown;
         }
 
         public Cctv() { }
@@ -62,9 +68,13 @@ namespace SmartHouse.domain
             TurnOn();         
         }
 
-        public void SetStatus(CctvStatus status)
+        public void SetCctvStatus (CctvStatus status)
         {
-            CctvStatus = status;
+            if (Status == DeviceStatus.On)
+            {
+                CctvStatus = status;
+            }
+            throw new InvalidOperationException("Cannot set CCTV status when the air conditioner is not on.");
         }
     }
 }

@@ -8,31 +8,23 @@ namespace SmartHouse.domain.Devices
 {
     public class Thermostat: ClimateDevices
     {
-        public const double DefoultDimmer = 0.5;
-
+        //Properties
+        public const double DefaultDimmer = 0.5;
+        //Constructors
         public Thermostat(string name) : base(name) { }
         public Thermostat(string name, Guid id, bool isOn, double temperature) : base(name, id, isOn, temperature) { }
         public Thermostat() : base() { }
-
-        
-
+        //Methods
         public void DimmerTemperatureUp()
         {
-            if (!(Status == DeviceStatus.On))
-            {
-                throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off.");
-            }
-            Temperature += DefoultDimmer;
+            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off."); }
+            Temperature += DefaultDimmer;
             LastModifiedAtUtc = DateTime.UtcNow;
         }
-
         public void DimmerTemperatureDown()
         {
-            if (!(Status == DeviceStatus.On))
-            {
-                throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off.");
-            }
-            Temperature -= DefoultDimmer;
+            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off."); }
+            Temperature -= DefaultDimmer;
             LastModifiedAtUtc = DateTime.UtcNow;
         }
     }

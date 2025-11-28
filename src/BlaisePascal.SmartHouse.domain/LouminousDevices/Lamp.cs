@@ -13,12 +13,9 @@
         //Methods
         public override void SwitchOnOff()
         {
-            {
-                if (IsOn)
-                    IsOn = false;
-                else
-                    IsOn = true;
-            }
+            if (IsOn)
+                IsOn = false;
+            IsOn = true;
         }
         public override void increaseBrightness()
         {
@@ -26,8 +23,7 @@
             {
                 if (Brightness >= MAX_BRIGHTNESS)
                     Brightness = MAX_BRIGHTNESS;
-                else
-                    Brightness += 1;
+                Brightness += 1;
             }
         }
         public override void decreaseBrightness()
@@ -35,13 +31,10 @@
             if (IsOn == true)
             {
                 if (Brightness <= MIN_BRIGHTNESS)
-                        Brightness = MIN_BRIGHTNESS;
-                else
-                        Brightness -= 1;
+                    Brightness = MIN_BRIGHTNESS;
+                Brightness -= 1;
             }
-        }
-
-        
+        }  
     }
 }        
     

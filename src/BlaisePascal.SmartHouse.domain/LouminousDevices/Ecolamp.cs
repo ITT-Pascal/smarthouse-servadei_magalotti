@@ -22,16 +22,12 @@ namespace SmartHouse.domain
         //methods
         public override void SwitchOnOff()
         {
-            {
-                if (IsOn)
-                    IsOn = false;
-                else
-                    IsOn = true;
-            }
             if (IsOn)
-            {
+                IsOn = false;
+            IsOn = true;
+            
+            if (IsOn)
                 TurnOnHours = DateTime.UtcNow;
-            }
         }
         public override void increaseBrightness()
         {
@@ -39,8 +35,8 @@ namespace SmartHouse.domain
             {
                 if (Brightness + 1 >= maxBrightness)
                     Brightness = maxBrightness;
-                else
-                    Brightness += 1;
+
+                Brightness += 1;
             }
         }
         public override void decreaseBrightness()
@@ -49,8 +45,7 @@ namespace SmartHouse.domain
             {
                 if (Brightness - 1 <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
-                else
-                    Brightness -= 1;
+                Brightness -= 1;
             }
         }
         public void SwitchPowerSaveMode()
@@ -60,24 +55,17 @@ namespace SmartHouse.domain
                 maxBrightness = 5;
                 IsPowerSaveMode = true;
                 if (Brightness > maxBrightness)
-                {
                     Brightness = maxBrightness;
-                }
             }
-            else
-            {
-                maxBrightness = 10;
-                IsPowerSaveMode = false;
-            }
+            maxBrightness = 10;
+            IsPowerSaveMode = false;    
         }
         public void ShuldBeActivatedPowerSaveMode()
         {
             if (DateTime.UtcNow - TurnOnHours >= TimeSpan.FromMinutes(180))
             {
                 if (IsPowerSaveMode == false)
-                {
-                    SwitchPowerSaveMode();
-                }
+                    SwitchPowerSaveMode();      
             }
         }
     }

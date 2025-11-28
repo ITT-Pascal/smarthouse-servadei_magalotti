@@ -32,57 +32,32 @@ namespace SmartHouse.domain
         }
         public void AlternateStatesLamp()
         {
-            if (lamp1.IsOn == true )
-            {
+            if (lamp1.IsOn == true)
                 if (lamp2.IsOn == true)
-                {
                     lamp2.SwitchOnOff();
-                }
-            }
-            else
-            {
+                else
                 if (lamp2.IsOn == false)
-                {
                     lamp2.SwitchOnOff();
-                }        
-            }
         }
         public bool AreBothOn()
         {
             if (lamp1.IsOn == true && lamp2.IsOn == true)
-            {
                 return true;
-            }
             else
-            {
-                return false;
-            }
+                return false;    
         }        
-        public void SwitchBothOn()
+        public void ToggleSwitchBoth()
         {
             if ( AreBothLampsOn == true)
-            {
-                if (lamp1.IsOn == true)
-                {
-                    lamp1.SwitchOnOff();
-                }
-
-                if (lamp2.IsOn == true)
-                {
-                    lamp2.SwitchOnOff();
-                }
-            }
+                 if (lamp1.IsOn == true)
+                     lamp1.SwitchOnOff();
+                 if (lamp2.IsOn == true)
+                     lamp2.SwitchOnOff();
             else
-            {
                 if (lamp1.IsOn == false)
-                {
                     lamp1.SwitchOnOff();
-                }
                 if (lamp2.IsOn == false)
-                {
                     lamp2.SwitchOnOff();
-                }
-            }
         }
         public void IncreaseBrightnessBoth()
         {
@@ -94,12 +69,10 @@ namespace SmartHouse.domain
             lamp1.decreaseBrightness();
             lamp2.decreaseBrightness();
         }
-
-        public void IncreaseOneLampBrightness(LampModel currentLamp )
+        public void IncreaseOneLampBrightness(LampModel currentLamp)
         {
             currentLamp.increaseBrightness();
         }
-
         public void DecreaseOneLampBrightness(Lamp currentLamp)
         {
             currentLamp.decreaseBrightness();

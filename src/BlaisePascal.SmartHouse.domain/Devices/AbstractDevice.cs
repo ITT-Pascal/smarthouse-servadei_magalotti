@@ -8,13 +8,14 @@ namespace SmartHouse.domain.Devices
 {
     public abstract class AbstractDevice
     {
+        //Properties
         public bool IsOn { get; protected set; }
         public string Name { get; protected set; }
         public Guid Id { get; protected set; }
         public DeviceStatus Status { get; protected set; }
         public DateTime CreatedAtUtc { get; protected set; }
         public DateTime LastModifiedAtUtc { get; protected set; }
-
+        //Constructors
         public AbstractDevice(string name)
         {
             Name = name;
@@ -29,15 +30,15 @@ namespace SmartHouse.domain.Devices
             Name = name;
             Id = id;
             IsOn = isOn;
+            
             if (isOn)
-                Status = DeviceStatus.On;
-            else
-                Status = DeviceStatus.Unknown;
+               Status = DeviceStatus.On;
+            
+            Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
         }
-        public AbstractDevice()
-        { CreatedAtUtc = DateTime.UtcNow; }
-
+        public AbstractDevice() { CreatedAtUtc = DateTime.UtcNow; }
+        //Methods
         public virtual void Rename(string newName)
         {
             Name = newName;

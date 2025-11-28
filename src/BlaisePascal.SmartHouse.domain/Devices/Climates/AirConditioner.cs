@@ -9,18 +9,17 @@ namespace SmartHouse.domain
 {
     public class AirConditioner: ClimateDevices
     {
+        //Properties 
         public AirConditionerStatus AirConditionerStatus { get; private set; }
-        
+        //Constructors
         public AirConditioner(string name): base(name) { }
         public AirConditioner(string name, Guid id, bool isOn, double temperature): base(name, id, isOn, temperature) { }
         public AirConditioner(): base() { }
-
-       
-
+        //Methods
         public void SetAirConditionerStatus(AirConditionerStatus status)
         {
-            if (Status == DeviceStatus.On )
-            {
+            if (Status == DeviceStatus.On)
+            { 
                 AirConditionerStatus = status;
                 LastModifiedAtUtc = DateTime.UtcNow;
             }

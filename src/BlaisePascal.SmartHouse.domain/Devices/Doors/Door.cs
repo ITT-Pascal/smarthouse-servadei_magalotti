@@ -9,9 +9,10 @@ namespace SmartHouse.domain
 {
     public class Door: AbstractDevice
     {
+        //Properties
         public bool IsOpen { get; private set; }
         public bool IsLocked { get; private set; }
-
+        //Constructors
         public Door(string name): base(name) { }
         public Door(string name, Guid id, bool isOn) : base(name, id, isOn) 
         {
@@ -19,7 +20,7 @@ namespace SmartHouse.domain
             IsLocked = false;
         }
         public Door() : base() { }
-
+        //Methods
         public void Open()
         {
             if (Status == DeviceStatus.On && !IsLocked)
@@ -28,7 +29,6 @@ namespace SmartHouse.domain
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
             throw new InvalidOperationException("Cannot act on a door that is not on and unlocked.");
-
         }
         public void Close()
         {
@@ -58,33 +58,20 @@ namespace SmartHouse.domain
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
             throw new InvalidOperationException("Cannot unlock a door that is not closed and on.");
-
         }
-
         public void SwitchOpenClose()
         {
             if (IsOpen)
-            {
                 Close();
-               
-            }
-            else
-            {
-                Open();
-            }
+            Open();
+            
         }
-
         public void SwitchLockUnlock()
         {
             if (IsLocked)
-            {
                 Unlock();
-
-            }
-            else
-            {
-                Lock();
-            }
+            Lock();
+            
         }
     }
 }

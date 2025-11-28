@@ -1,0 +1,30 @@
+﻿using SmartHouse.domain.Devices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SmartHouse.domain
+{
+    public class AirConditioner: ClimateDevices
+    {
+        public AirConditionerStatus AirConditionerStatus { get; private set; }
+        
+        public AirConditioner(string name): base(name) { }
+        public AirConditioner(string name, Guid id, bool isOn, double temperature): base(name, id, isOn, temperature) { }
+        public AirConditioner(): base() { }
+
+       
+
+        public void SetAirConditionerStatus(AirConditionerStatus status)
+        {
+            if (Status == DeviceStatus.On )
+            {
+                AirConditionerStatus = status;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
+            throw new InvalidOperationException("Cannot set air conditioner status when the air conditioner is not on.");           
+        }
+    }
+}

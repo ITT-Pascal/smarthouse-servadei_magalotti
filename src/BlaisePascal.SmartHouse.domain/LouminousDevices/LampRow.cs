@@ -9,42 +9,29 @@ using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
-    public class LampRow 
+    public class LampRow
     {
-        /*
-
-            
-            
-
-   
-        List<AbstractLamp> SortByIntensity(bool descending) -> return delle lampade
-        */
-
-
-        /*public List<Lamp> Lamps = new List<Lamp> { }; 
-        public List<Ecolamp> Ecolamps = new List<Ecolamp> { };   
-        */
         //Properties
         public List<LampModel> LampsTot { get; private set; }
         //Costructor
-        public LampRow() 
-        { 
-            List<LampModel> LampsTotT = new List<LampModel>();   
+        public LampRow()
+        {
+            List<LampModel> LampsTotT = new List<LampModel>();
         }
         //methods
-        public void AggiungiLamp() 
+        public void AggiungiLamp()
         {
-            Lamp Lamp1 = new Lamp("Lampada",false);
+            Lamp Lamp1 = new Lamp("Lampada", false);
             LampsTot.Add(new Lamp("Lampada", false));
         }
-        public void AggiungiEcoLamp() 
-        { 
-            Ecolamp EcoLamp1 = new Ecolamp("EcoLampada",true);
-            LampsTot.Add(new Ecolamp("EcoLampada",true));
+        public void AggiungiEcoLamp()
+        {
+            Ecolamp EcoLamp1 = new Ecolamp("EcoLampada", true);
+            LampsTot.Add(new Ecolamp("EcoLampada", true));
         }
         public void aggiungiLampadeDaltipo(bool IsLamp)
         {
-            if(IsLamp== true)
+            if (IsLamp == true)
             {
                 AggiungiLamp();
             }
@@ -53,10 +40,10 @@ namespace SmartHouse.domain
         public void AccendiLampInBaseAllaPosizione(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
-                if (LampsTot[Position].IsOn == false)
-                {
+            if (LampsTot[Position].IsOn == false)
+            {
                 LampsTot[Position].SwitchOnOff();
-                }
+            }
         }
         public void SpegniLampInBaseAllaPosizione(int Position)
         {
@@ -88,14 +75,14 @@ namespace SmartHouse.domain
         }
         public void SwitchOff(Guid id)
         {
-            
-            for (int i = 0; i< LampsTot.Count(); i++)
+
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].GetId() == id)
                 {
                     if (LampsTot[i].IsOn == true)
                         LampsTot[i].SwitchOnOff();
-                }                  
+                }
             }
         }
         public void SwitchOff(string name)
@@ -134,9 +121,9 @@ namespace SmartHouse.domain
         public void SetIntensityForAllLamps(int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i<LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
-                LampsTot[i].Brightness = brightness;                  
+                LampsTot[i].Brightness = brightness;
             }
         }
         public void SetIntensityForLamp(Guid id, int brightness)
@@ -145,27 +132,27 @@ namespace SmartHouse.domain
             for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].GetId() == id)
-                    LampsTot[i].Brightness = brightness;                                  
+                    LampsTot[i].Brightness = brightness;
             }
         }
         public void SetIntensityForLamp(string name, int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i < LampsTot.Count(); i++)            
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].GetName() == name)
-                        LampsTot[i].Brightness = brightness;
+                    LampsTot[i].Brightness = brightness;
             }
         }
         public LampModel FindLampWithMaxIntensity()
         {
             LampModel model = null;
             int highestBrightness = 0;
-            for(int i = 0; i < LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].Brightness > highestBrightness)
                     highestBrightness = LampsTot[i].Brightness;
-                    model = LampsTot[i];
+                model = LampsTot[i];
             }
             return model;
         }
@@ -186,7 +173,7 @@ namespace SmartHouse.domain
             List<LampModel> brightnessLampFinder = new List<LampModel>();
             if (min > max) throw new ArgumentException("the min value cannot be higher than the max value");
 
-            for(int i = 0; i<LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].Brightness >= min && LampsTot[i].Brightness <= max)
                 {
@@ -198,14 +185,14 @@ namespace SmartHouse.domain
         public List<LampModel> FindAllOn()
         {
             List<LampModel> IsOnLampList = new List<LampModel>();
-            for (int i = 0; i<LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].IsOn == true)
                 {
                     IsOnLampList.Add(LampsTot[i]);
                 }
             }
-            return IsOnLampList;  
+            return IsOnLampList;
         }
         public List<LampModel> FindAllOff()
         {
@@ -222,34 +209,37 @@ namespace SmartHouse.domain
         public LampModel? FindLampById(Guid id)
         {
             LampModel model = null;
-            for (int i = 0; i<LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++)
             {
                 if (LampsTot[i].GetId() == id)
-                    model = LampsTot[i];    
-            }    
+                    model = LampsTot[i];
+            }
             return model;
         }
-        //TODO
-        //List<AbstractLamp> SortByIntensity(bool descending) -> return delle lampade
-        public List<LampModel> SortByIntensity(bool descending)
+        public List<LampModel> SortByBrightness(bool descending)
         {
-            if (descending == true)
+            List<LampModel> anotherLampModelList = new List<LampModel>();
+            List<LampModel> order = new List<LampModel>();
+            if (LampsTot.Count != 0)
             {
-                for (int i = 0; i < LampsTot.Count(); i++)
+                if (descending == true)
                 {
-
+                    for (int i = 0; i < LampsTot.Count; i++)
+                    {
+                        anotherLampModelList.Add(LampsTot[i]);
+                    }
+                    for (int i = 0; i < anotherLampModelList.Count; i++)
+                    {
+                        FindLampWithMaxIntensity();
+                        order.Add(anotherLampModelList[i]);
+                        anotherLampModelList.Remove(anotherLampModelList[i]);
+                    }
+                    return order;
                 }
+                    LampsTot.Sort();
+                    return LampsTot;               
             }
-        }
-        //TODO 
-        public void SpegniLamp(bool isLamp)    
-        { 
-            if(isLamp == true)
-            {
-                throw new NotImplementedException();    
-            }
-        
-        
-        }    
+            throw new Exception("the list is empty!");
+        }      
     }
 }

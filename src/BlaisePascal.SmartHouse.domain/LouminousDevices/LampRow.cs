@@ -113,10 +113,11 @@ namespace SmartHouse.domain
         {
             LampModel model = null;
             int highestBrightness = 0;
-            for (int i = 0; i < LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++) 
                  if (LampsTot[i].Brightness > highestBrightness)
-                     highestBrightness = LampsTot[i].Brightness;
-                 model = LampsTot[i];
+                    highestBrightness = LampsTot[i].Brightness;
+                 else
+                    model = LampsTot[i];
             return model;
         }
         public LampModel FindLampWithMinIntensity()
@@ -126,7 +127,8 @@ namespace SmartHouse.domain
             for (int i = 0; i < LampsTot.Count(); i++)
                  if (LampsTot[i].Brightness < lowestBrightness)
                      lowestBrightness = LampsTot[i].Brightness;
-                 model = LampsTot[i]; 
+                 else
+                    model = LampsTot[i]; 
             return model;
         }
         public List<LampModel> FindLampsByIntensityRange(int min, int max)
@@ -172,11 +174,12 @@ namespace SmartHouse.domain
                 {
                     for (int i = 0; i < LampsTot.Count; i++)
                          anotherLampModelList.Add(LampsTot[i]);
-                    
                     for (int i = 0; i < anotherLampModelList.Count; i++)
-                         FindLampWithMaxIntensity();
-                         order.Add(anotherLampModelList[i]);
-                         anotherLampModelList.Remove(anotherLampModelList[i]);             
+                    {
+                        FindLampWithMaxIntensity();
+                        order.Add(anotherLampModelList[i]);
+                        anotherLampModelList.Remove(anotherLampModelList[i]);
+                    }
                     return order;
                 }
                 LampsTot.Sort();

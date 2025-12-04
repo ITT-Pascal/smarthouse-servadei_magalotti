@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" version="29.2.4">
+  <diagram id="uml" name="SmartHouse UML">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="12" edge="1" style="endArrow=block;endFill=1;" />
+        <mxCell id="1" parent="12" />
+        <mxCell id="pvFZkLSDKkRFnmPZpIl8-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Classname" vertex="1">
+          <mxGeometry height="86" width="160" x="-3050" y="-1540" as="geometry" />
+        </mxCell>
+        <mxCell id="pvFZkLSDKkRFnmPZpIl8-13" parent="pvFZkLSDKkRFnmPZpIl8-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ field: type" vertex="1">
+          <mxGeometry height="26" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pvFZkLSDKkRFnmPZpIl8-14" parent="pvFZkLSDKkRFnmPZpIl8-12" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="pvFZkLSDKkRFnmPZpIl8-15" parent="pvFZkLSDKkRFnmPZpIl8-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ method(type): type" vertex="1">
+          <mxGeometry height="26" width="160" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-12" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="AbstractDevice" vertex="1">
+          <mxGeometry height="188" width="160" x="-6135" y="-4418" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-13" parent="j6ChaKaD8XTokwuoiacX-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;&amp;nbsp; + Guid Id&lt;/div&gt;&lt;div&gt;&amp;nbsp; + bool IsOn&lt;/div&gt;&lt;div&gt;&amp;nbsp; + string Name&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DeviceStatus Status&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime CreatedAtUtc&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime LastModifiedAtUtc&lt;/div&gt;" vertex="1">
+          <mxGeometry height="124" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-15" parent="j6ChaKaD8XTokwuoiacX-12" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="(metodi)" vertex="1">
+          <mxGeometry height="30" width="160" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-14" parent="j6ChaKaD8XTokwuoiacX-12" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-16" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Cctv" vertex="1">
+          <mxGeometry height="86" width="160" x="-6535" y="-4000" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-17" parent="j6ChaKaD8XTokwuoiacX-16" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ CctvStatus CctvStatus" vertex="1">
+          <mxGeometry height="26" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-18" parent="j6ChaKaD8XTokwuoiacX-16" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-19" parent="j6ChaKaD8XTokwuoiacX-16" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ void SetCctvStatus()" vertex="1">
+          <mxGeometry height="26" width="160" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-20" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="AirConditioner" vertex="1">
+          <mxGeometry height="120" width="190" x="-6435" y="-3790" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-21" parent="j6ChaKaD8XTokwuoiacX-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ AirConditionerStatus AirConditionerStatus&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="44" width="190" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-22" parent="j6ChaKaD8XTokwuoiacX-20" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="190" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-23" parent="j6ChaKaD8XTokwuoiacX-20" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ void SetAirConditionerStatus()" vertex="1">
+          <mxGeometry height="42" width="190" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-24" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="ClimateDevices" vertex="1">
+          <mxGeometry height="86" width="160" x="-6135" y="-3700" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-25" parent="j6ChaKaD8XTokwuoiacX-24" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="+ double Temperature" vertex="1">
+          <mxGeometry height="26" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-26" parent="j6ChaKaD8XTokwuoiacX-24" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-27" parent="j6ChaKaD8XTokwuoiacX-24" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="(metodi)" vertex="1">
+          <mxGeometry height="26" width="160" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-28" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Thermostat" vertex="1">
+          <mxGeometry height="110" width="210" x="-5780" y="-4012" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-29" parent="j6ChaKaD8XTokwuoiacX-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="prop" vertex="1">
+          <mxGeometry height="26" width="210" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-30" parent="j6ChaKaD8XTokwuoiacX-28" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="210" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-31" parent="j6ChaKaD8XTokwuoiacX-28" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ void DimmerTemperatureUp()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void DimmerTemperatureDown()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="210" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-33" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="Door" vertex="1">
+          <mxGeometry height="190" width="160" x="-5860" y="-3825" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-34" parent="j6ChaKaD8XTokwuoiacX-33" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ bool IsOpen&lt;/div&gt;&lt;div&gt;&amp;nbsp; + bool IsLocked&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="44" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-35" parent="j6ChaKaD8XTokwuoiacX-33" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-36" parent="j6ChaKaD8XTokwuoiacX-33" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ void Open()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void Close()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void Lock()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void Unlock()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void SwitchOpenClose()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void SwitchLockUnlock()&lt;/div&gt;" vertex="1">
+          <mxGeometry height="112" width="160" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-37" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="EcoLamp" vertex="1">
+          <mxGeometry height="150" width="250" x="-5820" y="-4230" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-38" parent="j6ChaKaD8XTokwuoiacX-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ int maxBrightness&lt;/div&gt;&lt;div&gt;&amp;nbsp; + bool IsPowerSaveMode&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime TurnOnHours&lt;/div&gt;" vertex="1">
+          <mxGeometry height="64" width="250" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-39" parent="j6ChaKaD8XTokwuoiacX-37" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="250" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-40" parent="j6ChaKaD8XTokwuoiacX-37" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ void SwitchPowerSaveMode()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void ShuldBeActivatedPowerSaveMode()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="52" width="250" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-41" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="LampModel" vertex="1">
+          <mxGeometry height="130" width="160" x="-6420" y="-4210" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-42" parent="j6ChaKaD8XTokwuoiacX-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ int Brightness&lt;/div&gt;&lt;div&gt;&amp;nbsp; + bool IsEco&lt;/div&gt;" vertex="1">
+          <mxGeometry height="54" width="160" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-43" parent="j6ChaKaD8XTokwuoiacX-41" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="160" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-44" parent="j6ChaKaD8XTokwuoiacX-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ Guid GetId()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + string GetName()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="42" width="160" y="88" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-45" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="LampRow" vertex="1">
+          <mxGeometry height="450" width="290" x="-6200" y="-4182" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-46" parent="j6ChaKaD8XTokwuoiacX-45" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ class LampRow&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime CreatedAtUtc&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime LastModifiedAtUtc&lt;/div&gt;&lt;div&gt;&amp;nbsp; + List&amp;lt;LampModel&amp;gt; LampsTot&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="104" width="290" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-47" parent="j6ChaKaD8XTokwuoiacX-45" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="290" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-48" parent="j6ChaKaD8XTokwuoiacX-45" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ void AddLamp()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void AddEcoLamp()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void AddLampByType()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnLampOnByPosition()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnLampOffByPosition()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnOnAll()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnOffAll()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnLampOffById()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void TurnLampOffByName()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void RemoveLampByPositionAndId()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void RemoveLampByPositionAndName()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void SetIntensityForAllLamps()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void SetIntensityLampById()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void SetIntensityByLampName()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + LampModel FindLampWithMaxIntensity()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + LampModel FindLampWithMinIntensity()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + List&amp;lt;LampModel&amp;gt; FindLampsByIntensityRange()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + List&amp;lt;LampModel&amp;gt; FindAllLampOn()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + List&amp;lt;LampModel&amp;gt; FindAllLampOff()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + List&amp;lt;LampModel&amp;gt; SortByBrightness()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="312" width="290" y="138" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-51" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="TwoLampDevice" vertex="1">
+          <mxGeometry height="250" width="230" x="-6720" y="-4316" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-52" parent="j6ChaKaD8XTokwuoiacX-51" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;+ class TwoLampDevice&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime CreatedAtUtc&lt;/div&gt;&lt;div&gt;&amp;nbsp; + DateTime LastModifiedAtUtc&lt;/div&gt;&lt;div&gt;&amp;nbsp; + LampModel lamp1&lt;/div&gt;&lt;div&gt;&amp;nbsp; + LampModel lamp2&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="94" width="230" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-53" parent="j6ChaKaD8XTokwuoiacX-51" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="230" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="j6ChaKaD8XTokwuoiacX-54" parent="j6ChaKaD8XTokwuoiacX-51" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="&lt;div&gt;&amp;nbsp;+ void SwitchOnOffBothLamps()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void AlternateStatesLamp()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + bool AreBothOn()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void ToggleSwitchBoth()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void IncreaseBrightnessBoth()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void DecreaseBrightnessBoth()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void IncreaseOneLampBrightness()&lt;/div&gt;&lt;div&gt;&amp;nbsp; + void DecreaseOneLampBrightness()&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="122" width="230" y="128" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

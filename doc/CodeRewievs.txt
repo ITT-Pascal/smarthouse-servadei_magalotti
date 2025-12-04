@@ -1,0 +1,37 @@
+usare nomi ben distinti e determinati, clean code quindi migliorare spaziature inutili ed eccessive
+
+nome classe astratta modello generico, gerarchia per modellare, 
+
+protected set = modificatore di acceso, che può modificare quella proprietà all'interno della classe stessa, ma anche dalle classe figlie.
+ dentro classe astratta :
+public DateTime CreatedAtUtc {get; protected set;}//momento in qui si è creata.
+
+public DateTime LastModifiedAtUtc { get; protected; }//momento in qui viene modificato lo stato dell'oggetto.
+
+si può fare il costruttore dentro a classe astratta, ma non verrà mai istanziata .magari ti da una base per le classi figlie.
+
+nome parametro deve essere lo stesso.
+
+public void Dimmer(int amount)//aumento brightness di quantità scelta da utente.
+
+enum class: acceso, spento powersavemode ecc.
+
+es.
+	public enum DeviceStatus
+	{
+		
+		Unknown,
+		
+		Off,
+		
+		On,
+	
+		Standby,
+	
+		Error,
+
+	}
+
+classe astratta:
+
+Status = DeviceStatus.Off;

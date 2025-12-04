@@ -1,35 +1,45 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SmartHouse.domain
 {
-    public class LampModel //base class
+    public class LampModel: AbstractDevice
     {
         //properties
-        public Guid IdLamps { get; protected set; }
-        public bool IsOn { get; protected set; }
         public int Brightness { get; set; }
         public bool IsEco { get; protected set; }
-        public string Name { get; protected set; }
         //constructor
-        public LampModel(string lampsName, bool isEco)
-        {
-            IdLamps = Guid.NewGuid();
-            Name = lampsName;
+        public LampModel(string name) : base(name) { }
+        public LampModel(string name, Guid id, bool isOn, bool isEco) : base(name, id) 
+        { 
             IsEco = isEco;
-            IsOn = false;
         }
+        public LampModel() : base() { }
         //methods
-        public virtual void SwitchOnOff() { }//vuoti poichè gli hanno tutte e 2 le classe derivate pero ognuna lo implementa in modo diverso
-        public virtual void increaseBrightness() { }
-        public virtual void decreaseBrightness() { }
+        public override void TurnOn()
+        {
+            base.TurnOn();
+        }
+        public override void TurnOff()
+        {
+            base.TurnOff();
+        }
 
-        public Guid GetId() { return IdLamps; }
-        public string GetName() { return Name; }      
-    }
+        public override void Toggle() 
+        {
+            base.Toggle();
+        }
+        public virtual void increaseBrightness() { }
+        public virtual void decreaseBrightness() { }   
+        
+        public Guid GetId() { return Id;}
+        public string GetName() { return Name; } 
+        }
 }
 
         

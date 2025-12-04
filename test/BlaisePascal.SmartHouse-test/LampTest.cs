@@ -9,10 +9,10 @@ namespace SmartHouse_test
         {
 
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
+            lamp.Toggle();
 
             //Assert
             Assert.True(lamp.IsOn);
@@ -22,11 +22,11 @@ namespace SmartHouse_test
         public void switchIsOnOff_WhenIsOnIsTrue_ItChangesItToFalse()
         {
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
-            lamp.SwitchOnOff();
+            lamp.Toggle();
+            lamp.Toggle();
 
             //Assert
             Assert.False(lamp.IsOn);
@@ -37,10 +37,10 @@ namespace SmartHouse_test
         public void increaseBrightness_WhenBrightnessIsLessThanMax_ItIncreasesByOne()
         {
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
+            lamp.Toggle();
             lamp.decreaseBrightness();
             lamp.increaseBrightness();
 
@@ -52,10 +52,10 @@ namespace SmartHouse_test
         public void increaseBrightness_WhenBrightnessIsMax_ItRemainsMax()
         {
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
+            lamp.Toggle();
             lamp.increaseBrightness();
 
             //Assert
@@ -67,10 +67,10 @@ namespace SmartHouse_test
         {
 
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
+            lamp.Toggle();
             lamp.decreaseBrightness();
 
             //Assert
@@ -82,10 +82,10 @@ namespace SmartHouse_test
         {
 
             //Arrange
-            Lamp lamp = new Lamp("Lampada", false);
+            Lamp lamp = new Lamp("Lampada");
 
             //Act
-            lamp.SwitchOnOff();
+            lamp.Toggle();
             for (int i = 0; i < 11; i++)
             {
                 lamp.decreaseBrightness();

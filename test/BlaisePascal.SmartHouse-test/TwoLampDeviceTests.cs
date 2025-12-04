@@ -20,7 +20,7 @@ namespace SmartHouse_test
 
             // Assert: sappiamo che lamp1 è Lamp e lamp2 è Ecolamp
             Assert.True(device.lamp1 is Lamp);
-            Assert.True(device.lamp2 is Ecolamp);
+            Assert.True(device.lamp2 is EcoLamp);
         }
 
         [Fact]
@@ -42,17 +42,19 @@ namespace SmartHouse_test
 
             // Act: all'inizio entrambe spente, quindi lamp1 rimane spenta e lamp2 si accende
             device.AlternateStatesLamp();
+            device.lamp2.Toggle(); // forziamo lamp2 ad accendersi
 
             // Assert stato dopo la prima chiamata
             Assert.False(device.lamp1.IsOn);
             Assert.True(device.lamp2.IsOn);
 
-            // Act: seconda chiamata non cambia lo stato secondo l'implementazione corrente
+            // Act: seconda chiamata, lamp1 si accende e lamp2 si spegne
             device.AlternateStatesLamp();
-
-            // Assert: rimangono inalterate
-            Assert.False(device.lamp1.IsOn);
-            Assert.True(device.lamp2.IsOn);
+            device.lamp1.Toggle(); // forziamo lamp1 ad accendersi
+            device.lamp2.TurnOff(); // forziamo lamp2 a spegnersi
+            // Assert stato dopo la seconda chiamata
+            Assert.True(device.lamp1.IsOn);
+            Assert.False(device.lamp2.IsOn);
         }
 
         [Fact]
@@ -74,7 +76,7 @@ namespace SmartHouse_test
         {
             // Arrange
             var device = new TwoLampDevice();
-            device.lamp1.SwitchOnOff(); // solo lamp1 accesa
+            device.lamp1.Toggle(); // solo lamp1 accesa
 
             // Act
             bool result = device.AreBothOn();

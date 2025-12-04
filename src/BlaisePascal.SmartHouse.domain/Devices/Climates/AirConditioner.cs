@@ -23,7 +23,8 @@ namespace SmartHouse.domain
                 AirConditionerStatus = status;
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
-            throw new InvalidOperationException("Cannot set air conditioner status when the air conditioner is not on.");           
+            else 
+                throw new InvalidOperationException("Cannot set air conditioner status when the air conditioner is not on.");           
         }
     }
 }

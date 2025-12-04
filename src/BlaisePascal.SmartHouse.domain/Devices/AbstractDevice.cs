@@ -8,13 +8,14 @@ namespace SmartHouse.domain.Devices
 {
     public abstract class AbstractDevice
     {
-        //Properties
-        public bool IsOn { get; protected set; }
-        public string Name { get; protected set; }
         public Guid Id { get; protected set; }
-        public DeviceStatus Status { get; protected set; }
+        //Properties
+        public bool IsOn { get; protected set; } 
+        public string Name { get; protected set; }
+        public DeviceStatus Status { get;  protected set; }
         public DateTime CreatedAtUtc { get; protected set; }
         public DateTime LastModifiedAtUtc { get; protected set; }
+
         //Constructors
         public AbstractDevice(string name)
         {
@@ -23,16 +24,14 @@ namespace SmartHouse.domain.Devices
             IsOn = false;
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
-
         }
-        public AbstractDevice(string name, Guid id, bool isOn)
+        public AbstractDevice(string name, Guid id)
         {
             Name = name;
             Id = id;
-            IsOn = isOn;
+            IsOn = false;
             
-            if (isOn)
-               Status = DeviceStatus.On;
+            
             
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
@@ -41,12 +40,14 @@ namespace SmartHouse.domain.Devices
         //Methods
         public virtual void Rename(string newName)
         {
+            if (Name == newName)
+                throw new InvalidOperationException("Name cannot be the same");
             Name = newName;
         }
 
         public virtual void TurnOn()
         {
-            if (!(Status == DeviceStatus.On))
+            if ((Status == DeviceStatus.On))
             {
                 throw new InvalidOperationException("Device already on.");
             }
@@ -63,8 +64,8 @@ namespace SmartHouse.domain.Devices
                 Status = DeviceStatus.Off;
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
-            throw new InvalidOperationException("Device already off.");
-
+            else
+                throw new InvalidOperationException("Device already off.");
         }
 
         public virtual void Toggle()

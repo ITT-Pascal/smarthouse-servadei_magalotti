@@ -16,73 +16,73 @@ namespace SmartHouse.domain
         //Costructor
         public LampRow()
         {
-            List<LampModel> LampsTotT = new List<LampModel>();
+            LampsTot = new List<LampModel>();
         }
         //Methods
-        public void AggiungiLamp()
+        public void AddLamp()
         {
-            Lamp Lamp1 = new Lamp("Lampada", false);
-            LampsTot.Add(new Lamp("Lampada", false));
+            Lamp Lamp1 = new Lamp("Lampada");
+            LampsTot.Add(new Lamp("Lampada"));
         }
-        public void AggiungiEcoLamp()
+        public void AddEcoLamp()
         {
-            Ecolamp EcoLamp1 = new Ecolamp("EcoLampada", true);
-            LampsTot.Add(new Ecolamp("EcoLampada", true));
+            EcoLamp EcoLamp1 = new EcoLamp("EcoLampada");
+            LampsTot.Add(new EcoLamp("EcoLampada"));
         }
-        public void aggiungiLampadeDaltipo(bool IsLamp)
+        public void AddLampByType(bool IsLamp)
         {
             if (IsLamp == true)
-                AggiungiLamp();
-            AggiungiEcoLamp();
+                AddLamp();
+            AddEcoLamp();
         }
-        public void AccendiLampInBaseAllaPosizione(int Position)
+        public void TurnLampOnByPosition(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
             if (LampsTot[Position].IsOn == false)
-                LampsTot[Position].SwitchOnOff();    
+                LampsTot[Position].Toggle();    
         }
-        public void SpegniLampInBaseAllaPosizione(int Position)
+        public void TurnLampOffByPosition(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
             if (LampsTot[Position].IsOn == true)
-                LampsTot[Position].SwitchOnOff();   
+                LampsTot[Position].Toggle();   
         }
-        public void AccendiTutte()
+        public void TurnOnAll()
         {
             for (int i = 0; i < LampsTot.Count(); i++)
                 if (LampsTot[i].IsOn == false)
-                    LampsTot[i].SwitchOnOff();  
+                    LampsTot[i].Toggle();  
         }
-        public void SpegniTutte()
+        public void TurnOffAll()
         {
             for (int i = 0; i < LampsTot.Count(); i++)
                 if (LampsTot[i].IsOn == true)
-                    LampsTot[i].SwitchOnOff();    
+                    LampsTot[i].Toggle();    
         }
-        public void SwitchOff(Guid id)
+        public void TurnLampOffById(Guid id)
         {
             for (int i = 0; i < LampsTot.Count(); i++)
             
                 if (LampsTot[i].GetId() == id)
                     if (LampsTot[i].IsOn == true)
-                        LampsTot[i].SwitchOnOff(); 
+                        LampsTot[i].Toggle(); 
         }
-        public void SwitchOff(string name)
+        public void TurnLampOffByName(string name)
         {
             for (int i = 0; i < LampsTot.Count(); i++)
             
                 if (LampsTot[i].GetName() == name)
                     if (LampsTot[i].IsOn == true)
-                        LampsTot[i].SwitchOnOff();  
+                        LampsTot[i].Toggle();  
         }
-        public void RemoveLampInPosition(Guid id, int position)
+        public void RemoveLampByPositionAndId(Guid id, int position)
         {
                 if (position < 0) throw new ArgumentOutOfRangeException("position");
                     for (int i = 0; i < LampsTot.Count(); i++)
                          if (LampsTot[i].GetId() == id)
                             LampsTot.Remove(LampsTot[position]);                             
         }
-        public void RemoveLampInPosition(string name, int position)
+        public void RemoveLampByPositionAndName(string name, int position)
         {
             if (position < 0) throw new ArgumentOutOfRangeException("position");
             for (int i = 0; i < LampsTot.Count(); i++)
@@ -95,14 +95,14 @@ namespace SmartHouse.domain
             for (int i = 0; i < LampsTot.Count(); i++)
                  LampsTot[i].Brightness = brightness;       
         }
-        public void SetIntensityForLamp(Guid id, int brightness)
+        public void SetIntensityLampById(Guid id, int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
             for (int i = 0; i < LampsTot.Count(); i++)
                  if (LampsTot[i].GetId() == id)
                     LampsTot[i].Brightness = brightness;    
         }
-        public void SetIntensityForLamp(string name, int brightness)
+        public void SetIntensityByLampName(string name, int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
             for (int i = 0; i < LampsTot.Count(); i++)
@@ -140,7 +140,7 @@ namespace SmartHouse.domain
                      brightnessLampFinder.Add(LampsTot[i]);        
             return brightnessLampFinder;
         }
-        public List<LampModel> FindAllOn()
+        public List<LampModel> FindAllLampOn()
         {
             List<LampModel> IsOnLampList = new List<LampModel>();
             for (int i = 0; i < LampsTot.Count(); i++)
@@ -148,7 +148,7 @@ namespace SmartHouse.domain
                      IsOnLampList.Add(LampsTot[i]);
             return IsOnLampList;
         }
-        public List<LampModel> FindAllOff()
+        public List<LampModel> FindAllLampOff()
         {
             List<LampModel> IsOffLampList = new List<LampModel>();
             for (int i = 0; i < LampsTot.Count(); i++)

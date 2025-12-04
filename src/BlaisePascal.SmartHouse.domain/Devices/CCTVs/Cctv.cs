@@ -12,7 +12,7 @@ namespace SmartHouse.domain
         public CctvStatus CctvStatus { get; private set; }
 
         public Cctv(string name): base(name){}
-        public Cctv(string name, Guid id, bool isOn) : base(name, id, isOn) { }
+        public Cctv(string name, Guid id, bool isOn) : base(name, id) { }
         public Cctv() : base() { }
 
         public void SetCctvStatus (CctvStatus status)
@@ -22,7 +22,8 @@ namespace SmartHouse.domain
                 CctvStatus = status;
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
-            throw new InvalidOperationException("Cannot set CCTV status when the air conditioner is not on.");
+            else
+                throw new InvalidOperationException("Cannot set CCTV status when the air conditioner is not on.");
         }
     }
 }

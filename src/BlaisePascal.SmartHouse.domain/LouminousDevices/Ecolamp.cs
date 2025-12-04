@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SmartHouse.domain
 {
-    public class Ecolamp : LampModel
+    public class EcoLamp : LampModel
     {
         //constants
         private const int MIN_BRIGHTNESS = 1;
@@ -14,37 +14,62 @@ namespace SmartHouse.domain
         public bool IsPowerSaveMode { get; private set; }
         public DateTime TurnOnHours { get; private set; }
         //constructor
-        public Ecolamp(string lampsName, bool isEco) : base(lampsName, isEco)
+
+        public EcoLamp(string name) : base(name) 
+        { 
+            IsPowerSaveMode = false;
+            IsOn = false;
+            Brightness = maxBrightness; 
+        }
+
+        public EcoLamp(string name, Guid id, bool isOn, bool isEco) : base(name, id, isOn, isEco)
         {
+            IsEco = isEco;
             IsPowerSaveMode = false;
             Brightness = maxBrightness;
+            IsOn = false;
         }
         //methods
-        public override void SwitchOnOff()
+
+        public override void TurnOn()
         {
-            if (IsOn)
-                IsOn = false;
-            IsOn = true;
-            
-            if (IsOn)
+            base.TurnOn();
+        }
+
+        public override void TurnOff()
+        {
+            base.TurnOff();
+        }
+
+        public override void Toggle()
+        {
+            base.Toggle();
+            if (Status == DeviceStatus.On)
                 TurnOnHours = DateTime.UtcNow;
         }
+
+        public override void Rename(string newName)
+        {
+            base.Rename(newName);
+        }
+        
         public override void increaseBrightness()
         {
-            if (IsOn == true)
+            if (Status == DeviceStatus.On)
             {
                 if (Brightness + 1 >= maxBrightness)
                     Brightness = maxBrightness;
-
-                Brightness += 1;
+                else
+                    Brightness += 1;
             }
         }
         public override void decreaseBrightness()
         {
-            if (IsOn == true)
+            if (Status == DeviceStatus.On)
             {
                 if (Brightness - 1 <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
+                else
                 Brightness -= 1;
             }
         }
@@ -52,13 +77,13 @@ namespace SmartHouse.domain
         {
             if (IsPowerSaveMode == false)
             {
-                maxBrightness = 5;
                 IsPowerSaveMode = true;
+                maxBrightness = 5;
+                Brightness = 5;
+
                 if (Brightness > maxBrightness)
                     Brightness = maxBrightness;
             }
-            maxBrightness = 10;
-            IsPowerSaveMode = false;    
         }
         public void ShuldBeActivatedPowerSaveMode()
         {

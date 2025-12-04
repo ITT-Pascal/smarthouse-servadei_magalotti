@@ -6,16 +6,19 @@
         private const int MIN_BRIGHTNESS = 1;
         private const int MAX_BRIGHTNESS = 10;
         //Constructor
-        public Lamp(string lampsName, bool isEco) : base(lampsName, isEco)
+        public Lamp(string name, Guid id, bool isOn, bool isEco) : base(name, id, isOn, isEco)
+        {
+            IsEco = isEco;
+            Brightness = MAX_BRIGHTNESS;
+        }
+        public Lamp(string name) : base(name)
         {
             Brightness = MAX_BRIGHTNESS;
         }
         //Methods
-        public override void SwitchOnOff()
+        public override void Toggle()
         {
-            if (IsOn)
-                IsOn = false;
-            IsOn = true;
+            base.Toggle();
         }
         public override void increaseBrightness()
         {
@@ -23,7 +26,8 @@
             {
                 if (Brightness >= MAX_BRIGHTNESS)
                     Brightness = MAX_BRIGHTNESS;
-                Brightness += 1;
+                else
+                    Brightness += 1;
             }
         }
         public override void decreaseBrightness()
@@ -32,9 +36,10 @@
             {
                 if (Brightness <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
-                Brightness -= 1;
+                else
+                    Brightness -= 1;
             }
-        }  
+        }
     }
 }        
     

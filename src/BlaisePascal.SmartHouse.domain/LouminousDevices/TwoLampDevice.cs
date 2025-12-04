@@ -18,8 +18,8 @@ namespace SmartHouse.domain
         public TwoLampDevice()
         {
             // Default sensato per i test: si possono comunque passare tipi diversi con l'overload sotto
-            lamp1 = new Lamp("LampadaNormale", false);
-            lamp2 = new Ecolamp("LampadaEco", true);
+            lamp1 = new Lamp("LampadaNormale");
+            lamp2 = new EcoLamp("LampadaEco");
         }
 
         
@@ -27,17 +27,17 @@ namespace SmartHouse.domain
         //Methods
         public void SwitchOnOffBothLamps()
         {
-            lamp1.SwitchOnOff();
-            lamp2.SwitchOnOff();
+            lamp1.Toggle();
+            lamp2.Toggle();
         }
         public void AlternateStatesLamp()
         {
             if (lamp1.IsOn == true)
                 if (lamp2.IsOn == true)
-                    lamp2.SwitchOnOff();
+                    lamp2.Toggle();
                 else
                 if (lamp2.IsOn == false)
-                    lamp2.SwitchOnOff();
+                    lamp2.Toggle();
         }
         public bool AreBothOn()
         {
@@ -50,14 +50,14 @@ namespace SmartHouse.domain
         {
             if ( AreBothLampsOn == true)
                  if (lamp1.IsOn == true)
-                     lamp1.SwitchOnOff();
+                     lamp1.Toggle();
                  if (lamp2.IsOn == true)
-                     lamp2.SwitchOnOff();
+                     lamp2.Toggle();
             else
                 if (lamp1.IsOn == false)
-                    lamp1.SwitchOnOff();
+                    lamp1.Toggle();
                 if (lamp2.IsOn == false)
-                    lamp2.SwitchOnOff();
+                    lamp2.Toggle();
         }
         public void IncreaseBrightnessBoth()
         {

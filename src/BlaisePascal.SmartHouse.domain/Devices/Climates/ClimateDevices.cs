@@ -12,7 +12,7 @@ namespace SmartHouse.domain.Devices
         public double Temperature { get; protected set; }
         //Constructors
         public ClimateDevices(string name) : base(name) { }
-        public ClimateDevices(string name, Guid id, bool isOn, double temperature) : base(name, id, isOn)
+        public ClimateDevices(string name, Guid id, bool isOn, double temperature) : base(name, id)
         {
             Temperature = temperature;
         }

@@ -17,16 +17,19 @@ namespace SmartHouse.domain
         {
             IsOpen = false;
             IsLocked = false;
+            CreatedAtUtc = DateTime.UtcNow;
         }
         public Door(string name, Guid id, bool isOn) : base(name, id) 
         {
             IsOpen = false;
             IsLocked = false;
+            CreatedAtUtc = DateTime.UtcNow;
         }
         public Door() : base() 
         {
             IsOpen = false;
             IsLocked = false;
+            CreatedAtUtc = DateTime.UtcNow;
         }
         //Methods
         public void Open()

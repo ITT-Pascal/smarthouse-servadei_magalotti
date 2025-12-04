@@ -22,6 +22,7 @@ namespace SmartHouse.domain.Devices
             Name = name;
             Id = Guid.NewGuid();
             IsOn = false;
+
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
         }
@@ -29,9 +30,7 @@ namespace SmartHouse.domain.Devices
         {
             Name = name;
             Id = id;
-            IsOn = false;
-            
-            
+            IsOn = false;            
             
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
@@ -43,6 +42,7 @@ namespace SmartHouse.domain.Devices
             if (Name == newName)
                 throw new InvalidOperationException("Name cannot be the same");
             Name = newName;
+            LastModifiedAtUtc = DateTime.UtcNow;
         }
 
         public virtual void TurnOn()
@@ -79,7 +79,5 @@ namespace SmartHouse.domain.Devices
                 TurnOn();
             }
         }
-
-
     }
 }

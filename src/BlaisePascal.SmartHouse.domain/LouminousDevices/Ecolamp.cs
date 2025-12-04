@@ -57,6 +57,7 @@ namespace SmartHouse.domain
         {
             if (Status == DeviceStatus.On)
             {
+                LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness + 1 >= maxBrightness)
                     Brightness = maxBrightness;
                 else
@@ -67,6 +68,7 @@ namespace SmartHouse.domain
         {
             if (Status == DeviceStatus.On)
             {
+                LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness - 1 <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
                 else
@@ -77,6 +79,7 @@ namespace SmartHouse.domain
         {
             if (IsPowerSaveMode == false)
             {
+                LastModifiedAtUtc = DateTime.UtcNow;
                 IsPowerSaveMode = true;
                 maxBrightness = 5;
                 Brightness = 5;
@@ -90,7 +93,8 @@ namespace SmartHouse.domain
             if (DateTime.UtcNow - TurnOnHours >= TimeSpan.FromMinutes(180))
             {
                 if (IsPowerSaveMode == false)
-                    SwitchPowerSaveMode();      
+                    SwitchPowerSaveMode();
+                    LastModifiedAtUtc = DateTime.UtcNow;
             }
         }
     }

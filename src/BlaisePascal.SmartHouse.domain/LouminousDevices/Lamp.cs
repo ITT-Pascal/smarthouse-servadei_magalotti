@@ -24,6 +24,7 @@
         {
             if (IsOn == true)
             {
+                LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness >= MAX_BRIGHTNESS)
                     Brightness = MAX_BRIGHTNESS;
                 else
@@ -34,6 +35,7 @@
         {
             if (IsOn == true)
             {
+                LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
                 else

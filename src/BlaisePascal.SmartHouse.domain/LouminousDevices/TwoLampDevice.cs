@@ -11,6 +11,8 @@ namespace SmartHouse.domain
     public class TwoLampDevice
     {
         //Properties
+        public DateTime CreatedAtUtc { get; protected set; }
+        public DateTime LastModifiedAtUtc { get; protected set; }
         public LampModel lamp1 { get; private set; }
         public LampModel lamp2 { get; private set; }
         public bool AreBothLampsOn  => AreBothOn();
@@ -20,6 +22,7 @@ namespace SmartHouse.domain
             // Default sensato per i test: si possono comunque passare tipi diversi con l'overload sotto
             lamp1 = new Lamp("LampadaNormale");
             lamp2 = new EcoLamp("LampadaEco");
+            CreatedAtUtc = DateTime.UtcNow;
         }
 
         

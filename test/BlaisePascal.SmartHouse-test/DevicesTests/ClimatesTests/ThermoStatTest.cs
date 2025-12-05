@@ -14,21 +14,21 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
         public void TurnOn_ShouldTurnDeviceOn()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
 
             // Act
             thermostat.TurnOn();
 
             // Assert
             Assert.True(thermostat.IsOn);
-            Assert.Equal(true, thermostat.Status == DeviceStatus.On);
+            Assert.True(thermostat.Status == DeviceStatus.On);
         }
 
         [Fact]
         public void TurnOff_ShouldTurnDeviceOff()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             thermostat.TurnOn();
 
             // Act
@@ -36,14 +36,14 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
 
             // Assert
             Assert.False(thermostat.IsOn);
-            Assert.Equal(true, thermostat.Status == DeviceStatus.Off);
+            Assert.True(thermostat.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void DimmerTemperatureUp_WhenOn_ShouldIncreaseTemperature()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             thermostat.TurnOn();
             thermostat.SetTemperature(20);
 
@@ -51,14 +51,14 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
             thermostat.DimmerTemperatureUp();
 
             // Assert
-            Assert.Equal(true, thermostat.Temperature == 20 + Thermostat.DefaultDimmer);
+            Assert.True(thermostat.Temperature == 20 + Thermostat.DefaultDimmer);
         }
 
         [Fact]
         public void DimmerTemperatureDown_WhenOn_ShouldDecreaseTemperature()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             thermostat.TurnOn();
             thermostat.SetTemperature(20);
 
@@ -66,14 +66,14 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
             thermostat.DimmerTemperatureDown();
 
             // Assert
-            Assert.Equal(true, thermostat.Temperature == 20 - Thermostat.DefaultDimmer);
+            Assert.True(thermostat.Temperature == 20 - Thermostat.DefaultDimmer);
         }
 
         [Fact]
         public void DimmerTemperatureUp_WhenOff_ShouldNotChangeTemperature()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             var initialTemp = thermostat.Temperature;
 
             // Act
@@ -84,15 +84,15 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
                 statusChanged = true; // flag per test logico: NON deve cambiare se spento
 
             // Assert
-            Assert.Equal(true, statusChanged);
-            Assert.Equal(true, thermostat.Temperature == initialTemp);
+            Assert.True(statusChanged);
+            Assert.True(thermostat.Temperature == initialTemp);
         }
 
         [Fact]
         public void DimmerTemperatureDown_WhenOff_ShouldNotChangeTemperature()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             var initialTemp = thermostat.Temperature;
 
             // Act
@@ -103,15 +103,15 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
                 statusChanged = true;
 
             // Assert
-            Assert.Equal(true, statusChanged);
-            Assert.Equal(true, thermostat.Temperature == initialTemp);
+            Assert.True(statusChanged);
+            Assert.True(thermostat.Temperature == initialTemp);
         }
 
         [Fact]
         public void Toggle_WhenOn_ShouldTurnOff()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
             thermostat.TurnOn();
 
             // Act
@@ -119,21 +119,21 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
 
             // Assert
             Assert.False(thermostat.IsOn);
-            Assert.Equal(true, thermostat.Status == DeviceStatus.Off);
+            Assert.True(thermostat.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void Toggle_WhenOff_ShouldTurnOn()
         {
             // Arrange
-            var thermostat = new Thermostat("Thermostat");
+            Thermostat thermostat = new Thermostat("Thermostat");
 
             // Act
             thermostat.Toggle();
 
             // Assert
             Assert.True(thermostat.IsOn);
-            Assert.Equal(true, thermostat.Status == DeviceStatus.On);
+            Assert.True(thermostat.Status == DeviceStatus.On);
         }
     }
 }

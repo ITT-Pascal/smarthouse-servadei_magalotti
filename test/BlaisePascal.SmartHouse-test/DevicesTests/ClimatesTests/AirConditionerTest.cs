@@ -14,21 +14,21 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
         public void TurnOn_ShouldTurnDeviceOn()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
 
             // Act
             conditioner.TurnOn();
 
             // Assert
             Assert.True(conditioner.IsOn);
-            Assert.Equal(true, conditioner.Status == DeviceStatus.On);
+            Assert.True(conditioner.Status == DeviceStatus.On);
         }
 
         [Fact]
         public void TurnOff_ShouldTurnDeviceOff()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
             conditioner.TurnOn();
 
             // Act
@@ -36,28 +36,28 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
 
             // Assert
             Assert.False(conditioner.IsOn);
-            Assert.Equal(true, conditioner.Status == DeviceStatus.Off);
+            Assert.True(conditioner.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void SetAirConditionerStatus_WhenOn_ShouldSetStatus()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
             conditioner.TurnOn();
 
             // Act
             conditioner.SetAirConditionerStatus(AirConditionerStatus.Cooling);
 
             // Assert
-            Assert.Equal(true, conditioner.AirConditionerStatus == AirConditionerStatus.Cooling);
+            Assert.True(conditioner.AirConditionerStatus == AirConditionerStatus.Cooling);
         }
 
         [Fact]
         public void SetAirConditionerStatus_WhenOff_ShouldNotChangeStatus()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
             var initialStatus = conditioner.AirConditionerStatus;
 
             // Act
@@ -68,28 +68,28 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
                 statusChanged = true; // flag per test logico: NON deve cambiare se spento
 
             // Assert
-            Assert.Equal(true, statusChanged);
-            Assert.Equal(true, conditioner.AirConditionerStatus == initialStatus);
+            Assert.True(statusChanged);
+            Assert.True(conditioner.AirConditionerStatus == initialStatus);
         }
 
         [Fact]
         public void Rename_ShouldChangeName()
         {
             // Arrange
-            var conditioner = new AirConditioner("OldName");
+            AirConditioner conditioner = new AirConditioner("OldName");
 
             // Act
             conditioner.Rename("NewName");
 
             // Assert
-            Assert.Equal(true, conditioner.Name == "NewName");
+            Assert.True(conditioner.Name == "NewName");
         }
 
         [Fact]
         public void Toggle_WhenOn_ShouldTurnOff()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
             conditioner.TurnOn();
 
             // Act
@@ -97,21 +97,21 @@ namespace SmartHouse_test.DevicesTests.ClimatesTests
 
             // Assert
             Assert.False(conditioner.IsOn);
-            Assert.Equal(true, conditioner.Status == DeviceStatus.Off);
+            Assert.True(conditioner.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void Toggle_WhenOff_ShouldTurnOn()
         {
             // Arrange
-            var conditioner = new AirConditioner("Conditioner");
+            AirConditioner conditioner = new AirConditioner("Conditioner");
 
             // Act
             conditioner.Toggle();
 
             // Assert
             Assert.True(conditioner.IsOn);
-            Assert.Equal(true, conditioner.Status == DeviceStatus.On);
+            Assert.True(conditioner.Status == DeviceStatus.On);
         }
     }
 }

@@ -13,21 +13,21 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
         public void TurnOn_ShouldTurnDeviceOn()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
 
             // Act
             door.TurnOn();
 
             // Assert
             Assert.True(door.IsOn);
-            Assert.Equal(true, door.Status == DeviceStatus.On);
+            Assert.True(door.Status == DeviceStatus.On);
         }
 
         [Fact]
         public void TurnOff_ShouldTurnDeviceOff()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
 
             // Act
@@ -35,14 +35,14 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
 
             // Assert
             Assert.False(door.IsOn);
-            Assert.Equal(true, door.Status == DeviceStatus.Off);
+            Assert.True(door.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void Open_WhenOnAndUnlocked_ShouldOpenDoor()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
 
             // Act
@@ -54,7 +54,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             }
 
             // Assert
-            Assert.Equal(true, canOpen);
+            Assert.True(canOpen);
             Assert.True(door.IsOpen);
         }
 
@@ -62,7 +62,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
         public void Close_WhenOnAndUnlocked_ShouldCloseDoor()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
             door.Open();
 
@@ -75,7 +75,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             }
 
             // Assert
-            Assert.Equal(true, canClose);
+            Assert.True(canClose);
             Assert.False(door.IsOpen);
         }
 
@@ -83,7 +83,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
         public void Lock_WhenClosedAndOn_ShouldLockDoor()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
             door.Close();
 
@@ -96,7 +96,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             }
 
             // Assert
-            Assert.Equal(true, canLock);
+            Assert.True(canLock);
             Assert.True(door.IsLocked);
         }
 
@@ -104,7 +104,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
         public void Unlock_WhenClosedAndOn_ShouldUnlockDoor()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
             door.Lock();
 
@@ -117,7 +117,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             }
 
             // Assert
-            Assert.Equal(true, canUnlock);
+            Assert.True(canUnlock);
             Assert.False(door.IsLocked);
         }
 
@@ -125,7 +125,7 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
         public void SwitchOpenClose_ShouldToggleDoorState()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
             door.Close();
 
@@ -137,15 +137,15 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             bool secondState = door.IsOpen;
 
             // Assert
-            Assert.Equal(true, firstState);
-            Assert.Equal(false, secondState );
+            Assert.True(firstState);
+            Assert.False(secondState);
         }
 
         [Fact]
         public void SwitchLockUnlock_ShouldToggleLockState()
         {
             // Arrange
-            var door = new Door("Door");
+            Door door = new Door("Door");
             door.TurnOn();
             door.Close();
 
@@ -157,21 +157,21 @@ namespace SmartHouse_test.DevicesTests.DoorsTests
             bool secondState = door.IsLocked;
 
             // Assert
-            Assert.Equal(true, firstState);
-            Assert.Equal(false, secondState);
+            Assert.True(firstState);
+            Assert.False(secondState);
         }
 
         [Fact]
         public void Rename_ShouldChangeName()
         {
             // Arrange
-            var door = new Door("OldDoor");
+            Door door = new Door("OldDoor");
 
             // Act
             door.Rename("NewDoor");
 
             // Assert
-            Assert.Equal(true, door.Name == "NewDoor");
+            Assert.True(door.Name == "NewDoor");
         }
     }
 }

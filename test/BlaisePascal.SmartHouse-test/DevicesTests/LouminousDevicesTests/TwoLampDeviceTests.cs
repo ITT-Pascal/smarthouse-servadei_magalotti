@@ -16,7 +16,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void Constructor_Default_ShouldInstantiateConcreteTypes()
         {
             // Arrange & Act
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
 
             // Assert: sappiamo che lamp1 è Lamp e lamp2 è Ecolamp
             Assert.True(device.lamp1 is Lamp);
@@ -27,7 +27,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void SwitchOnOffBothLamps_TurnsOnBothLamps_LampsAreOn()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
             // Act
             device.SwitchOnOffBothLamps();
             // Assert
@@ -38,7 +38,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void AlternateStatesLamp_ShouldSwitchOnlyOneLamp()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
 
             // Act: all'inizio entrambe spente, quindi lamp1 rimane spenta e lamp2 si accende
             device.AlternateStatesLamp();
@@ -61,7 +61,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void AreBothOn_ShouldReturnTrue_IfBothAreOn()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
             device.SwitchOnOffBothLamps(); // accende entrambe
 
             // Act
@@ -75,7 +75,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void AreBothOn_ShouldReturnFalse_IfOneIsOff()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
             device.lamp1.Toggle(); // solo lamp1 accesa
 
             // Act
@@ -89,7 +89,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void IncreaseBrightnessBoth_ShouldIncreaseBrightnessOfBothLamps()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
 
             // Accendiamo entrambe e abbassiamo la luminosità per poter poi aumentarla
             device.SwitchOnOffBothLamps();
@@ -107,7 +107,7 @@ namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
         public void DecreaseBrightnessBoth_ShouldDecreaseBrightnessOfBothLamps()
         {
             // Arrange
-            var device = new TwoLampDevice();
+            TwoLampDevice device = new TwoLampDevice();
             device.SwitchOnOffBothLamps(); // Accendiamo entrambe le lampade per poter modificare la luminosità
 
             int initialBrightness1 = device.lamp1.Brightness;

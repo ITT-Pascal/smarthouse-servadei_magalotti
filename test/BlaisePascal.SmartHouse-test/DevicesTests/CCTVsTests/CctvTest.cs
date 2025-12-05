@@ -13,21 +13,21 @@ namespace SmartHouse_test.DevicesTests.CCTVsTests
         public void TurnOn_ShouldTurnDeviceOn()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
 
             // Act
             cctv.TurnOn();
 
             // Assert
             Assert.True(cctv.IsOn);
-            Assert.Equal(true, cctv.Status == DeviceStatus.On);
+            Assert.True(cctv.Status == DeviceStatus.On);
         }
 
         [Fact]
         public void TurnOff_ShouldTurnDeviceOff()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
             cctv.TurnOn();
 
             // Act
@@ -35,28 +35,28 @@ namespace SmartHouse_test.DevicesTests.CCTVsTests
 
             // Assert
             Assert.False(cctv.IsOn);
-            Assert.Equal(true, cctv.Status == DeviceStatus.Off);
+            Assert.True(cctv.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void SetCctvStatus_WhenOn_ShouldSetStatus()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
             cctv.TurnOn();
 
             // Act
             cctv.SetCctvStatus(CctvStatus.NightVision);
 
             // Assert
-            Assert.Equal(true, cctv.CctvStatus == CctvStatus.NightVision);
+            Assert.True(cctv.CctvStatus == CctvStatus.NightVision);
         }
 
         [Fact]
         public void SetCctvStatus_WhenOff_ShouldNotChangeStatus()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
             var initialStatus = cctv.CctvStatus;
 
             // Act
@@ -67,15 +67,15 @@ namespace SmartHouse_test.DevicesTests.CCTVsTests
                 statusChanged = true; // flag logico: NON deve cambiare se spento
 
             // Assert
-            Assert.Equal(true, statusChanged);
-            Assert.Equal(true, cctv.CctvStatus == initialStatus);
+            Assert.True(statusChanged);
+            Assert.True(cctv.CctvStatus == initialStatus);
         }
 
         [Fact]
         public void Toggle_WhenOn_ShouldTurnOff()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
             cctv.TurnOn();
 
             // Act
@@ -83,34 +83,34 @@ namespace SmartHouse_test.DevicesTests.CCTVsTests
 
             // Assert
             Assert.False(cctv.IsOn);
-            Assert.Equal(true, cctv.Status == DeviceStatus.Off);
+            Assert.True(cctv.Status == DeviceStatus.Off);
         }
 
         [Fact]
         public void Toggle_WhenOff_ShouldTurnOn()
         {
             // Arrange
-            var cctv = new Cctv("CCTV");
+            Cctv cctv = new Cctv("CCTV");
 
             // Act
             cctv.Toggle();
 
             // Assert
             Assert.True(cctv.IsOn);
-            Assert.Equal(true, cctv.Status == DeviceStatus.On);
+            Assert.True(cctv.Status == DeviceStatus.On);
         }
 
         [Fact]
         public void Rename_ShouldChangeName()
         {
             // Arrange
-            var cctv = new Cctv("OldName");
+            Cctv cctv = new Cctv("OldName");
 
             // Act
             cctv.Rename("NewName");
 
             // Assert
-            Assert.Equal(true, cctv.Name == "NewName");
+            Assert.True(cctv.Name == "NewName");
         }
     }
 }

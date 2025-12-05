@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
-    public class LampRow
+    public class LampRow:LampModel
     {
         //Properties
         public DateTime CreatedAtUtc { get; protected set; }

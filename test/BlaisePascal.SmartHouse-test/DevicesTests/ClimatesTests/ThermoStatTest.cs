@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse_test
+namespace SmartHouse_test.DevicesTests.ClimatesTests
 {
     public class ThermostatTests
     {

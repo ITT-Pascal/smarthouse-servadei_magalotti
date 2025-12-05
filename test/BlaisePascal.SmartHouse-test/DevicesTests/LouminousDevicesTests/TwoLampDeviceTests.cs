@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace SmartHouse_test
+namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
 {
     public class TwoLampDeviceTests
     {

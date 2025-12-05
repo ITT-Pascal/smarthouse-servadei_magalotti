@@ -82,10 +82,7 @@ namespace SmartHouse.domain
                 LastModifiedAtUtc = DateTime.UtcNow;
                 IsPowerSaveMode = true;
                 maxBrightness = 5;
-                Brightness = 5;
-
-                if (Brightness > maxBrightness)
-                    Brightness = maxBrightness;
+                Brightness = maxBrightness;
             }
         }
         public void ShuldBeActivatedPowerSaveMode()

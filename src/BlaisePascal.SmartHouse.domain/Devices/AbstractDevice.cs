@@ -19,7 +19,10 @@ namespace SmartHouse.domain.Devices
         //Constructors
         public AbstractDevice(string name)
         {
-            Name = name;
+            if (name == "")
+                throw new InvalidOperationException("Name cannot be empty");
+            else
+                Name = name;
             Id = Guid.NewGuid();
             IsOn = false;
 
@@ -28,19 +31,26 @@ namespace SmartHouse.domain.Devices
         }
         public AbstractDevice(string name, Guid id)
         {
-            Name = name;
+            if (  name == "")
+                throw new InvalidOperationException("Name cannot be empty");
+            else
+                Name = name;
             Id = id;
             IsOn = false;            
             
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
         }
-        public AbstractDevice() { CreatedAtUtc = DateTime.UtcNow; }
+        public AbstractDevice() 
+        {
+            CreatedAtUtc = DateTime.UtcNow; 
+            IsOn = false; 
+        }
         //Methods
         public virtual void Rename(string newName)
         {
-            if (Name == newName)
-                throw new InvalidOperationException("Name cannot be the same");
+            if (Name == newName&&newName=="")
+                throw new InvalidOperationException("Name cannot be the same and cannot be empty");
             Name = newName;
             LastModifiedAtUtc = DateTime.UtcNow;
         }

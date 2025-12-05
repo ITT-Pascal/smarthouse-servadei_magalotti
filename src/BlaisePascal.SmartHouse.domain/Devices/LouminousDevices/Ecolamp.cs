@@ -72,7 +72,7 @@ namespace SmartHouse.domain
                 if (Brightness - 1 <= MIN_BRIGHTNESS)
                     Brightness = MIN_BRIGHTNESS;
                 else
-                Brightness -= 1;
+                    Brightness -= 1;
             }
         }
         public void SwitchPowerSaveMode()
@@ -82,6 +82,13 @@ namespace SmartHouse.domain
                 LastModifiedAtUtc = DateTime.UtcNow;
                 IsPowerSaveMode = true;
                 maxBrightness = 5;
+                Brightness = maxBrightness;
+            }
+            else
+            {
+                LastModifiedAtUtc = DateTime.UtcNow;
+                IsPowerSaveMode = false;
+                maxBrightness = 10;
                 Brightness = maxBrightness;
             }
         }

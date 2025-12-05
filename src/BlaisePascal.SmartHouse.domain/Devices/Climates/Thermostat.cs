@@ -18,14 +18,20 @@ namespace SmartHouse.domain.Devices
         public void DimmerTemperatureUp()
         {
             if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off."); }
-            Temperature += DefaultDimmer;
-            LastModifiedAtUtc = DateTime.UtcNow;
+            else
+            {
+                Temperature += DefaultDimmer;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
         public void DimmerTemperatureDown()
         {
             if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the thermostat is off."); }
-            Temperature -= DefaultDimmer;
-            LastModifiedAtUtc = DateTime.UtcNow;
+            else
+            {
+                Temperature -= DefaultDimmer;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
     }
 }

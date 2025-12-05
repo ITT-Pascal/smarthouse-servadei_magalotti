@@ -25,7 +25,6 @@ namespace SmartHouse.domain.Devices
                 Name = name;
             Id = Guid.NewGuid();
             IsOn = false;
-
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
         }
@@ -36,8 +35,7 @@ namespace SmartHouse.domain.Devices
             else
                 Name = name;
             Id = id;
-            IsOn = false;            
-            
+            IsOn = false;                
             Status = DeviceStatus.Unknown;
             CreatedAtUtc = DateTime.UtcNow;
         }
@@ -58,14 +56,12 @@ namespace SmartHouse.domain.Devices
         public virtual void TurnOn()
         {
             if ((Status == DeviceStatus.On))
-            {
-                throw new InvalidOperationException("Device already on.");
-            }
+                 throw new InvalidOperationException("Device already on.");
+            
             IsOn = true;
             Status = DeviceStatus.On;
             LastModifiedAtUtc = DateTime.UtcNow;
         }
-
         public virtual void TurnOff()
         {
             if (Status == DeviceStatus.On)
@@ -81,13 +77,9 @@ namespace SmartHouse.domain.Devices
         public virtual void Toggle()
         {
             if (Status == DeviceStatus.On)
-            {
-                TurnOff();
-            }
+                TurnOff(); 
             else
-            {
-                TurnOn();
-            }
+                TurnOn();   
         }
     }
 }

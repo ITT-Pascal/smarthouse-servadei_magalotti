@@ -39,7 +39,7 @@ namespace SmartHouse.domain
         
         public Guid GetId() { return Id;}
         public string GetName() { return Name; } 
-        }
+    }
 }
 
         

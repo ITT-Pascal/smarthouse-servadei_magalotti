@@ -21,20 +21,29 @@ namespace SmartHouse.domain.Devices
         public virtual void SetTemperature(double temperature)
         {
             if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot set temperature when the device is off."); }
-            Temperature = temperature;
-            LastModifiedAtUtc = DateTime.UtcNow;
+            else
+            {
+                Temperature = temperature;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
         public virtual void IncreaseTemperature(double increment)
         {
             if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot increase temperature when the thermostat is off."); }
-            Temperature += increment;
-            LastModifiedAtUtc = DateTime.UtcNow;
+            else
+            {
+                Temperature += increment;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
-       public virtual void DecreaseTemperature(double decrement)
+        public virtual void DecreaseTemperature(double decrement)
         {
             if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot decrease temperature when the thermostat is off."); }
-            Temperature -= decrement;
-            LastModifiedAtUtc = DateTime.UtcNow;
+            else
+            {
+                Temperature -= decrement;
+                LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
     }
 }

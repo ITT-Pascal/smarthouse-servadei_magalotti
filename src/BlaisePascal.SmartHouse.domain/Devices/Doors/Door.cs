@@ -60,36 +60,37 @@ namespace SmartHouse.domain
                 throw new InvalidOperationException("Cannot lock a door that is not closed or on.");
             }
             else
+            {
                 IsLocked = true;
                 LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
-
         public void Unlock()
         {
-            if (IsOpen || !IsOn) 
+            if (IsOpen || !IsOn)
             {
                 throw new InvalidOperationException("Cannot unlock a door that is not closed or on.");
-                
+
             }
             else
+            {
                 IsLocked = false;
                 LastModifiedAtUtc = DateTime.UtcNow;
+            }
         }
         public void SwitchOpenClose()
         {
             if (IsOpen)
                 Close();
             else
-                Open();
-            
+                Open();      
         }
         public void SwitchLockUnlock()
         {
             if (IsLocked==true)
                 Unlock();
             else
-                Lock();
-            
+                Lock();   
         }
     }
 }

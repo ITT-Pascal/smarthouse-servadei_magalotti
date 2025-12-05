@@ -84,40 +84,50 @@ namespace SmartHouse.domain
         public void RemoveLampByPositionAndId(Guid id, int position)
         {
                 if (position < 0) throw new ArgumentOutOfRangeException("position");
-                    for (int i = 0; i < LampsTot.Count(); i++)
-                         if (LampsTot[i].GetId() == id)
-                            LampsTot.Remove(LampsTot[position]);                             
+                for (int i = 0; i < LampsTot.Count(); i++)
+                     if (LampsTot[i].GetId() == id)
+                         LampsTot.Remove(LampsTot[position]);                             
         }
         public void RemoveLampByPositionAndName(string name, int position)
         {
             if (position < 0) throw new ArgumentOutOfRangeException("position");
             for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetName() == name)
+                 if (LampsTot[i].GetName() == name) 
+                {
                     LampsTot.Remove(LampsTot[position]);
                     LastModifiedAtUtc = DateTime.UtcNow;
+                }
+                    
         }
         public void SetIntensityForAllLamps(int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i < LampsTot.Count(); i++)
+            for (int i = 0; i < LampsTot.Count(); i++) 
+            {
                 LampsTot[i].Brightness = brightness;
                 LastModifiedAtUtc = DateTime.UtcNow;
+            }
+               
         }
         public void SetIntensityLampById(Guid id, int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
             for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetId() == id)
+                 if (LampsTot[i].GetId() == id) 
+                 {
                     LampsTot[i].Brightness = brightness;
                     LastModifiedAtUtc = DateTime.UtcNow;
+                 }               
         }
         public void SetIntensityByLampName(string name, int brightness)
         {
             if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
             for (int i = 0; i < LampsTot.Count(); i++)
                  if (LampsTot[i].GetName() == name)
-                    LampsTot[i].Brightness = brightness; 
+                 {
+                    LampsTot[i].Brightness = brightness;
                     LastModifiedAtUtc = DateTime.UtcNow;
+                 }                   
         }
         public LampModel FindLampWithMaxIntensity()
         {

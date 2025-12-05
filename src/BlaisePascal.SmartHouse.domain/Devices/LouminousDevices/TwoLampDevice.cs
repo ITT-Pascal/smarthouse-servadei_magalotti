@@ -24,9 +24,6 @@ namespace SmartHouse.domain
             lamp2 = new EcoLamp("LampadaEco");
             CreatedAtUtc = DateTime.UtcNow;
         }
-
-        
-
         //Methods
         public void SwitchOnOffBothLamps()
         {

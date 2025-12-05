@@ -1,6 +1,6 @@
 ﻿namespace SmartHouse.domain
 {
-    public class Lamp : LampModel
+    public class Lamp: LampModel
     {
         //Costants
         private const int MIN_BRIGHTNESS = 1;

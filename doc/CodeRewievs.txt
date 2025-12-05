@@ -1,3 +1,5 @@
+codeReview 1 14/11/25
+
 usare nomi ben distinti e determinati, clean code quindi migliorare spaziature inutili ed eccessive
 
 nome classe astratta modello generico, gerarchia per modellare, 

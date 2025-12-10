@@ -41,11 +41,9 @@
                     Brightness = amount;
                 }
                 else
-                {
                     throw new ArgumentException("The amount is invalid");
-                }
         }
-        
+
         public override void decreaseBrightness()
         {
             if (Status == DeviceStatus.On)

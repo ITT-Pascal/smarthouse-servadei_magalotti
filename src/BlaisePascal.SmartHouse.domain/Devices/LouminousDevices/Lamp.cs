@@ -31,6 +31,19 @@
                     Brightness += 1;
             }
         }
+        public void increaseBrightnessByAmount(int amount)
+        {
+            if (IsOn == true)
+                if (amount <= MAX_BRIGHTNESS && amount >= MIN_BRIGHTNESS)
+                {
+                    LastModifiedAtUtc = DateTime.UtcNow;
+                    Brightness = amount;
+                }
+                else
+                {
+                    throw new ArgumentException("The amount is invalid");
+                }
+        }
         public override void decreaseBrightness()
         {
             if (IsOn == true)

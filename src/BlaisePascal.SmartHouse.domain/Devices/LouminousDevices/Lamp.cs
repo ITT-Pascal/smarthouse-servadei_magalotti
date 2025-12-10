@@ -22,7 +22,7 @@
         }
         public override void increaseBrightness()
         {
-            if (IsOn == true)
+            if (Status == DeviceStatus.On)
             {
                 LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness >= MAX_BRIGHTNESS)
@@ -31,9 +31,10 @@
                     Brightness += 1;
             }
         }
-        public void increaseBrightnessByAmount(int amount)
+
+        public void dimmerBrightness(int amount)
         {
-            if (IsOn == true)
+            if (Status == DeviceStatus.On)
                 if (amount <= MAX_BRIGHTNESS && amount >= MIN_BRIGHTNESS)
                 {
                     LastModifiedAtUtc = DateTime.UtcNow;
@@ -44,9 +45,10 @@
                     throw new ArgumentException("The amount is invalid");
                 }
         }
+        
         public override void decreaseBrightness()
         {
-            if (IsOn == true)
+            if (Status == DeviceStatus.On)
             {
                 LastModifiedAtUtc = DateTime.UtcNow;
                 if (Brightness <= MIN_BRIGHTNESS)

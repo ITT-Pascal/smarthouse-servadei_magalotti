@@ -11,9 +11,6 @@ namespace SmartHouse.domain
 {
     public class LampRow: LampModel
     {
-        //Properties
-        public DateTime CreatedAtUtc { get; protected set; }
-        public DateTime LastModifiedAtUtc { get; protected set; }
         public List<LampModel> LampsTot { get; private set; }
         //Costructor
         public LampRow()
@@ -36,6 +33,7 @@ namespace SmartHouse.domain
         }
         public void AddLampByType(bool IsLamp)
         {
+            LastModifiedAtUtc = DateTime.UtcNow;
             if (IsLamp == true)
                 AddLamp();
             AddEcoLamp();
@@ -44,49 +42,60 @@ namespace SmartHouse.domain
         public void TurnLampOnByPosition(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
+            LastModifiedAtUtc = DateTime.UtcNow;
             if (LampsTot[Position].IsOn == false)
-                LampsTot[Position].Toggle();
+                LampsTot[Position].TurnOn();
         }
         public void TurnLampOffByPosition(int Position)
         {
             if (Position < 0) throw new ArgumentOutOfRangeException("position");
-            if (LampsTot[Position].IsOn == true)
-                LampsTot[Position].Toggle();  
+            LastModifiedAtUtc = DateTime.UtcNow;
+            if (LampsTot[Position].Status == DeviceStatus.On)
+                LampsTot[Position].TurnOff();  
         }
         public void TurnOnAll()
         {
+            LastModifiedAtUtc = DateTime.UtcNow;
             for (int i = 0; i < LampsTot.Count(); i++)
-                if (LampsTot[i].IsOn == false)
-                    LampsTot[i].Toggle();  
+                if (LampsTot[i].Status != DeviceStatus.On)
+                    LampsTot[i].TurnOn();  
         }
         public void TurnOffAll()
         {
+            LastModifiedAtUtc = DateTime.UtcNow;
             for (int i = 0; i < LampsTot.Count(); i++)
-                if (LampsTot[i].IsOn == true)
-                    LampsTot[i].Toggle();    
+                if (LampsTot[i].Status == DeviceStatus.On)
+                    LampsTot[i].TurnOff();    
         }
         public void TurnLampOffById(Guid id)
         {
+            LastModifiedAtUtc = DateTime.UtcNow;
             for (int i = 0; i < LampsTot.Count(); i++)
             
                 if (LampsTot[i].GetId() == id)
-                    if (LampsTot[i].IsOn == true)
-                        LampsTot[i].Toggle(); 
+                    if (LampsTot[i].Status == DeviceStatus.On)
+                        LampsTot[i].TurnOff(); 
         }
         public void TurnLampOffByName(string name)
         {
+            LastModifiedAtUtc = DateTime.UtcNow;
             for (int i = 0; i < LampsTot.Count(); i++)
             
                 if (LampsTot[i].GetName() == name)
-                    if (LampsTot[i].IsOn == true)
-                        LampsTot[i].Toggle();  
+                    if (LampsTot[i].Status == DeviceStatus.On)
+                        LampsTot[i].TurnOff();  
         }
         public void RemoveLampByPositionAndId(Guid id, int position)
         {
                 if (position < 0) throw new ArgumentOutOfRangeException("position");
                 for (int i = 0; i < LampsTot.Count(); i++)
                      if (LampsTot[i].GetId() == id)
-                         LampsTot.Remove(LampsTot[position]);                             
+                     {
+                        LampsTot.Remove(LampsTot[position]);
+                        LastModifiedAtUtc = DateTime.UtcNow;
+                     }
+                        
+                
         }
         public void RemoveLampByPositionAndName(string name, int position)
         {

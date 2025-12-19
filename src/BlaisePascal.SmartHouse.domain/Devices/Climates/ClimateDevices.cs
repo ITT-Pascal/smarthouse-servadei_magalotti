@@ -29,7 +29,7 @@ namespace SmartHouse.domain.Devices
         }
         public virtual void IncreaseTemperature(double increment)
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot increase temperature when the thermostat is off."); }
+            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot increase temperature when the device is off."); }
             else
             {
                 Temperature += increment;
@@ -38,7 +38,7 @@ namespace SmartHouse.domain.Devices
         }
         public virtual void DecreaseTemperature(double decrement)
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot decrease temperature when the thermostat is off."); }
+            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot decrease temperature when the device is off."); }
             else
             {
                 Temperature -= decrement;

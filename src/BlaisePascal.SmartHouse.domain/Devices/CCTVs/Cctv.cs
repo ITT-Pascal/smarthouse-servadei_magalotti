@@ -24,7 +24,7 @@ namespace SmartHouse.domain
                 LastModifiedAtUtc = DateTime.UtcNow;
             }
             else
-                throw new InvalidOperationException("Cannot set CCTV status when the air conditioner is not on.");
+                throw new InvalidOperationException("Cannot set CCTV status when the device is not on.");
         }
     }
 }

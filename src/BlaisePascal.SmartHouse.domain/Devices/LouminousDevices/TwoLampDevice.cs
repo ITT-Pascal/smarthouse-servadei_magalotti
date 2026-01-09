@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices.LouminousDevices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class TwoLampDevice: LampModel
+    public class TwoLampDevice: LampModel, ITwoLamp
     {
         //Properties
         public DateTime CreatedAtUtc { get; protected set; }

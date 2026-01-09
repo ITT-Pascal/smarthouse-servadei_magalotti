@@ -1,6 +1,8 @@
-﻿namespace SmartHouse.domain
+﻿using SmartHouse.domain.Devices.LouminousDevices;
+
+namespace SmartHouse.domain
 {
-    public class Lamp: LampModel
+    public class Lamp: LampModel, ILamp
     {
         //Costants
         private const int MIN_BRIGHTNESS = 1;

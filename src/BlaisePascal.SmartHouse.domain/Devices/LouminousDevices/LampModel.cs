@@ -1,4 +1,5 @@
 ﻿using SmartHouse.domain.Devices;
+using SmartHouse.domain.Devices.LouminousDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class LampModel: AbstractDevice
+    public class LampModel: AbstractDevice, ILampModel
     {
         //properties
         public int Brightness { get; set; }

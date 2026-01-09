@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices.LouminousDevices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace SmartHouse.domain
 {
-    public class EcoLamp: LampModel
+    public class EcoLamp: LampModel, IEcoLamp
     {
         //constants
         private const int MIN_BRIGHTNESS = 1;

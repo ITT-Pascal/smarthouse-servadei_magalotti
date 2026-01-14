@@ -1,4 +1,5 @@
 ﻿using SmartHouse.domain.Devices;
+using SmartHouse.domain.Devices.Climates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class AirConditioner: ClimateDevices
+    public class AirConditioner: ClimateDevices, IClimateDevices
     {
         //Properties 
         public AirConditionerStatus AirConditionerStatus { get; private set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices.Climates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain.Devices
 {
-    public class Thermostat: ClimateDevices
+    public class Thermostat: ClimateDevices, IClimateDevices
     {
         //Properties
         public const double DefaultDimmer = 0.5;

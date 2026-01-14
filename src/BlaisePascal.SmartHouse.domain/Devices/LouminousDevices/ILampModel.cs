@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain.Devices.LouminousDevices
 {
-    public interface ILampModel
+    public interface ILampModel : IDevice
     {
         void TurnOn();
         void TurnOff();

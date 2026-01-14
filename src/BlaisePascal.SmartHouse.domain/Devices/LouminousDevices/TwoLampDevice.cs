@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class TwoLampDevice: LampModel, ITwoLamp
+    public class TwoLampDevice: LampModel
     {
         //Properties
         public DateTime CreatedAtUtc { get; protected set; }

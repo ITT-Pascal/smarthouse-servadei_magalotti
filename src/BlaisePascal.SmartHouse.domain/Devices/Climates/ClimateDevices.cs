@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices.Climates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain.Devices
 {
-    public class ClimateDevices: AbstractDevice
+    public class ClimateDevices: AbstractDevice, IClimateDevices
     {
         //Properties
         public double Temperature { get; protected set; }

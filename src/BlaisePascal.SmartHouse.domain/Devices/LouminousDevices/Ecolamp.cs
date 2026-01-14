@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SmartHouse.domain
 {
-    public class EcoLamp: LampModel, IEcoLamp
+    public class EcoLamp: LampModel,ILampModel
     {
         //constants
         private const int MIN_BRIGHTNESS = 1;

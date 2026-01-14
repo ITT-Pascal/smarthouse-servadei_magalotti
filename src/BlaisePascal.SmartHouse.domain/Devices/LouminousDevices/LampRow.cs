@@ -1,4 +1,5 @@
-﻿using SmartHouse.domain.Devices.LouminousDevices;
+﻿using SmartHouse.domain.Devices;
+using SmartHouse.domain.Devices.LouminousDevices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
-    public class LampRow: LampModel, ILampRow
+    public class LampRow: LampModel, IDevice
     {
         public List<LampModel> LampsTot { get; private set; }
         //Costructor

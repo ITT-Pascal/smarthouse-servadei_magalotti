@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class AirConditioner: ClimateDevices, IClimateDevices
+    public class AirConditioner: ClimateDevices
     {
         //Properties 
         public AirConditionerStatus AirConditionerStatus { get; private set; }

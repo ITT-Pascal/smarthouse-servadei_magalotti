@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace SmartHouse.domain
 {
-    public class LampRow: LampModel, IDevice
+    public class LampRow: LampModel
     {
         public List<LampModel> LampsTot { get; private set; }
         //Costructor

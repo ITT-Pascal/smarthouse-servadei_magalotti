@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain.Devices
 {
-    public class Thermostat: ClimateDevices, IClimateDevices
+    public class Thermostat: ClimateDevices
     {
         //Properties
         public const double DefaultDimmer = 0.5;

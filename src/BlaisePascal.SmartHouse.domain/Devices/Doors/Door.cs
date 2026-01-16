@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class Door: AbstractDevice , IDevice
+    public class Door: AbstractDevice 
     {
         //Properties
         public bool IsOpen { get; private set; }

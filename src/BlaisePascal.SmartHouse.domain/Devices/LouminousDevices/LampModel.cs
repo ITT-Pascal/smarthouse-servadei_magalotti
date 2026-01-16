@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain
 {
-    public class LampModel: AbstractDevice, IDevice
+    public class LampModel: AbstractDevice, ILampModel
     {
         //properties
         public int Brightness { get; set; }

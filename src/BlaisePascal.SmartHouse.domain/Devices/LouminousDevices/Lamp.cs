@@ -1,4 +1,5 @@
-﻿using SmartHouse.domain.Devices.LouminousDevices;
+﻿using SmartHouse.domain.Devices.Abstractions;
+using SmartHouse.domain.Devices.LouminousDevices;
 
 namespace SmartHouse.domain
 {

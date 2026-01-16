@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SmartHouse.domain.Devices.Abstractions.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices
+namespace SmartHouse.domain.Devices.Abstractions
 {
     public abstract class AbstractDevice : IDevice
     {
@@ -55,7 +56,7 @@ namespace SmartHouse.domain.Devices
 
         public virtual void TurnOn()
         {
-            if ((Status == DeviceStatus.On))
+            if (Status == DeviceStatus.On)
                  throw new InvalidOperationException("Device already on.");
             
             IsOn = true;

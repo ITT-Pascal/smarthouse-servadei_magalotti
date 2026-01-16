@@ -1,5 +1,5 @@
-﻿using SmartHouse.domain.Devices;
-using SmartHouse.domain.Devices.LouminousDevices;
+﻿using SmartHouse.domain.Devices.Abstractions;
+using SmartHouse.domain.Devices.LouminousDevices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

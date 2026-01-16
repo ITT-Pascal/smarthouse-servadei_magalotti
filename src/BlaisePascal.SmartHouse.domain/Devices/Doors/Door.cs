@@ -1,4 +1,4 @@
-﻿using SmartHouse.domain.Devices;
+﻿using SmartHouse.domain.Devices.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,7 +87,7 @@ namespace SmartHouse.domain
         }
         public void SwitchLockUnlock()
         {
-            if (IsLocked==true)
+            if (IsLocked)
                 Unlock();
             else
                 Lock();   

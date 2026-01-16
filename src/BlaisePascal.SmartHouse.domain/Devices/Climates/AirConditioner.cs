@@ -1,4 +1,5 @@
 ﻿using SmartHouse.domain.Devices;
+using SmartHouse.domain.Devices.Abstractions;
 using SmartHouse.domain.Devices.Climates;
 using System;
 using System.Collections.Generic;

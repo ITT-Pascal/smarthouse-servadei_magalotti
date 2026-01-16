@@ -1,10 +1,10 @@
 ﻿using SmartHouse.domain.Devices;
-using SmartHouse.domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SmartHouse.domain.Devices.Abstractions;
 
 namespace SmartHouse_test.DevicesTests.ClimatesTests
 {

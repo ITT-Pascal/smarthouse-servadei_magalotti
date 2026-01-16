@@ -1,4 +1,4 @@
-﻿using SmartHouse.domain.Devices;
+﻿using SmartHouse.domain.Devices.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

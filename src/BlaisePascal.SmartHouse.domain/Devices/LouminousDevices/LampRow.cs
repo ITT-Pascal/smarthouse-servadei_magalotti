@@ -1,4 +1,5 @@
 ﻿using SmartHouse.domain.Devices;
+using SmartHouse.domain.Devices.Abstractions;
 using SmartHouse.domain.Devices.LouminousDevices;
 using System;
 using System.Collections;

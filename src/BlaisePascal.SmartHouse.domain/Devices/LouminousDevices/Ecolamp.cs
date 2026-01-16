@@ -77,6 +77,21 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
                     Brightness -= 1;
             }
         }
+
+        public override void SetBrightness(int brightness)
+        {
+            if (Status == DeviceStatus.On)
+            {
+                if (brightness <= maxBrightness && brightness >= MIN_BRIGHTNESS)
+                {
+                    LastModifiedAtUtc = DateTime.UtcNow;
+                    Brightness = brightness;
+                }
+                else
+                    throw new ArgumentException("The amount is invalid");
+            }
+        }
+
         public void SwitchPowerSaveMode()
         {
             if (IsPowerSaveMode == false)

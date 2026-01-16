@@ -36,8 +36,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             base.Toggle();
         }
         public virtual void increaseBrightness() { }
-        public virtual void decreaseBrightness() { }   
-        
+        public virtual void decreaseBrightness() { }  
+        public virtual void SetBrightness(int brightness){}
+
         public Guid GetId() { return Id;}
         public string GetName() { return Name; } 
     }

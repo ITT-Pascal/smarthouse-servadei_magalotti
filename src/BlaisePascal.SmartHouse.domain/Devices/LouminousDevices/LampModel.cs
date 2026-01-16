@@ -1,5 +1,5 @@
-﻿using SmartHouse.domain.Devices.Abstractions;
-using SmartHouse.domain.Devices.LouminousDevices.Interfaces;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace SmartHouse.domain.Devices.LouminousDevices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class LampModel: AbstractDevice, ILampModel
     {

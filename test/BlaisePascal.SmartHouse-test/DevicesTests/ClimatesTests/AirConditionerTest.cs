@@ -1,13 +1,12 @@
-﻿using SmartHouse.domain.Devices;
-using SmartHouse.domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SmartHouse.domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Climates;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 
-namespace SmartHouse_test.DevicesTests.ClimatesTests
+namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.ClimatesTests
 {
     public class AirConditionerTests
     {

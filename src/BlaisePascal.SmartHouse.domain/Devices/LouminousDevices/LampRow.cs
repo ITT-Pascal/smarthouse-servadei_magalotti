@@ -1,6 +1,6 @@
-﻿using SmartHouse.domain.Devices;
-using SmartHouse.domain.Devices.Abstractions;
-using SmartHouse.domain.Devices.LouminousDevices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace SmartHouse.domain.Devices.LouminousDevices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class LampRow: LampModel
     {

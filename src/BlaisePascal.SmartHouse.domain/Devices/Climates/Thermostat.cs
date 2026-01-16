@@ -1,12 +1,12 @@
-﻿using SmartHouse.domain.Devices.Abstractions;
-using SmartHouse.domain.Devices.Climates;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Climates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.Climates
+namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
     public class Thermostat: ClimateDevices
     {

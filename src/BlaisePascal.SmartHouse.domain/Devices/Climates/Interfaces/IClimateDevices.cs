@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.Climates.Interfaces
+namespace BlaisePascal.SmartHouse.Domain.Devices.Climates.Interfaces
 {
     public interface IClimateDevices
     {

@@ -1,12 +1,12 @@
-﻿using SmartHouse.domain;
-using SmartHouse.domain.Devices.Abstractions;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Doors;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;  
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse_test.DevicesTests.DoorsTests
+namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.DoorsTests
 {
     public class DoorTest
     {

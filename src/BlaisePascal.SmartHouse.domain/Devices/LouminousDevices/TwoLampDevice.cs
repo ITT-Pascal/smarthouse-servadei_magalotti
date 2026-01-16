@@ -1,4 +1,4 @@
-﻿using SmartHouse.domain.Devices.LouminousDevices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.LouminousDevices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class TwoLampDevice: LampModel
     {

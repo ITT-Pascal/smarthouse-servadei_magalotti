@@ -1,5 +1,5 @@
-using SmartHouse.domain;
-namespace SmartHouse_test.DevicesTests.LouminousDevicesTests
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesTests
 
 {
     public class LampTests

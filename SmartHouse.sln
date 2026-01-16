@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{0509A61A-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CE0D972C-7ED8-4A06-BF7A-340958EFBC19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHouse.domain", "src\BlaisePascal.SmartHouse.domain\SmartHouse.domain.csproj", "{4C2560D5-69FF-AE1C-AB8A-C96FD1210127}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaisePascal.SmartHouse.Domain", "src\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj", "{4C2560D5-69FF-AE1C-AB8A-C96FD1210127}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHouse-test", "test\BlaisePascal.SmartHouse-test\SmartHouse-test.csproj", "{69E2329B-C393-988D-0A8F-153482A0AC4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlaisePascal.SmartHouse.Domain.UnitTest", "test\BlaisePascal.SmartHouse-test\BlaisePascal.SmartHouse.Domain.UnitTest.csproj", "{69E2329B-C393-988D-0A8F-153482A0AC4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

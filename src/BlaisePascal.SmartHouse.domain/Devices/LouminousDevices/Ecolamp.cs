@@ -1,11 +1,11 @@
-﻿using SmartHouse.domain.Devices.Abstractions;
-using SmartHouse.domain.Devices.LouminousDevices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SmartHouse.domain.Devices.LouminousDevices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class EcoLamp: LampModel
     {

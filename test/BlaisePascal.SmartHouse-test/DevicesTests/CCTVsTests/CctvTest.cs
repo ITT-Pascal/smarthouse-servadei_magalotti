@@ -1,12 +1,13 @@
-﻿using SmartHouse.domain;
-using SmartHouse.domain.Devices.Abstractions;
+﻿
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlaisePascal.SmartHouse.Domain.Devices.CCTVs;
 
-namespace SmartHouse_test.DevicesTests.CCTVsTests
+namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.CCTVsTests
 {
     public class CctvTests
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.Abstractions.Interfaces
+namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces
 {
     public interface IDevice
     {

@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BlaisePascal.SmartHouse.domain\SmartHouse.domain.csproj" />
+    <ProjectReference Include="..\..\src\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

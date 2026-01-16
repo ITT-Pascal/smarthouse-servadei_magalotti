@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.Climates
+namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
     public enum AirConditionerStatus
     {

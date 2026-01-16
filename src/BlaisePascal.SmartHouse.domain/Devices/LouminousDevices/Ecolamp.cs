@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SmartHouse.domain
+namespace SmartHouse.domain.Devices.LouminousDevices
 {
     public class EcoLamp: LampModel
     {

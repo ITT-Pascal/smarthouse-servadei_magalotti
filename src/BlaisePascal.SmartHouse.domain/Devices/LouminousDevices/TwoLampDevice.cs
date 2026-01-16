@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain
+namespace SmartHouse.domain.Devices.LouminousDevices
 {
     public class TwoLampDevice: LampModel
     {

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace SmartHouse.domain
+namespace SmartHouse.domain.Devices.LouminousDevices
 {
     public class LampRow: LampModel
     {

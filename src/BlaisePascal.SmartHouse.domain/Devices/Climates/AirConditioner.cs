@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain
+namespace SmartHouse.domain.Devices.Climates
 {
     public class AirConditioner: ClimateDevices
     {

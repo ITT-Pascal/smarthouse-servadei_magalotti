@@ -1,7 +1,7 @@
 ﻿using SmartHouse.domain.Devices.Abstractions;
 using SmartHouse.domain.Devices.LouminousDevices;
 
-namespace SmartHouse.domain
+namespace SmartHouse.domain.Devices.LouminousDevices
 {
     public class Lamp: LampModel
     {

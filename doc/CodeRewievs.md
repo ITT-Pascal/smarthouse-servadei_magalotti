@@ -6,13 +6,13 @@ usare nomi ben distinti e determinati, clean code quindi migliorare spaziature i
 
 
 
-nome classe astratta modello generico, gerarchia per modellare, 
+nome classe astratta modello generico, gerarchia per modellare,
 
 
 
 protected set = modificatore di acceso, che può modificare quella proprietà all'interno della classe stessa, ma anche dalle classe figlie.
 
-&nbsp;dentro classe astratta :
+ dentro classe astratta :
 
 public DateTime CreatedAtUtc {get; protected set;}//momento in qui si è creata.
 
@@ -40,33 +40,33 @@ enum class: acceso, spento powersavemode ecc.
 
 es.
 
-&nbsp;	public enum DeviceStatus
+ 	public enum DeviceStatus
 
-&nbsp;	{
+ 	{
 
-&nbsp;		
+ 
 
-&nbsp;		Unknown,
+ 		Unknown,
 
-&nbsp;		
+ 
 
-&nbsp;		Off,
+ 		Off,
 
-&nbsp;		
+ 
 
-&nbsp;		On,
+ 		On,
 
-&nbsp;	
+ 
 
-&nbsp;		Standby,
+ 		Standby,
 
-&nbsp;	
+ 
 
-&nbsp;		Error,
+ 		Error,
 
 
 
-&nbsp;	}
+ 	}
 
 
 
@@ -95,13 +95,13 @@ Status = DeviceStatus.Off;
 
 **SW:**
 
-* **TurnOff() implementare come TurnOn() in AbstractDevice**
+* **TurnOff() implementare come TurnOn() in AbstractDevice                //FATTO**
 * **public virtual void increaseBrightness() { } -> o classe astratta con metodi astratti e virtual, oppure senza virtual**
-* **TEST: SmartHouse-test rinominare in BlaisePascal.SmartHouse.Domain**
-* **Folder "Abstractions" in Device folder**
-* **namespace SmartHouse.domain.Devices in tutti i namespace**
+* **TEST: SmartHouse-test rinominare in BlaisePascal.SmartHouse.Domain  //FATTO**
+* **Folder "Abstractions" in Device folder                             //FATTO**
+* **namespace SmartHouse.domain.Devices in tutti i namespace          //FATTO**
 * **public void Rename\_ShouldChangeName() implementare anche gli ulteriori blocchi non analizzati (esempio quando tira l'exception). Questa cosa va rifatta e ricontrollata per ogni metodo e test**
-* **MatrixLed**
+* **MatrixLed                                                      //FAtto**
 
 
 
@@ -109,44 +109,3 @@ Status = DeviceStatus.Off;
 
 * **inserire link drawio**
 * **descrittiva a livello di funzionalità astraendo dalla specificità del design e codice**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

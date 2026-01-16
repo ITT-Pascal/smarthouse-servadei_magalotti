@@ -1,4 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
+using SmartHouse.domain.Devices.Doors.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Doors
 {
-    public class Door: AbstractDevice 
+    public class Door: AbstractDevice, IOpenable, ILockable
     {
         //Properties
         public bool IsOpen { get; private set; }

@@ -65,14 +65,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
         }
         public virtual void TurnOff()
         {
-            if (Status == DeviceStatus.On)
-            {
-                IsOn = false;
-                Status = DeviceStatus.Off;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
-            else
+            if (Status == DeviceStatus.Off)
                 throw new InvalidOperationException("Device already off.");
+
+            IsOn = false;
+            Status = DeviceStatus.Off;
+            LastModifiedAtUtc = DateTime.UtcNow;
         }
 
         public virtual void Toggle()

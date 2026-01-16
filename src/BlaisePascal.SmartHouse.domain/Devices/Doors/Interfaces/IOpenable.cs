@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SmartHouse.domain.Devices.Doors.Interfaces
 {
-    internal class IOpenable
+    public interface IOpenable
     {
+        public void Open();
+        public void Close();
     }
 }

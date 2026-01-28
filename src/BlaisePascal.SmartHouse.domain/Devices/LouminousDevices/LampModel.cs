@@ -43,7 +43,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         public string GetName() { return Name; } 
     }
 }
-
         
 
     

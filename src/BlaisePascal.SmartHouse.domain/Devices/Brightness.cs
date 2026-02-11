@@ -12,7 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices
 
         public const int MinBrightness = 1;
         public int MaxBrightness = 10;
-        public Brigthness(int value)
+        public Brightness(int value)
         {
             Value = Math.Clamp(value, MinBrightness, MaxBrightness);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse.Domain.Devices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects
 {
     public record Brightness
     {

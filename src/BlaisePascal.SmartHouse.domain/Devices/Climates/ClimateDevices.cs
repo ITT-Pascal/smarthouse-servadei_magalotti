@@ -25,6 +25,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
             CurrentTemperature = new Temperature(currentTemp);
         }
 
+        public ClimateDevice(string name) : base(name)
+        {
+        }
+
         public virtual void SetTemperature(double value)
         {
             if (!IsOn)

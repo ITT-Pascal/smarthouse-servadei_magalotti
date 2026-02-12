@@ -11,6 +11,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
         Idle,
         Recording,
         NightVision,
-        MotionDetection
+        MotionDetection,
+        Termic
     }
 }

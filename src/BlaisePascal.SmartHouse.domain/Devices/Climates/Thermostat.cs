@@ -24,6 +24,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
             Mode = mode;
         }
 
+        public Thermostat(string name) : base(name)
+        {
+        }
+
         public void SetMode(ThermostatMode mode)
         {
             if (!IsOn)

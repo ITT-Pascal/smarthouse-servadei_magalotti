@@ -31,6 +31,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Doors
             Code = new DoorCode(code);
         }
 
+        public Door(string name) : base(name)
+        {
+        }
+
         public void Open()
         {
             if (!IsOn)

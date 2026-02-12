@@ -31,6 +31,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
             IsLocked = isLocked;
         }
 
+        public Cctv(string name) : base(name)
+        {
+        }
+
         public void SetMode(CctvMode mode)
         {
             if (!IsOn)

@@ -23,6 +23,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
             Mode = mode;
         }
 
+        public AirConditioner(string name) : base(name)
+        {
+        }
+
         public void SetMode(AirConditionerMode mode)
         {
             if (!IsOn)

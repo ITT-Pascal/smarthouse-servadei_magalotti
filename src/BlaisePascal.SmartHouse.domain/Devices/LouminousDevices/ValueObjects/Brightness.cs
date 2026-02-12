@@ -8,13 +8,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects
 {
     public record Brightness
     {
-        public int Value { get; }// current min max parametri
+        public int Value { get; }
 
-        public const int MinBrightness = 1;
-        public int MaxBrightness = 10;
         public Brightness(int value)
         {
-            Value = Math.Clamp(value, MinBrightness, MaxBrightness);
+            Value = Math.Clamp(value, 1, 10);
         }
     }
 }

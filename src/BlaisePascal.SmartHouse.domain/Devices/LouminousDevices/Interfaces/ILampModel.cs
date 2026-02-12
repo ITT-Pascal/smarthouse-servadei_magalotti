@@ -9,8 +9,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Interfaces
 {
     public interface ILampModel : IDevice
     {
-        void increaseBrightness();
-        void decreaseBrightness();
+        void IncreaseBrightness();
+        void DecreaseBrightness();
         string GetName();
     }
 }

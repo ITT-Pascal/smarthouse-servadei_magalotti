@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartHouse.domain.Devices.Doors.Interfaces
+namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces
 {
     public interface IOpenable
     {
-        public void Open();
-        public void Close();
+        bool IsOpen { get; }
+        void Open();
+        void Close();
     }
 }

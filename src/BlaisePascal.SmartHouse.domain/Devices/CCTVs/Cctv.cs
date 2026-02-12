@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.CCTVs.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,39 +9,90 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
 {
-    public class Cctv: AbstractDevice, ILockable
+    public class Cctv : AbstractDevice, ILockable
     {
-        //Properties
-        public CctvStatus CctvStatus { get; private set; }
-        public string Password = "admin";
-        //Constructors
-        public Cctv(string name): base(name){}
-        public Cctv(string name, Guid id, bool isOn) : base(name, id) { }
-        public Cctv() : base() { }
-        //Methods
-        public void SetCctvStatus (CctvStatus status)
+        public CctvMode CurrentMode { get; private set; }
+        public CctvPassword Password { get; private set; }
+        public bool IsLocked { get; private set; }
+
+        public Cctv(string name, string password) : base(name)
         {
-            if (Status == DeviceStatus.On)
+            CurrentMode = CctvMode.Idle;
+            Password = new CctvPassword(password);
+            IsLocked = true;
+        }
+
+        public Cctv(Guid id, string name, DeviceStatus status, CctvMode mode, string password, bool isLocked)
+            : base(name, id)
+        {
+            Status = status;
+            CurrentMode = mode;
+            Password = new CctvPassword(password);
+            IsLocked = isLocked;
+        }
+
+        public void SetMode(CctvMode mode)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot change mode when device is off.");
+
+            if (IsLocked)
+                throw new InvalidOperationException("Cannot change mode when device is locked.");
+
+            CurrentMode = mode;
+            UpdateLastModified();
+        }
+
+        public void Unlock(string passwordCandidate)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot unlock device when it is off.");
+
+            if (Password.Match(passwordCandidate))
             {
-                CctvStatus = status;
-                LastModifiedAtUtc = DateTime.UtcNow;
+                IsLocked = false;
+                UpdateLastModified();
             }
             else
-                throw new InvalidOperationException("Cannot set CCTV status when the device is not on.");
+            {
+                throw new ArgumentException("Invalid password.");
+            }
         }
-       
 
-        public void Login(string password)
+        public void Lock()
         {
-            if (Password == password)
-                Unlock();
-            Lock();
+            IsLocked = true;
+            UpdateLastModified();
         }
-        public void Lock() { Status = DeviceStatus.Off; }
 
         public void Unlock()
         {
-            Status = DeviceStatus.On;
+            throw new InvalidOperationException("This device requires a password to unlock. Use Unlock(string password).");
+        }
+
+        public void ChangePassword(string oldPassword, string newPassword)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Device must be on to change password.");
+
+            if (IsLocked)
+                throw new InvalidOperationException("Device must be unlocked to change password.");
+
+            if (Password.Match(oldPassword))
+            {
+                Password = new CctvPassword(newPassword);
+                UpdateLastModified();
+            }
+            else
+            {
+                throw new ArgumentException("Old password does not match.");
+            }
+        }
+
+        public override void TurnOff()
+        {
+            base.TurnOff();
+            Lock();
         }
     }
 }

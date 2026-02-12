@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
-    public enum AirConditionerStatus
+    public enum AirConditionerMode
     {
-        Auto,
-        Dry,
-        Cooling,
-        Heating,
+        Auto = 0,
+        Cooling = 1,
+        Heating = 2,
+        Dry = 3,
+        FanOnly = 4,
+        Dehumidify = 5
     }
 }

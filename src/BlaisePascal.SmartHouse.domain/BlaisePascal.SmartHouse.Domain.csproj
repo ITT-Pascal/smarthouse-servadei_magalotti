@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Devices\CCTVs\Interface\" />
+    <Compile Remove="Devices\CCTVs\Interfaces\**" />
+    <EmbeddedResource Remove="Devices\CCTVs\Interfaces\**" />
+    <None Remove="Devices\CCTVs\Interfaces\**" />
   </ItemGroup>
 
 </Project>

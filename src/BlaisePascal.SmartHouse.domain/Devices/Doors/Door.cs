@@ -1,6 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
-using SmartHouse.domain.Devices.Doors.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.Doors.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,90 +9,108 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Doors
 {
-    public class Door: AbstractDevice, IOpenable, ILockable
+    public class Door : AbstractDevice, IOpenable, ILockable
     {
-        //Properties
         public bool IsOpen { get; private set; }
         public bool IsLocked { get; private set; }
-        //Constructors
-        public Door(string name): base(name) 
+        public DoorCode Code { get; private set; }
+
+        public Door(string name, string code) : base(name)
         {
             IsOpen = false;
             IsLocked = false;
-            CreatedAtUtc = DateTime.UtcNow;
+            Code = new DoorCode(code);
         }
-        public Door(string name, Guid id, bool isOn) : base(name, id) 
+
+        public Door(Guid id, string name, DeviceStatus status, bool isOpen, bool isLocked, string code)
+            : base(name, id)
         {
-            IsOpen = false;
-            IsLocked = false;
-            CreatedAtUtc = DateTime.UtcNow;
+            Status = status;
+            IsOpen = isOpen;
+            IsLocked = isLocked;
+            Code = new DoorCode(code);
         }
-        public Door() : base() 
-        {
-            IsOpen = false;
-            IsLocked = false;
-            CreatedAtUtc = DateTime.UtcNow;
-        }
-        //Methods
+
         public void Open()
         {
-            if (Status == DeviceStatus.On && !IsLocked)
-            {
-                IsOpen = true;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
-            else
-                throw new InvalidOperationException("Cannot act on a door that is not on and unlocked.");
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot open door when device is off.");
+
+            if (IsLocked)
+                throw new InvalidOperationException("Cannot open a locked door. Unlock it first.");
+
+            if (IsOpen)
+                throw new InvalidOperationException("Door is already open.");
+
+            IsOpen = true;
+            UpdateLastModified();
         }
+
         public void Close()
         {
-            if (Status == DeviceStatus.On && !IsLocked)
-            {
-                IsOpen = false;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
-            else
-                throw new InvalidOperationException("Cannot act on a door that is not on and unlocked.");
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot close door when device is off.");
+
+            if (!IsOpen)
+                throw new InvalidOperationException("Door is already closed.");
+
+            IsOpen = false;
+            UpdateLastModified();
         }
 
         public void Lock()
         {
-            if (IsOpen || !IsOn)
-            {
-                throw new InvalidOperationException("Cannot lock a door that is not closed or on.");
-            }
-            else
-            {
-                IsLocked = true;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot lock door when device is off.");
+
+            if (IsOpen)
+                throw new InvalidOperationException("Cannot lock an open door. Close it first.");
+
+            if (IsLocked)
+                throw new InvalidOperationException("Door is already locked.");
+
+            IsLocked = true;
+            UpdateLastModified();
         }
+
+        public void Unlock(string codeCandidate)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot unlock door when device is off.");
+
+            if (!IsLocked)
+                throw new InvalidOperationException("Door is already unlocked.");
+
+            if (!Code.Match(codeCandidate))
+                throw new ArgumentException("Invalid code.");
+
+            IsLocked = false;
+            UpdateLastModified();
+        }
+
         public void Unlock()
         {
-            if (IsOpen || !IsOn)
-            {
-                throw new InvalidOperationException("Cannot unlock a door that is not closed or on.");
-
-            }
-            else
-            {
-                IsLocked = false;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            throw new InvalidOperationException("Security required. Use Unlock(string code).");
         }
-        public void SwitchOpenClose()
+
+        public void ChangeCode(string oldCode, string newCode)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Device must be on to change code.");
+
+            if (!Code.Match(oldCode))
+                throw new ArgumentException("Old code does not match.");
+
+            Code = new DoorCode(newCode);
+            UpdateLastModified();
+        }
+
+        public override void TurnOff()
         {
             if (IsOpen)
-                Close();
-            else
-                Open();      
-        }
-        public void SwitchLockUnlock()
-        {
-            if (IsLocked)
-                Unlock();
-            else
-                Lock();   
+                throw new InvalidOperationException("Cannot turn off device while door is open.");
+
+            base.TurnOff();
         }
     }
 }

@@ -1,74 +1,54 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public class Lamp: LampModel
+    public class Lamp : LampModel
     {
-        //Costants
-        private const int MIN_BRIGHTNESS = 1;
-        private const int MAX_BRIGHTNESS = 10;
-        //Constructor
-        public Lamp(string name, Guid id, bool isOn, bool isEco) : base(name, id, isOn, isEco)
-        {
-            IsEco = isEco;
-            Brightness = MAX_BRIGHTNESS;
-        }
+        public const int MaxBrightness = 10;
+
         public Lamp(string name) : base(name)
         {
-            Brightness = MAX_BRIGHTNESS;
-        }
-        //Methods
-        public override void Toggle()
-        {
-            base.Toggle();
-        }
-        public override void increaseBrightness()
-        {
-            if (Status == DeviceStatus.On)
-            {
-                LastModifiedAtUtc = DateTime.UtcNow;
-                if (Brightness >= MAX_BRIGHTNESS)
-                    Brightness = MAX_BRIGHTNESS;
-                else
-                    Brightness += 1;
-            }
-        }
-
-        public void dimmerBrightness(int amount)
-        {
-            if (Status == DeviceStatus.On)
-                if (amount <= MAX_BRIGHTNESS && amount >= MIN_BRIGHTNESS)
-                {
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                    Brightness = amount;
-                }
-                else
-                    throw new ArgumentException("The amount is invalid");
-        }
-
-        public override void decreaseBrightness()
-        {
-            if (Status == DeviceStatus.On)
-            {
-                LastModifiedAtUtc = DateTime.UtcNow;
-                if (Brightness <= MIN_BRIGHTNESS)
-                    Brightness = MIN_BRIGHTNESS;
-                else
-                    Brightness -= 1;
-            }
+            IsEco = false;
+            if (CurrentBrightness.Value < MinBrightness)
+                SetBrightness(MinBrightness);
         }
 
         public override void SetBrightness(int brightness)
         {
             if (Status == DeviceStatus.On)
-                if (brightness <= MAX_BRIGHTNESS && brightness >= MIN_BRIGHTNESS)
-                {
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                    Brightness = brightness;
-                }
-                else
-                    throw new ArgumentException("The brightness is invalid");
+            {
+                if (brightness > MaxBrightness) brightness = MaxBrightness;
+                if (brightness < MinBrightness) brightness = MinBrightness;
+
+                CurrentBrightness = new Brightness(brightness);
+                UpdateLastModified();
+            }
+        }
+
+        public override void IncreaseBrightness()
+        {
+            if (Status == DeviceStatus.On)
+            {
+                int newValue = CurrentBrightness.Value + 1;
+                if (newValue > MaxBrightness) newValue = MaxBrightness;
+
+                CurrentBrightness = new Brightness(newValue);
+                UpdateLastModified();
+            }
+        }
+
+        public override void DecreaseBrightness()
+        {
+            if (Status == DeviceStatus.On)
+            {
+                int newValue = CurrentBrightness.Value - 1;
+                if (newValue < MinBrightness) newValue = MinBrightness;
+
+                CurrentBrightness = new Brightness(newValue);
+                UpdateLastModified();
+            }
         }
     }
 }        

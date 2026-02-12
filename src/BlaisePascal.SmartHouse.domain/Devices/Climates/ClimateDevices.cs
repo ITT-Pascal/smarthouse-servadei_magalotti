@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.Climates.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,44 +9,47 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
-    public class ClimateDevices: AbstractDevice, IClimateDevices
+    public abstract class ClimateDevice : AbstractDevice
     {
-        //Properties
-        public double Temperature { get; protected set; }
-        //Constructors
-        public ClimateDevices(string name) : base(name) { }
-        public ClimateDevices(string name, Guid id, bool isOn, double temperature) : base(name, id)
+        public Temperature CurrentTemperature { get; protected set; }
+
+        protected ClimateDevice(string name, double initialTemp) : base(name)
         {
-            Temperature = temperature;
+            CurrentTemperature = new Temperature(initialTemp);
         }
-        public ClimateDevices() : base() { }
-        //Methods
-        public virtual void SetTemperature(double temperature)
+
+        protected ClimateDevice(Guid id, string name, DeviceStatus status, double currentTemp)
+            : base(name, id)
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot set temperature when the device is off."); }
-            else
-            {
-                Temperature = temperature;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            Status = status;
+            CurrentTemperature = new Temperature(currentTemp);
         }
-        public virtual void IncreaseTemperature(double increment)
+
+        public virtual void SetTemperature(double value)
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot increase temperature when the device is off."); }
-            else
-            {
-                Temperature += increment;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot set temperature when device is off.");
+
+            CurrentTemperature = new Temperature(value);
+            UpdateLastModified();
         }
-        public virtual void DecreaseTemperature(double decrement)
+
+        public virtual void IncreaseTemperature(double amount)
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot decrease temperature when the device is off."); }
-            else
-            {
-                Temperature -= decrement;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot increase temperature when device is off.");
+
+            CurrentTemperature = CurrentTemperature.Add(amount);
+            UpdateLastModified();
+        }
+
+        public virtual void DecreaseTemperature(double amount)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot decrease temperature when device is off.");
+
+            CurrentTemperature = CurrentTemperature.Subtract(amount);
+            UpdateLastModified();
         }
     }
 }

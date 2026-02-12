@@ -8,24 +8,28 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
-    public class AirConditioner: ClimateDevices
+    public class AirConditioner : ClimateDevice
     {
-        //Properties 
-        public AirConditionerStatus AirConditionerStatus { get; private set; }
-        //Constructors
-        public AirConditioner(string name): base(name) { }
-        public AirConditioner(string name, Guid id, bool isOn, double temperature): base(name, id, isOn, temperature) { }
-        public AirConditioner(): base() { }
-        //Methods
-        public void SetAirConditionerStatus(AirConditionerStatus status)
+        public AirConditionerMode Mode { get; private set; }
+
+        public AirConditioner(string name, double initialTemp) : base(name, initialTemp)
         {
-            if (Status == DeviceStatus.On)
-            { 
-                AirConditionerStatus = status;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
-            else 
-                throw new InvalidOperationException("Cannot set air conditioner status when the air conditioner is not on.");           
+            Mode = AirConditionerMode.Auto;
+        }
+
+        public AirConditioner(Guid id, string name, DeviceStatus status, double currentTemp, AirConditionerMode mode)
+            : base(id, name, status, currentTemp)
+        {
+            Mode = mode;
+        }
+
+        public void SetMode(AirConditionerMode mode)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot change mode when device is off.");
+
+            Mode = mode;
+            UpdateLastModified();
         }
     }
 }

@@ -7,35 +7,30 @@ using System.Text;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public class EcoLamp: LampModel
+    public class EcoLamp : LampModel
     {
-        //constants
-        private const int MIN_BRIGHTNESS = 1;
-        //properties
-        public int maxBrightness { get; private set; } = 10;
+        private const int PowerSaveLimit = 5;
+        private const int StandardLimit = 10;
+        private const int AutoPowerSaveMinutes = 180;
+
+        public int MaxBrightness { get; private set; }
         public bool IsPowerSaveMode { get; private set; }
         public DateTime TurnOnHours { get; private set; }
-        //constructor
 
-        public EcoLamp(string name) : base(name) 
-        { 
-            IsPowerSaveMode = false;
-            IsOn = false;
-            Brightness = maxBrightness; 
-        }
-
-        public EcoLamp(string name, Guid id, bool isOn, bool isEco) : base(name, id, isOn, isEco)
+        public EcoLamp(string name) : base(name)
         {
-            IsEco = isEco;
+            MaxBrightness = StandardLimit;
             IsPowerSaveMode = false;
-            Brightness = maxBrightness;
-            IsOn = false;
+            if (CurrentBrightness.Value > MaxBrightness)
+            {
+                base.SetBrightness(MaxBrightness);
+            }
         }
-        //methods
 
         public override void TurnOn()
         {
             base.TurnOn();
+            TurnOnHours = DateTime.UtcNow;
         }
 
         public override void TurnOff()
@@ -47,34 +42,34 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         {
             base.Toggle();
             if (Status == DeviceStatus.On)
-                TurnOnHours = DateTime.UtcNow;
-        }
-
-        public override void Rename(string newName)
-        {
-            base.Rename(newName);
-        }
-        
-        public override void increaseBrightness()
-        {
-            if (Status == DeviceStatus.On)
             {
-                LastModifiedAtUtc = DateTime.UtcNow;
-                if (Brightness + 1 >= maxBrightness)
-                    Brightness = maxBrightness;
-                else
-                    Brightness += 1;
+                TurnOnHours = DateTime.UtcNow;
             }
         }
-        public override void decreaseBrightness()
+
+        public override void IncreaseBrightness()
         {
             if (Status == DeviceStatus.On)
             {
-                LastModifiedAtUtc = DateTime.UtcNow;
-                if (Brightness - 1 <= MIN_BRIGHTNESS)
-                    Brightness = MIN_BRIGHTNESS;
-                else
-                    Brightness -= 1;
+                int nextValue = CurrentBrightness.Value + 1;
+                if (nextValue >= MaxBrightness)
+                {
+                    nextValue = MaxBrightness;
+                }
+                base.SetBrightness(nextValue);
+            }
+        }
+
+        public override void DecreaseBrightness()
+        {
+            if (Status == DeviceStatus.On)
+            {
+                int nextValue = CurrentBrightness.Value - 1;
+                if (nextValue < MinBrightness)
+                {
+                    nextValue = MinBrightness;
+                }
+                base.SetBrightness(nextValue);
             }
         }
 
@@ -82,42 +77,40 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         {
             if (Status == DeviceStatus.On)
             {
-                if (brightness <= maxBrightness && brightness >= MIN_BRIGHTNESS)
-                {
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                    Brightness = brightness;
-                }
-                else
-                    throw new ArgumentException("The amount is invalid");
+                if (brightness > MaxBrightness) brightness = MaxBrightness;
+                if (brightness < MinBrightness) brightness = MinBrightness;
+                base.SetBrightness(brightness);
             }
         }
 
         public void SwitchPowerSaveMode()
         {
-            if (IsPowerSaveMode == false)
+            if (!IsPowerSaveMode)
             {
-                LastModifiedAtUtc = DateTime.UtcNow;
                 IsPowerSaveMode = true;
-                maxBrightness = 5;
-                Brightness = maxBrightness;
+                MaxBrightness = PowerSaveLimit;
+                if (CurrentBrightness.Value > MaxBrightness)
+                {
+                    base.SetBrightness(MaxBrightness);
+                }
             }
             else
             {
-                LastModifiedAtUtc = DateTime.UtcNow;
                 IsPowerSaveMode = false;
-                maxBrightness = 10;
-                Brightness = maxBrightness;
+                MaxBrightness = StandardLimit;
             }
+            UpdateLastModified();
         }
-        public void ShuldBeActivatedPowerSaveMode()
+
+        public void ShouldBeActivatedPowerSaveMode()
         {
-            if (DateTime.UtcNow - TurnOnHours >= TimeSpan.FromMinutes(180))
+            if (Status == DeviceStatus.On && !IsPowerSaveMode)
             {
-                if (IsPowerSaveMode == false)
+                if ((DateTime.UtcNow - TurnOnHours).TotalMinutes >= AutoPowerSaveMinutes)
+                {
                     SwitchPowerSaveMode();
-                    LastModifiedAtUtc = DateTime.UtcNow;
+                }
             }
         }
     }
-}   
-    
+}

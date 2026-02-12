@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
 {
-    public enum CctvStatus
+    public enum CctvMode
     {
-        Normal = 0,
-        Termic = 1,
-        NightVision = 2,
+        Idle,
+        Recording,
+        NightVision,
+        MotionDetection
     }
 }

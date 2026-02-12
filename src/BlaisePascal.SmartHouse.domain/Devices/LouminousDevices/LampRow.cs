@@ -12,212 +12,285 @@ using System.Xml.Linq;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public class LampRow: LampModel
+    public class LampRow : AbstractDevice
     {
-        public List<LampModel> LampsTot { get; private set; }
-        //Costructor
-        public LampRow()
+        private List<LampModel> _lamps;
+
+        public LampRow(string name) : base(name)
         {
-            LampsTot = new List<LampModel>();
-            CreatedAtUtc = DateTime.UtcNow;
-        }
-        //Methods
-        public void AddLamp()
-        {
-            Lamp Lamp1 = new Lamp("Lampada");
-            LampsTot.Add(new Lamp("Lampada"));
-            LastModifiedAtUtc = DateTime.UtcNow;
-        }
-        public void AddEcoLamp()
-        {
-            EcoLamp EcoLamp1 = new EcoLamp("EcoLampada");
-            LampsTot.Add(new EcoLamp("EcoLampada"));
-            LastModifiedAtUtc = DateTime.UtcNow;
-        }
-        public void AddLampByType(bool IsLamp)
-        {
-            LastModifiedAtUtc = DateTime.UtcNow;
-            if (IsLamp == true)
-                AddLamp();
-            AddEcoLamp();
+            _lamps = new List<LampModel>();
         }
 
-        public void TurnLampOnByPosition(int Position)
+        public LampRow(string name, Guid id)
+            : base(name, id)
         {
-            if (Position < 0) throw new ArgumentOutOfRangeException("position");
-            LastModifiedAtUtc = DateTime.UtcNow;
-            if (LampsTot[Position].IsOn == false)
-                LampsTot[Position].TurnOn();
+            _lamps = new List<LampModel>();
         }
-        public void TurnLampOffByPosition(int Position)
+
+        public void SwitchOn()
         {
-            if (Position < 0) throw new ArgumentOutOfRangeException("position");
-            LastModifiedAtUtc = DateTime.UtcNow;
-            if (LampsTot[Position].Status == DeviceStatus.On)
-                LampsTot[Position].TurnOff();  
-        }
-        public void TurnOnAll()
-        {
-            LastModifiedAtUtc = DateTime.UtcNow;
-            for (int i = 0; i < LampsTot.Count(); i++)
-                if (LampsTot[i].Status != DeviceStatus.On)
-                    LampsTot[i].TurnOn();  
-        }
-        public void TurnOffAll()
-        {
-            LastModifiedAtUtc = DateTime.UtcNow;
-            for (int i = 0; i < LampsTot.Count(); i++)
-                if (LampsTot[i].Status == DeviceStatus.On)
-                    LampsTot[i].TurnOff();    
-        }
-        public void TurnLampOffById(Guid id)
-        {
-            LastModifiedAtUtc = DateTime.UtcNow;
-            for (int i = 0; i < LampsTot.Count(); i++)
-            
-                if (LampsTot[i].GetId() == id)
-                    if (LampsTot[i].Status == DeviceStatus.On)
-                        LampsTot[i].TurnOff(); 
-        }
-        public void TurnLampOffByName(string name)
-        {
-            LastModifiedAtUtc = DateTime.UtcNow;
-            for (int i = 0; i < LampsTot.Count(); i++)
-            
-                if (LampsTot[i].GetName() == name)
-                    if (LampsTot[i].Status == DeviceStatus.On)
-                        LampsTot[i].TurnOff();  
-        }
-        public void RemoveLampByPositionAndId(Guid id, int position)
-        {
-                if (position < 0) throw new ArgumentOutOfRangeException("position");
-                for (int i = 0; i < LampsTot.Count(); i++)
-                     if (LampsTot[i].GetId() == id)
-                     {
-                        LampsTot.Remove(LampsTot[position]);
-                        LastModifiedAtUtc = DateTime.UtcNow;
-                     }
-                        
-                
-        }
-        public void RemoveLampByPositionAndName(string name, int position)
-        {
-            if (position < 0) throw new ArgumentOutOfRangeException("position");
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetName() == name) 
-                {
-                    LampsTot.Remove(LampsTot[position]);
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                }
-                    
-        }
-        public void SetIntensityForAllLamps(int brightness)
-        {
-            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i < LampsTot.Count(); i++) 
+            TurnOn();
+            for (int i = 0; i < _lamps.Count; i++)
             {
-                LampsTot[i].Brightness = brightness;
-                LastModifiedAtUtc = DateTime.UtcNow;
+                _lamps[i].TurnOn();
             }
-               
+            UpdateLastModified();
         }
-        public void SetIntensityLampById(Guid id, int brightness)
+
+        public void SwitchOn(Guid id)
         {
-            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetId() == id) 
-                 {
-                    LampsTot[i].Brightness = brightness;
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                 }               
+            var lamp = FindLampById(id);
+            if (lamp != null)
+            {
+                lamp.TurnOn();
+                UpdateLastModified();
+            }
         }
-        public void SetIntensityByLampName(string name, int brightness)
+
+        public void SwitchOn(string name)
         {
-            if (brightness > 10 && brightness < 0) throw new ArgumentOutOfRangeException("cannot exced max brightness, ");
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetName() == name)
-                 {
-                    LampsTot[i].Brightness = brightness;
-                    LastModifiedAtUtc = DateTime.UtcNow;
-                 }                   
+            if (string.IsNullOrWhiteSpace(name)) return;
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Name == name)
+                {
+                    _lamps[i].TurnOn();
+                    UpdateLastModified();
+                    break;
+                }
+            }
         }
-        public LampModel FindLampWithMaxIntensity()
+
+        public void SwitchOff()
         {
-            LampModel model = null;
-            int highestBrightness = 0;
-            for (int i = 0; i < LampsTot.Count(); i++) 
-                 if (LampsTot[i].Brightness > highestBrightness)
-                    highestBrightness = LampsTot[i].Brightness;
-                 else
-                    model = LampsTot[i];
-            return model;
+            TurnOff();
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                _lamps[i].TurnOff();
+            }
+            UpdateLastModified();
         }
-        public LampModel FindLampWithMinIntensity()
+
+        public void SwitchOff(Guid id)
         {
-            LampModel model = null;
-            int lowestBrightness = 10;
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].Brightness < lowestBrightness)
-                     lowestBrightness = LampsTot[i].Brightness;
-                 else
-                    model = LampsTot[i]; 
-            return model;
+            var lamp = FindLampById(id);
+            if (lamp != null)
+            {
+                lamp.TurnOff();
+                UpdateLastModified();
+            }
         }
+
+        public void SwitchOff(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return;
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Name == name)
+                {
+                    _lamps[i].TurnOff();
+                    UpdateLastModified();
+                    break;
+                }
+            }
+        }
+
+        public void AddLamp(LampModel lamp)
+        {
+            if (lamp == null) return;
+            if (FindLampById(lamp.Id) == null)
+            {
+                _lamps.Add(lamp);
+                UpdateLastModified();
+            }
+        }
+
+        public void AddLampInPosition(LampModel lamp, int position)
+        {
+            if (lamp != null && position >= 0 && position <= _lamps.Count)
+            {
+                _lamps.Insert(position, lamp);
+                UpdateLastModified();
+            }
+        }
+
+        public void RemoveLamp(Guid id)
+        {
+            var lamp = FindLampById(id);
+            if (lamp != null)
+            {
+                _lamps.Remove(lamp);
+                UpdateLastModified();
+            }
+        }
+
+        public void RemoveLamp(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return;
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Name == name)
+                {
+                    _lamps.RemoveAt(i);
+                    UpdateLastModified();
+                    break;
+                }
+            }
+        }
+
+        public void RemoveLampInPosition(int position)
+        {
+            if (position >= 0 && position < _lamps.Count)
+            {
+                _lamps.RemoveAt(position);
+                UpdateLastModified();
+            }
+        }
+
+        public void SetIntensityForAllLamps(int intensity)
+        {
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                _lamps[i].SetBrightness(intensity);
+            }
+            UpdateLastModified();
+        }
+
+        public void SetIntensityForLamp(Guid id, int intensity)
+        {
+            var lamp = FindLampById(id);
+            if (lamp != null)
+            {
+                lamp.SetBrightness(intensity);
+                UpdateLastModified();
+            }
+        }
+
+        public void SetIntensityForLamp(string name, int intensity)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return;
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Name == name)
+                {
+                    _lamps[i].SetBrightness(intensity);
+                    UpdateLastModified();
+                    break;
+                }
+            }
+        }
+
+        public LampModel? FindLampWithMaxIntensity()
+        {
+            if (_lamps.Count == 0) return null;
+            LampModel max = _lamps[0];
+            for (int i = 1; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].CurrentBrightness.Value > max.CurrentBrightness.Value)
+                {
+                    max = _lamps[i];
+                }
+            }
+            return max;
+        }
+
+        public LampModel? FindLampWithMinIntensity()
+        {
+            if (_lamps.Count == 0) return null;
+            LampModel min = _lamps[0];
+            for (int i = 1; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].CurrentBrightness.Value < min.CurrentBrightness.Value)
+                {
+                    min = _lamps[i];
+                }
+            }
+            return min;
+        }
+
         public List<LampModel> FindLampsByIntensityRange(int min, int max)
         {
-            List<LampModel> brightnessLampFinder = new List<LampModel>();
-            if (min > max) throw new ArgumentException("the min value cannot be higher than the max value");
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].Brightness >= min && LampsTot[i].Brightness <= max)
-                     brightnessLampFinder.Add(LampsTot[i]);        
-            return brightnessLampFinder;
+            List<LampModel> result = new List<LampModel>();
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].CurrentBrightness.Value >= min && _lamps[i].CurrentBrightness.Value <= max)
+                {
+                    result.Add(_lamps[i]);
+                }
+            }
+            return result;
         }
-        public List<LampModel> FindAllLampOn()
+
+        public List<LampModel> FindAllOn()
         {
-            List<LampModel> IsOnLampList = new List<LampModel>();
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].IsOn == true)
-                     IsOnLampList.Add(LampsTot[i]);
-            return IsOnLampList;
+            List<LampModel> result = new List<LampModel>();
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Status == DeviceStatus.On)
+                {
+                    result.Add(_lamps[i]);
+                }
+            }
+            return result;
         }
-        public List<LampModel> FindAllLampOff()
+
+        public List<LampModel> FindAllOff()
         {
-            List<LampModel> IsOffLampList = new List<LampModel>();
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].IsOn == false)
-                     IsOffLampList.Add(LampsTot[i]);   
-            return IsOffLampList;
+            List<LampModel> result = new List<LampModel>();
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                if (_lamps[i].Status == DeviceStatus.Off)
+                {
+                    result.Add(_lamps[i]);
+                }
+            }
+            return result;
         }
+
         public LampModel? FindLampById(Guid id)
         {
-            LampModel model = null;
-            for (int i = 0; i < LampsTot.Count(); i++)
-                 if (LampsTot[i].GetId() == id)
-                     model = LampsTot[i];
-            return model;
-        }
-        public List<LampModel> SortByBrightness(bool descending)
-        {
-            List<LampModel> anotherLampModelList = new List<LampModel>();
-            List<LampModel> order = new List<LampModel>();
-            if (LampsTot.Count != 0)
+            for (int i = 0; i < _lamps.Count; i++)
             {
-                if (descending == true)
+                if (_lamps[i].Id == id)
                 {
-                    for (int i = 0; i < LampsTot.Count; i++)
-                         anotherLampModelList.Add(LampsTot[i]);
-                    for (int i = 0; i < anotherLampModelList.Count; i++)
-                    {
-                        FindLampWithMaxIntensity();
-                        order.Add(anotherLampModelList[i]);
-                        anotherLampModelList.Remove(anotherLampModelList[i]);
-                    }
-                    return order;
+                    return _lamps[i];
                 }
-                LampsTot.Sort();
-                return LampsTot;               
             }
-            throw new Exception("the list is empty!");
-        }      
+            return null;
+        }
+
+        public List<LampModel> SortByIntensity(bool descending)
+        {
+            List<LampModel> sorted = new List<LampModel>();
+            for (int i = 0; i < _lamps.Count; i++)
+            {
+                sorted.Add(_lamps[i]);
+            }
+
+            int n = sorted.Count;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    bool condition;
+                    if (descending)
+                    {
+                        condition = sorted[j].CurrentBrightness.Value < sorted[j + 1].CurrentBrightness.Value;
+                    }
+                    else
+                    {
+                        condition = sorted[j].CurrentBrightness.Value > sorted[j + 1].CurrentBrightness.Value;
+                    }
+
+                    if (condition)
+                    {
+                        LampModel temp = sorted[j];
+                        sorted[j] = sorted[j + 1];
+                        sorted[j + 1] = temp;
+                    }
+                }
+            }
+            return sorted;
+        }
     }
 }

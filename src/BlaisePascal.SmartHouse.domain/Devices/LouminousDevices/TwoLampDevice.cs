@@ -1,4 +1,5 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,74 +10,75 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public class TwoLampDevice: LampModel
+    public class TwoLampsDevice : AbstractDevice
     {
-        //Properties
-        public DateTime CreatedAtUtc { get; protected set; }
-        public DateTime LastModifiedAtUtc { get; protected set; }
-        public LampModel lamp1 { get; private set; }
-        public LampModel lamp2 { get; private set; }
-        public bool AreBothLampsOn  => AreBothOn();
-        //Constructor
-        public TwoLampDevice()
+        public LampModel Lamp1 { get; private set; }
+        public LampModel Lamp2 { get; private set; }
+
+        public TwoLampsDevice(string name, LampModel lamp1, LampModel lamp2) : base(name)
         {
-            // Default sensato per i test: si possono comunque passare tipi diversi con l'overload sotto
-            lamp1 = new Lamp("LampadaNormale");
-            lamp2 = new EcoLamp("LampadaEco");
-            CreatedAtUtc = DateTime.UtcNow;
+            if (lamp1 == null) throw new ArgumentNullException(nameof(lamp1));
+            if (lamp2 == null) throw new ArgumentNullException(nameof(lamp2));
+
+            Lamp1 = lamp1;
+            Lamp2 = lamp2;
         }
-        //Methods
-        public void SwitchOnOffBothLamps()
+
+        public TwoLampsDevice(string name, Guid id, LampModel lamp1, LampModel lamp2)
+            : base(name, id)
         {
-            lamp1.Toggle();
-            lamp2.Toggle();
+            Lamp1 = lamp1;
+            Lamp2 = lamp2;
         }
+        public bool AreBothLampsOn()
+        {
+
+            {
+                return Lamp1.Status == DeviceStatus.On && Lamp2.Status == DeviceStatus.On;
+            }
+        }
+        public override void TurnOn()
+        {
+            base.TurnOn();
+            Lamp1.TurnOn();
+            Lamp2.TurnOn();
+            UpdateLastModified();
+        }
+
+        public override void TurnOff()
+        {
+            base.TurnOff();
+            Lamp1.TurnOff();
+            Lamp2.TurnOff();
+            UpdateLastModified();
+        }
+
+        public void ToggleBothLamps()
+        {
+            Lamp1.Toggle();
+            Lamp2.Toggle();
+            UpdateLastModified();
+        }
+
         public void AlternateStatesLamp()
         {
-            if (lamp1.IsOn == true)
-                if (lamp2.IsOn == true)
-                    lamp2.Toggle();
-                else
-                if (lamp2.IsOn == false)
-                    lamp2.Toggle();
+            Lamp1.Toggle();
+            Lamp2.Toggle();
+            UpdateLastModified();
         }
-        public bool AreBothOn()
-        {
-            if (lamp1.IsOn == true && lamp2.IsOn == true)
-                return true;
-            else
-                return false;    
-        }        
-        public void ToggleSwitchBoth()
-        {
-            if ( AreBothLampsOn == true)
-                 if (lamp1.IsOn == true)
-                     lamp1.Toggle();
-                 if (lamp2.IsOn == true)
-                     lamp2.Toggle();
-            else
-                if (lamp1.IsOn == false)
-                    lamp1.Toggle();
-                if (lamp2.IsOn == false)
-                    lamp2.Toggle();
-        }
+
         public void IncreaseBrightnessBoth()
         {
-            lamp1.increaseBrightness();
-            lamp2.increaseBrightness();
+            Lamp1.IncreaseBrightness();
+            Lamp2.IncreaseBrightness();
+            UpdateLastModified();
         }
+
         public void DecreaseBrightnessBoth()
         {
-            lamp1.decreaseBrightness();
-            lamp2.decreaseBrightness();
-        }
-        public void IncreaseOneLampBrightness(LampModel currentLamp)
-        {
-            currentLamp.increaseBrightness();
-        }
-        public void DecreaseOneLampBrightness(Lamp currentLamp)
-        {
-            currentLamp.decreaseBrightness();
+            Lamp1.DecreaseBrightness();
+            Lamp2.DecreaseBrightness();
+            UpdateLastModified();
         }
     }
 }

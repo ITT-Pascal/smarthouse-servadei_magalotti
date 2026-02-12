@@ -13,49 +13,55 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
 {
     public class LedMatrix : AbstractDevice
     {
-        public LampModel[,] Matrix { get; private set; }
+        public LampModel?[,] Matrix { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
         public LedMatrix(string name, int height, int width) : base(name)
         {
-            Width = width;
+            if (height <= 0) throw new ArgumentException("Height must be greater than 0");
+            if (width <= 0) throw new ArgumentException("Width must be greater than 0");
+
             Height = height;
-            Matrix = new LampModel[height, width];
+            Width = width;
+            Matrix = new LampModel?[height, width];
         }
 
-        public LedMatrix(string name, LampModel[,] matrix) : base(name)
+        public LedMatrix(string name, Guid id)
+            : base(name, id)
         {
-            Matrix = matrix;
-            Width = Matrix.GetLength(1);
             Height = Matrix.GetLength(0);
+            Width = Matrix.GetLength(1);
         }
 
-
-
-        //Methods
         public void AddLampInPosition(LampModel lamp, int row, int column)
         {
+            if (row < 0 || row >= Height || column < 0 || column >= Width)
+                throw new IndexOutOfRangeException("Invalid position");
+
             if (Matrix[row, column] != null)
-                throw new ArgumentException("Not avaiable place");
+                throw new ArgumentException("Not available place");
 
             Matrix[row, column] = lamp;
+            UpdateLastModified();
         }
 
         public void RemoveLamp(string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name");
+
             for (int r = 0; r < Height; r++)
             {
                 for (int c = 0; c < Width; c++)
                 {
-                    if (Matrix[r, c] != null && Matrix[r, c].Name == name)
+                    if (Matrix[r, c]?.Name == name)
                     {
-                        Matrix[r, c] = null;
+                        Matrix[r, c] =  null;
+                        UpdateLastModified();
                         return;
                     }
                 }
             }
-
             throw new ArgumentException("No lamps with this name");
         }
 
@@ -68,21 +74,29 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                     if (Matrix[r, c] != null && Matrix[r, c].Id == id)
                     {
                         Matrix[r, c] = null;
+                        UpdateLastModified();
                         return;
                     }
                 }
             }
-
             throw new ArgumentException("No lamps with this guid");
         }
 
         public void RemoveLampInPosition(int row, int column)
         {
-            Matrix[row, column] = null;
+            if (row < 0 || row >= Height || column < 0 || column >= Width)
+                throw new IndexOutOfRangeException("Invalid position");
+
+            if (Matrix[row, column] != null)
+            {
+                Matrix[row, column] = null;
+                UpdateLastModified();
+            }
         }
 
         public override void TurnOn()
         {
+            base.TurnOn();
             foreach (LampModel i in Matrix)
             {
                 if (i != null)
@@ -90,11 +104,12 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                     i.TurnOn();
                 }
             }
-
+            UpdateLastModified();
         }
 
         public override void TurnOff()
         {
+            base.TurnOff();
             foreach (LampModel i in Matrix)
             {
                 if (i != null)
@@ -102,13 +117,32 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                     i.TurnOff();
                 }
             }
-
+            UpdateLastModified();
         }
 
-        public void SwitchOneOneLamp(Guid id) { GetLamp(id).TurnOn(); }
-        public void SwitchOneOneLamp(string name) { GetLamp(name).TurnOn(); }
-        public void SwitchOffOneLamp(Guid id) { GetLamp(id).TurnOff(); }
-        public void SwitchOffOneLamp(string name) { GetLamp(name).TurnOff(); }
+        public void SwitchOnOneLamp(Guid id)
+        {
+            GetLamp(id).TurnOn();
+            UpdateLastModified();
+        }
+
+        public void SwitchOnOneLamp(string name)
+        {
+            GetLamp(name).TurnOn();
+            UpdateLastModified();
+        }
+
+        public void SwitchOffOneLamp(Guid id)
+        {
+            GetLamp(id).TurnOff();
+            UpdateLastModified();
+        }
+
+        public void SwitchOffOneLamp(string name)
+        {
+            GetLamp(name).TurnOff();
+            UpdateLastModified();
+        }
 
         public void SetBrightness(int newbrightness)
         {
@@ -117,9 +151,20 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                 if (lamp != null)
                     lamp.SetBrightness(newbrightness);
             }
+            UpdateLastModified();
         }
-        public void SetBrightnessOneLamp(int newbrightness, Guid id) { GetLamp(id).SetBrightness(newbrightness); }
-        public void SetBrightnessOneLamp(int newbrightness, string name) { GetLamp(name).SetBrightness(newbrightness); }
+
+        public void SetBrightnessOneLamp(int newbrightness, Guid id)
+        {
+            GetLamp(id).SetBrightness(newbrightness);
+            UpdateLastModified();
+        }
+
+        public void SetBrightnessOneLamp(int newbrightness, string name)
+        {
+            GetLamp(name).SetBrightness(newbrightness);
+            UpdateLastModified();
+        }
 
         public LampModel FindLampWithMaxBrightness()
         {
@@ -129,10 +174,9 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
 
             foreach (LampModel l in Matrix)
             {
-                if (l == null)
-                    continue;
+                if (l == null) continue;
 
-                if (maxLamp == null || l.Brightness > maxLamp.Brightness)
+                if (maxLamp == null || l.CurrentBrightness.Value > maxLamp.CurrentBrightness.Value)
                     maxLamp = l;
             }
 
@@ -143,14 +187,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
         {
             NotNullValidator();
 
-            LampModel? minLamp = null;
+            LampModel minLamp = null;
 
             foreach (LampModel l in Matrix)
             {
-                if (l == null)
-                    continue;
+                if (l == null) continue;
 
-                if (minLamp == null || l.Brightness < minLamp.Brightness)
+                if (minLamp == null || l.CurrentBrightness.Value < minLamp.CurrentBrightness.Value)
                     minLamp = l;
             }
 
@@ -169,13 +212,10 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                     else Matrix[r, c].TurnOff();
                 }
             }
+            UpdateLastModified();
         }
 
-
-        //Metodi get privati
-
-
-        public LampModel GetLamp(Guid id)
+        private LampModel GetLamp(Guid id)
         {
             for (int r = 0; r < Height; r++)
             {
@@ -190,13 +230,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             throw new ArgumentException("No lamps with this guid");
         }
 
-        public LampModel GetLamp(string name)
+        private LampModel GetLamp(string name)
         {
             for (int r = 0; r < Height; r++)
             {
                 for (int c = 0; c < Width; c++)
                 {
-                    if (Matrix[r, c] != null && Matrix[r, c].Name == name)
+                    if (Matrix[r, c]?.Name == name)
                     {
                         return Matrix[r, c];
                     }
@@ -212,9 +252,8 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                 if (lamp != null)
                     return;
             }
-            throw new Exception("All the matrix position are null");
+            throw new InvalidOperationException("All the matrix positions are null");
         }
-
     }
 }
 

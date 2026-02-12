@@ -8,6 +8,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces
 {
     public interface IDevice
     {
+        Guid Id { get; }
+        string Name { get; }
+        DeviceStatus Status { get; }
+        bool IsOn { get; }
+        DateTime CreatedAtUtc { get; }
+        DateTime LastModifiedAtUtc { get; }
         void Rename(string newName);
         void TurnOn();
         void TurnOff();

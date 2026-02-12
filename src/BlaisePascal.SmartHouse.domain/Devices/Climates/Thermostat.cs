@@ -8,32 +8,39 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
-    public class Thermostat: ClimateDevices
+    public class Thermostat : ClimateDevice
     {
-        //Properties
-        public const double DefaultDimmer = 0.5;
-        //Constructors
-        public Thermostat(string name) : base(name) { }
-        public Thermostat(string name, Guid id, bool isOn, double temperature) : base(name, id, isOn, temperature) { }
-        public Thermostat() : base() { }
-        //Methods
+        private const double DefaultDimmerStep = 0.5;
+        public ThermostatMode Mode { get; private set; }
+
+        public Thermostat(string name, double initialTemp) : base(name, initialTemp)
+        {
+            Mode = ThermostatMode.Standby;
+        }
+
+        public Thermostat(Guid id, string name, DeviceStatus status, double currentTemp, ThermostatMode mode)
+            : base(id, name, status, currentTemp)
+        {
+            Mode = mode;
+        }
+
+        public void SetMode(ThermostatMode mode)
+        {
+            if (!IsOn)
+                throw new InvalidOperationException("Cannot change mode when device is off.");
+
+            Mode = mode;
+            UpdateLastModified();
+        }
+
         public void DimmerTemperatureUp()
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the device is off."); }
-            else
-            {
-                Temperature += DefaultDimmer;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            IncreaseTemperature(DefaultDimmerStep);
         }
+
         public void DimmerTemperatureDown()
         {
-            if (!(Status == DeviceStatus.On)) { throw new InvalidOperationException("Cannot dimmer temperature when the device is off."); }
-            else
-            {
-                Temperature -= DefaultDimmer;
-                LastModifiedAtUtc = DateTime.UtcNow;
-            }
+            DecreaseTemperature(DefaultDimmerStep);
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Doors.DoorRepository
 {
-    public interface DoorRepository
+    public interface IDoorRepository
     {
-        void AddDoor(Door door);
-        void UpdateDoor(Door door);
-        void DeleteDoor(Guid id);
-        Door GetDoorById(Guid id);
-        List<Door> GetAllDoors();
+        void Add(Door door);
+        void Update(Door door);
+        void Remove(Guid id);
+        Door GetById(Guid id);
+        List<Door> GetAll();
     }
 }

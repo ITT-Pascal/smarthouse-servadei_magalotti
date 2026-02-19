@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Queries
 {
-    public class GetLampByIdQuery
+    public class GetMinBrightnessLampQuery
     {
         private readonly ILampRepository _lampRepository;
 
-        public GetLampByIdQuery(ILampRepository lampRepository)
+        public GetMinBrightnessLampQuery(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
 
-        public LampModel Execute(Guid id)
+        public LampModel Execute()
         {
-            return _lampRepository.GetLampById(id);
+            var lamps = _lampRepository.GetAllLamps();
+            if (!lamps.Any()) return null;
+
+            return lamps.OrderBy(l => l.CurrentBrightness.Value).First();
         }
     }
 }

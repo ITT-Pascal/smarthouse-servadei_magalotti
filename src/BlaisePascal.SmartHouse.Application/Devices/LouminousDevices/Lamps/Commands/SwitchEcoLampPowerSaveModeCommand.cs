@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Commands
 {
-    public class SwitchOnLampCommand
+    public class SwitchEcoLampPowerSaveModeCommand
     {
         private readonly ILampRepository _lampRepository;
 
-        public SwitchOnLampCommand(ILampRepository lampRepository)
+        public SwitchEcoLampPowerSaveModeCommand(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
@@ -20,10 +20,14 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Com
         public void Execute(Guid lampId)
         {
             var lamp = _lampRepository.GetLampById(lampId);
-            if (lamp != null)
+            if (lamp != null && lamp is EcoLamp ecoLamp)
             {
-                lamp.TurnOn();
-                _lampRepository.UpdateLamp(lamp);
+                ecoLamp.SwitchPowerSaveMode();
+                _lampRepository.UpdateLamp(ecoLamp);
+            }
+            else
+            {
+                throw new InvalidOperationException("Lamp not found or not an EcoLamp.");
             }
         }
     }

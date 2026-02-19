@@ -1,5 +1,4 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
-using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Commands
 {
-    public class SwitchOnLampCommand
+    public class SetLampBrightnessCommand
     {
         private readonly ILampRepository _lampRepository;
 
-        public SwitchOnLampCommand(ILampRepository lampRepository)
+        public SetLampBrightnessCommand(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
 
-        public void Execute(Guid lampId)
+        public void Execute(Guid lampId, int brightness)
         {
             var lamp = _lampRepository.GetLampById(lampId);
             if (lamp != null)
             {
-                lamp.TurnOn();
+                lamp.SetBrightness(brightness);
                 _lampRepository.UpdateLamp(lamp);
             }
         }

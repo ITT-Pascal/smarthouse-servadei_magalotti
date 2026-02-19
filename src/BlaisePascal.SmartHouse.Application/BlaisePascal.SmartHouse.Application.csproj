@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Devices\LouminousDevices\Lamps\Dto\" />
-    <Folder Include="Devices\LouminousDevices\Lamps\Mappers\" />
-    <Folder Include="Devices\LouminousDevices\Lamps\Validations\" />
+    <Compile Remove="Devices\LouminousDevices\Lamps\Dto\**" />
+    <Compile Remove="Devices\LouminousDevices\Lamps\Mappers\**" />
+    <Compile Remove="Devices\LouminousDevices\Lamps\Validations\**" />
+    <EmbeddedResource Remove="Devices\LouminousDevices\Lamps\Dto\**" />
+    <EmbeddedResource Remove="Devices\LouminousDevices\Lamps\Mappers\**" />
+    <EmbeddedResource Remove="Devices\LouminousDevices\Lamps\Validations\**" />
+    <None Remove="Devices\LouminousDevices\Lamps\Dto\**" />
+    <None Remove="Devices\LouminousDevices\Lamps\Mappers\**" />
+    <None Remove="Devices\LouminousDevices\Lamps\Validations\**" />
   </ItemGroup>
 
   <ItemGroup>

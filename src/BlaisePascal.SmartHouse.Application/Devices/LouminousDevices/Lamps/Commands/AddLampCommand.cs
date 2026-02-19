@@ -1,4 +1,5 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Com
 {
     public class AddLampCommand
     {
-        private ILampRepository _lampRepository;
+        private readonly ILampRepository _lampRepository;
 
         public AddLampCommand(ILampRepository lampRepository)
         {
@@ -18,13 +19,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Com
 
         public void Execute(string lampName)
         {
-
-            _lampRepository.AddLamp(new Lamp(new Device(name));
+            _lampRepository.AddLamp(new Lamp(lampName));
         }
-
-
-
-
-
     }
 }

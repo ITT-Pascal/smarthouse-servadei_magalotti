@@ -16,7 +16,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Com
             _lampRepository = lampRepository;
         }
 
-        public void Execute(Guid lampId) 
+        public void Execute(Guid lampId)
         {
             _lampRepository.DeleteLamp(lampId);
         }

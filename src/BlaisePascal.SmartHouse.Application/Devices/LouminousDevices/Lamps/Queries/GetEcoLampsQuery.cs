@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Queries
 {
-    public class GetLampByIdQuery
+    public class GetEcoLampsQuery
     {
         private readonly ILampRepository _lampRepository;
 
-        public GetLampByIdQuery(ILampRepository lampRepository)
+        public GetEcoLampsQuery(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
 
-        public LampModel Execute(Guid id)
+        public List<LampModel> Execute()
         {
-            return _lampRepository.GetLampById(id);
+            var lamps = _lampRepository.GetAllLamps();
+            return lamps.Where(l => l.IsEco).ToList();
         }
     }
 }

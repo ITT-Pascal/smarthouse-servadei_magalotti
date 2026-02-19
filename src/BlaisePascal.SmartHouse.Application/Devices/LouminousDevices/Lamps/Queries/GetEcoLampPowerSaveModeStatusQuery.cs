@@ -8,18 +8,23 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Queries
 {
-    public class GetLampByIdQuery
+    public class GetEcoLampPowerSaveModeStatusQuery
     {
         private readonly ILampRepository _lampRepository;
 
-        public GetLampByIdQuery(ILampRepository lampRepository)
+        public GetEcoLampPowerSaveModeStatusQuery(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
 
-        public LampModel Execute(Guid id)
+        public bool Execute(Guid lampId)
         {
-            return _lampRepository.GetLampById(id);
+            var lamp = _lampRepository.GetLampById(lampId);
+            if (lamp != null && lamp is EcoLamp ecoLamp)
+            {
+                return ecoLamp.IsPowerSaveMode;
+            }
+            throw new InvalidOperationException("Lamp not found or not an EcoLamp.");
         }
     }
 }

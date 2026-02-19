@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Queries
 {
-    public class GetLampByIdQuery
+    public class GetLampByNameQuery
     {
         private readonly ILampRepository _lampRepository;
 
-        public GetLampByIdQuery(ILampRepository lampRepository)
+        public GetLampByNameQuery(ILampRepository lampRepository)
         {
             _lampRepository = lampRepository;
         }
 
-        public LampModel Execute(Guid id)
+        public List<LampModel> Execute(string name)
         {
-            return _lampRepository.GetLampById(id);
+            var lamps = _lampRepository.GetAllLamps();
+            return lamps.Where(l => l.Name == name).ToList();
         }
     }
 }

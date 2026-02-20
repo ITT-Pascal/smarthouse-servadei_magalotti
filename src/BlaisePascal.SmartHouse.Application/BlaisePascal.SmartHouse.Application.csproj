@@ -19,8 +19,4 @@
     <ProjectReference Include="..\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Devices\LouminousDevices\Lamps\Dto\" />
-  </ItemGroup>
-
 </Project>

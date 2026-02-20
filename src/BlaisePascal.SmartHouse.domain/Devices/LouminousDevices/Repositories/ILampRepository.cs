@@ -8,10 +8,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories
 {
     public interface ILampRepository
     {
-        void AddLamp(LampModel lamp);
-        void UpdateLamp(LampModel lamp);
+        void AddLamp(AbstractLamp lamp);
+        void UpdateLamp(AbstractLamp lamp);
         void DeleteLamp(Guid id);
-        LampModel GetLampById(Guid id);
-        List<LampModel> GetAllLamps();
+        AbstractLamp GetLampById(Guid id);
+        List<AbstractLamp> GetAllLamps();
     }
 }

@@ -13,7 +13,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
 {
     public class LedMatrix : AbstractDevice
     {
-        public LampModel?[,] Matrix { get; private set; }
+        public AbstractLamp?[,] Matrix { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -24,7 +24,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
 
             Height = height;
             Width = width;
-            Matrix = new LampModel?[height, width];
+            Matrix = new AbstractLamp?[height, width];
         }
 
         public LedMatrix(string name, Guid id)
@@ -34,7 +34,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             Width = Matrix.GetLength(1);
         }
 
-        public void AddLampInPosition(LampModel lamp, int row, int column)
+        public void AddLampInPosition(AbstractLamp lamp, int row, int column)
         {
             if (row < 0 || row >= Height || column < 0 || column >= Width)
                 throw new IndexOutOfRangeException("Invalid position");
@@ -97,7 +97,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
         public override void TurnOn()
         {
             base.TurnOn();
-            foreach (LampModel i in Matrix)
+            foreach (AbstractLamp i in Matrix)
             {
                 if (i != null)
                 {
@@ -110,7 +110,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
         public override void TurnOff()
         {
             base.TurnOff();
-            foreach (LampModel i in Matrix)
+            foreach (AbstractLamp i in Matrix)
             {
                 if (i != null)
                 {
@@ -146,7 +146,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
 
         public void SetBrightness(int newbrightness)
         {
-            foreach (LampModel lamp in Matrix)
+            foreach (AbstractLamp lamp in Matrix)
             {
                 if (lamp != null)
                     lamp.SetBrightness(newbrightness);
@@ -166,13 +166,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        public LampModel FindLampWithMaxBrightness()
+        public AbstractLamp FindLampWithMaxBrightness()
         {
             NotNullValidator();
 
-            LampModel? maxLamp = null;
+            AbstractLamp? maxLamp = null;
 
-            foreach (LampModel l in Matrix)
+            foreach (AbstractLamp l in Matrix)
             {
                 if (l == null) continue;
 
@@ -183,13 +183,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             return maxLamp;
         }
 
-        public LampModel FindLampWithMinBrightness()
+        public AbstractLamp FindLampWithMinBrightness()
         {
             NotNullValidator();
 
-            LampModel minLamp = null;
+            AbstractLamp minLamp = null;
 
-            foreach (LampModel l in Matrix)
+            foreach (AbstractLamp l in Matrix)
             {
                 if (l == null) continue;
 
@@ -215,7 +215,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        private LampModel GetLamp(Guid id)
+        private AbstractLamp GetLamp(Guid id)
         {
             for (int r = 0; r < Height; r++)
             {
@@ -230,7 +230,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             throw new ArgumentException("No lamps with this guid");
         }
 
-        private LampModel GetLamp(string name)
+        private AbstractLamp GetLamp(string name)
         {
             for (int r = 0; r < Height; r++)
             {

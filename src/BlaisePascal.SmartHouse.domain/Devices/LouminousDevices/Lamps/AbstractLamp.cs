@@ -10,23 +10,41 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public abstract class LampModel : AbstractDevice
+    public abstract class AbstractLamp : AbstractDevice
     {
         public const int MinBrightness = 1;
 
         public Brightness CurrentBrightness { get; protected set; }
         public bool IsEco { get; protected set; }
 
-        public LampModel(string name) : base(name)
+        public AbstractLamp(Guid id, string name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc): base(id, name, status, createdAtUtc, lastModifiedAtUtc) 
+        {
+            Id = id;
+            Name = name;
+            Status = status;
+            CurrentBrightness = brightness;
+            CreatedAtUtc = createdAtUtc;
+            LastModifiedAtUtc = lastModifiedAtUtc;
+        }
+
+        public AbstractLamp(string name) : base(name)
         {
             CurrentBrightness = new Brightness(MinBrightness);
             IsEco = false;
         }
 
-        public LampModel(Guid id, string name, bool isEco) : base(name, id)
+        public AbstractLamp(Guid id, string name, bool isEco) : base(name, id)
         {
             IsEco = isEco;
             CurrentBrightness = new Brightness(MinBrightness);
+        }
+
+        protected AbstractLamp(Guid id, string name, DeviceStatus status, DateTime createdAtUtc)
+        {
+            Id = id;
+            Name = name;
+            Status = status;
+            CreatedAtUtc = createdAtUtc;
         }
 
         public virtual void SetBrightness(int value)

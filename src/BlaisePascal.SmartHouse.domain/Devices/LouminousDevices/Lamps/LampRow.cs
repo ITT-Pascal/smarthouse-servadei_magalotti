@@ -14,17 +14,17 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class LampRow : AbstractDevice
     {
-        private List<LampModel> _lamps;
+        private List<AbstractLamp> _lamps;
 
         public LampRow(string name) : base(name)
         {
-            _lamps = new List<LampModel>();
+            _lamps = new List<AbstractLamp>();
         }
 
         public LampRow(string name, Guid id)
             : base(name, id)
         {
-            _lamps = new List<LampModel>();
+            _lamps = new List<AbstractLamp>();
         }
 
         public void SwitchOn()
@@ -95,7 +95,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void AddLamp(LampModel lamp)
+        public void AddLamp(AbstractLamp lamp)
         {
             if (lamp == null) return;
             if (FindLampById(lamp.Id) == null)
@@ -105,7 +105,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void AddLampInPosition(LampModel lamp, int position)
+        public void AddLampInPosition(AbstractLamp lamp, int position)
         {
             if (lamp != null && position >= 0 && position <= _lamps.Count)
             {
@@ -180,10 +180,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public LampModel? FindLampWithMaxIntensity()
+        public AbstractLamp? FindLampWithMaxIntensity()
         {
             if (_lamps.Count == 0) return null;
-            LampModel max = _lamps[0];
+            AbstractLamp max = _lamps[0];
             for (int i = 1; i < _lamps.Count; i++)
             {
                 if (_lamps[i].CurrentBrightness.Value > max.CurrentBrightness.Value)
@@ -194,10 +194,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return max;
         }
 
-        public LampModel? FindLampWithMinIntensity()
+        public AbstractLamp? FindLampWithMinIntensity()
         {
             if (_lamps.Count == 0) return null;
-            LampModel min = _lamps[0];
+            AbstractLamp min = _lamps[0];
             for (int i = 1; i < _lamps.Count; i++)
             {
                 if (_lamps[i].CurrentBrightness.Value < min.CurrentBrightness.Value)
@@ -208,9 +208,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return min;
         }
 
-        public List<LampModel> FindLampsByIntensityRange(int min, int max)
+        public List<AbstractLamp> FindLampsByIntensityRange(int min, int max)
         {
-            List<LampModel> result = new List<LampModel>();
+            List<AbstractLamp> result = new List<AbstractLamp>();
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].CurrentBrightness.Value >= min && _lamps[i].CurrentBrightness.Value <= max)
@@ -221,9 +221,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return result;
         }
 
-        public List<LampModel> FindAllOn()
+        public List<AbstractLamp> FindAllOn()
         {
-            List<LampModel> result = new List<LampModel>();
+            List<AbstractLamp> result = new List<AbstractLamp>();
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Status == DeviceStatus.On)
@@ -234,9 +234,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return result;
         }
 
-        public List<LampModel> FindAllOff()
+        public List<AbstractLamp> FindAllOff()
         {
-            List<LampModel> result = new List<LampModel>();
+            List<AbstractLamp> result = new List<AbstractLamp>();
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Status == DeviceStatus.Off)
@@ -247,7 +247,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return result;
         }
 
-        public LampModel? FindLampById(Guid id)
+        public AbstractLamp? FindLampById(Guid id)
         {
             for (int i = 0; i < _lamps.Count; i++)
             {
@@ -259,9 +259,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             return null;
         }
 
-        public List<LampModel> SortByIntensity(bool descending)
+        public List<AbstractLamp> SortByIntensity(bool descending)
         {
-            List<LampModel> sorted = new List<LampModel>();
+            List<AbstractLamp> sorted = new List<AbstractLamp>();
             for (int i = 0; i < _lamps.Count; i++)
             {
                 sorted.Add(_lamps[i]);
@@ -284,7 +284,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 
                     if (condition)
                     {
-                        LampModel temp = sorted[j];
+                        AbstractLamp temp = sorted[j];
                         sorted[j] = sorted[j + 1];
                         sorted[j + 1] = temp;
                     }

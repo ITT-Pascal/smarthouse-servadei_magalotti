@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
-    public class EcoLamp : LampModel
+    public class EcoLamp : AbstractLamp
     {
         private const int PowerSaveLimit = 5;
         private const int StandardLimit = 10;

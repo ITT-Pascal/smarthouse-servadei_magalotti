@@ -154,7 +154,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         [Fact]
         public void MinBrightness_IsAlwaysOne()
         {
-            Assert.Equal(1, LampModel.MinBrightness);
+            Assert.Equal(1, AbstractLamp.MinBrightness);
         }
 
         [Fact]

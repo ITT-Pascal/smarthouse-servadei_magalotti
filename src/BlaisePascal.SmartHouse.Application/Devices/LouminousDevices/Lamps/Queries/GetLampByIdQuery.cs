@@ -17,7 +17,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Que
             _lampRepository = lampRepository;
         }
 
-        public LampModel Execute(Guid id)
+        public AbstractLamp Execute(Guid id)
         {
             return _lampRepository.GetLampById(id);
         }

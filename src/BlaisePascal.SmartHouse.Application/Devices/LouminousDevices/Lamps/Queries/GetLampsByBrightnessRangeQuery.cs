@@ -17,7 +17,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Que
             _lampRepository = lampRepository;
         }
 
-        public List<LampModel> Execute(int minBrightness, int maxBrightness)
+        public List<AbstractLamp> Execute(int minBrightness, int maxBrightness)
         {
             var lamps = _lampRepository.GetAllLamps();
             return lamps.Where(l => l.CurrentBrightness.Value >= minBrightness && l.CurrentBrightness.Value <= maxBrightness).ToList();

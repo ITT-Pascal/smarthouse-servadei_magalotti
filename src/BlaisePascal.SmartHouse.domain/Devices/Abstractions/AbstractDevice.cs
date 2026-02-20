@@ -16,7 +16,16 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
         public DateTime CreatedAtUtc { get; protected set; }
         public DateTime LastModifiedAtUtc { get; protected set; }
 
-        protected AbstractDevice(string name)
+        public AbstractDevice(Guid id, string name, DeviceStatus status, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
+        {
+            Id = id;
+            Name = name;
+            Status = status;
+            CreatedAtUtc = createdAtUtc;
+            LastModifiedAtUtc = lastModifiedAtUtc;
+        }
+
+        public AbstractDevice(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidOperationException("Name cannot be empty or whitespace.");
@@ -28,7 +37,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             LastModifiedAtUtc = DateTime.UtcNow;
         }
 
-        protected AbstractDevice(string name, Guid id)
+        public AbstractDevice(string name, Guid id)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new InvalidOperationException("Name cannot be empty or whitespace.");
@@ -43,7 +52,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             LastModifiedAtUtc = DateTime.UtcNow;
         }
 
-        protected AbstractDevice()
+        public AbstractDevice()
         {
             Id = Guid.NewGuid();
             Status = DeviceStatus.Off;

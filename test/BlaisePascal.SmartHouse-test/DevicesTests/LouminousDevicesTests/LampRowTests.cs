@@ -196,7 +196,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lampRow.AddLamp(l1); lampRow.AddLamp(l2);
             lampRow.SwitchOn();
             l1.SetBrightness(8); l2.SetBrightness(3);
-            List<LampModel> sorted = lampRow.SortByIntensity(false);
+            List<AbstractLamp> sorted = lampRow.SortByIntensity(false);
             Assert.Equal(3, sorted[0].CurrentBrightness.Value);
         }
 
@@ -209,7 +209,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lampRow.AddLamp(l1); lampRow.AddLamp(l2);
             lampRow.SwitchOn();
             l1.SetBrightness(8); l2.SetBrightness(3);
-            List<LampModel> sorted = lampRow.SortByIntensity(true);
+            List<AbstractLamp> sorted = lampRow.SortByIntensity(true);
             Assert.Equal(8, sorted[0].CurrentBrightness.Value);
         }
 

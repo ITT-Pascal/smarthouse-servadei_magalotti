@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Devices\LouminousDevices\Lamps\Validations\**" />
-    <EmbeddedResource Remove="Devices\LouminousDevices\Lamps\Validations\**" />
-    <None Remove="Devices\LouminousDevices\Lamps\Validations\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 

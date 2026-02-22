@@ -12,6 +12,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
         Recording,
         NightVision,
         MotionDetection,
-        Termic
+        Termic,
+        Unknown
     }
 }

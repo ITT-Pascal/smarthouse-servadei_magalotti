@@ -1,6 +1,7 @@
 ﻿using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Abstractions.Mappers;
 using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Dto;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;

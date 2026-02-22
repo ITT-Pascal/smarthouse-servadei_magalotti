@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.LuminuosDevice;
 using System;
 using System.Collections.Generic;

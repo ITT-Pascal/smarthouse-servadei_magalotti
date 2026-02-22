@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Dto
 {
-    public class LampDto
+    public record LampDto
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string DeviceStatus { get; set; }
-        public int Brightness { get; set; }
-        public DateTime CreatedAtUtc { get; set; }
-        public DateTime LastModifiedAtUtc { get; set; }
+        public Guid Id { get; init; }
+        public string ?Name { get; init; }
+        public string ?DeviceStatus { get; init; }
+        public int Brightness { get; init; }
+        public DateTime CreatedAtUtc { get; init; }
+        public DateTime LastModifiedAtUtc { get; init; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Mappers
 {
-    public class LampMapper
+    public static class LampMapper
     {
         public static LampDto ToDto(Lamp lamp)
         {
@@ -31,7 +31,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Map
                 dto.Id,
                 dto.Name,
                 DeviceStatusMapper.ToDomain(dto.DeviceStatus),
-                dto.Brightness,
+                new Brightness(dto.Brightness),
                 dto.CreatedAtUtc,
                 dto.LastModifiedAtUtc);
         }

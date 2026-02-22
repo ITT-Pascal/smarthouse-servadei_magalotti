@@ -2,15 +2,15 @@
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 
-namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
+namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps
 {
     public class Lamp : AbstractLamp
     {
         public const int MaxBrightness = 10;
 
-        public Lamp(Guid id, string name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc) : base(id, name, status, createdAtUtc) 
-        { 
-            Brightness = brightness;
+        public Lamp(Guid id, string name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
+            : base(id, name, status, brightness, createdAtUtc, lastModifiedAtUtc)
+        {
         }
         public Lamp(string name) : base(name)
         {

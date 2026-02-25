@@ -12,40 +12,55 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
 {
     public class InMemoryLampRepository : ILampRepository
     {
-        private readonly List<Lamp>? _lamps;
+        private readonly List<AbstractLamp> _lamps;
 
         public InMemoryLampRepository()
         {
-            _lamps = new List<Lamp>();
+            _lamps = new List<AbstractLamp>
             {
-                new Lamp(new string("CrazyLamp"));
-                new Lamp(new string("PulgaLamp"));
-            }
+                new Lamp("CrazyLamp"),
+                new Lamp("PulgaLamp")
+            };
         }
 
         public void AddLamp(AbstractLamp lamp)
         {
-            throw new NotImplementedException();
+            if (lamp == null)
+                throw new ArgumentNullException(nameof(lamp));
+
+            _lamps.Add(lamp);
         }
 
         public void DeleteLamp(Guid id)
         {
-            throw new NotImplementedException();
+            var lampToRemove = GetLampById(id);
+            if (lampToRemove != null)
+            {
+                _lamps.Remove(lampToRemove);
+            }
         }
 
         public List<AbstractLamp> GetAllLamps()
         {
-            throw new NotImplementedException();
+            return _lamps.ToList();
         }
 
         public AbstractLamp GetLampById(Guid id)
         {
-            throw new NotImplementedException();
+            return _lamps.FirstOrDefault(lamp => lamp.Id == id);
         }
 
         public void UpdateLamp(AbstractLamp lamp)
         {
-            throw new NotImplementedException();
+            if (lamp == null)
+                throw new ArgumentNullException(nameof(lamp));
+
+            int index = _lamps.FindIndex(l => l.Id == lamp.Id);
+
+            if (index != -1)
+            {
+                _lamps[index] = lamp;
+            }
         }
     }
 }

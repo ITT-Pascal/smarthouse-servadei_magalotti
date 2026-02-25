@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Csv\" />
+    <Folder Include="Repositories\Json\" />
+    <Folder Include="Repositories\MongoDB\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Application\BlaisePascal.SmartHouse.Application.csproj" />
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

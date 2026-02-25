@@ -1,6 +1,7 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.LuminuosDevice;
 using System;
 using System.Collections.Generic;
@@ -111,7 +112,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp = new Lamp("L");
             ledMatrix.AddLampInPosition(lamp, 0, 0);
             ledMatrix.TurnOn();
-            ledMatrix.SetBrightness(9);
+            ledMatrix.SetBrightness(new Brightness(9));
             Assert.Equal(9, lamp.CurrentBrightness.Value);
         }
 
@@ -122,7 +123,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp = new Lamp("L");
             ledMatrix.AddLampInPosition(lamp, 0, 0);
             ledMatrix.TurnOn();
-            ledMatrix.SetBrightnessOneLamp(4, lamp.Id);
+            ledMatrix.SetBrightnessOneLamp(new Brightness(4), lamp.Id);
             Assert.Equal(4, lamp.CurrentBrightness.Value);
         }
 
@@ -135,8 +136,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             ledMatrix.AddLampInPosition(l1, 0, 0);
             ledMatrix.AddLampInPosition(l2, 1, 1);
             ledMatrix.TurnOn();
-            l1.SetBrightness(2);
-            l2.SetBrightness(8);
+            l1.SetBrightness(new Brightness(2));
+            l2.SetBrightness(new Brightness(8));
             Assert.Equal(l2, ledMatrix.FindLampWithMaxBrightness());
         }
 
@@ -149,8 +150,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             ledMatrix.AddLampInPosition(l1, 0, 0);
             ledMatrix.AddLampInPosition(l2, 1, 1);
             ledMatrix.TurnOn();
-            l1.SetBrightness(2);
-            l2.SetBrightness(8);
+            l1.SetBrightness(new Brightness(2));
+            l2.SetBrightness(new Brightness(8));
             Assert.Equal(l1, ledMatrix.FindLampWithMinBrightness());
         }
 
@@ -208,7 +209,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             LedMatrix ledMatrix = new LedMatrix("Matrix", 2, 2);
             ledMatrix.Rename("NuovaMatrice");
-            Assert.Equal("NuovaMatrice", ledMatrix.Name);
+            Assert.Equal("NuovaMatrice", ledMatrix.Name.String);
         }
 
         [Fact]

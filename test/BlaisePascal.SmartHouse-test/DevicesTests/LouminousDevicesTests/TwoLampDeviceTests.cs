@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp l2 = new Lamp("L2");
             TwoLampsDevice twoLampsDevice = new TwoLampsDevice("TwoLamps", l1, l2);
             twoLampsDevice.TurnOn();
-            l1.SetBrightness(5); l2.SetBrightness(5);
+            l1.SetBrightness(new Brightness(5));
+            l2.SetBrightness(new Brightness(5));
             twoLampsDevice.IncreaseBrightnessBoth();
             Assert.Equal(6, l1.CurrentBrightness.Value);
         }
@@ -77,7 +79,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp l2 = new Lamp("L2");
             TwoLampsDevice twoLampsDevice = new TwoLampsDevice("TwoLamps", l1, l2);
             twoLampsDevice.TurnOn();
-            l1.SetBrightness(5); l2.SetBrightness(5);
+            l1.SetBrightness(new Brightness(5));
+            l2.SetBrightness(new Brightness(5));
             twoLampsDevice.DecreaseBrightnessBoth();
             Assert.Equal(4, l2.CurrentBrightness.Value);
         }
@@ -107,7 +110,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             TwoLampsDevice twoLampsDevice = new TwoLampsDevice("TwoLamps", new Lamp("L1"), new Lamp("L2"));
             twoLampsDevice.Rename("NuovoNome");
-            Assert.Equal("NuovoNome", twoLampsDevice.Name);
+            Assert.Equal("NuovoNome", twoLampsDevice.Name.String);
         }
 
         [Fact]

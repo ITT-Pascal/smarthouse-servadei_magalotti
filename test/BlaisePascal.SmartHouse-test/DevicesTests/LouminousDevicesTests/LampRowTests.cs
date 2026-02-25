@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,7 +122,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lampRow.AddLamp(lamp1);
             lampRow.AddLamp(lamp2);
             lampRow.SwitchOn();
-            lampRow.SetIntensityForAllLamps(9);
+            lampRow.SetIntensityForAllLamps(new Brightness(9));
             Assert.True(lamp1.CurrentBrightness.Value == 9 && lamp2.CurrentBrightness.Value == 9);
         }
 
@@ -134,8 +135,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lampRow.AddLamp(lampLow);
             lampRow.AddLamp(lampHigh);
             lampRow.SwitchOn();
-            lampLow.SetBrightness(2);
-            lampHigh.SetBrightness(8);
+            lampLow.SetBrightness(new Brightness(2));
+            lampHigh.SetBrightness(new Brightness(8));
             Assert.Equal(lampHigh.Id, lampRow.FindLampWithMaxIntensity().Id);
         }
 
@@ -148,8 +149,8 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lampRow.AddLamp(lampLow);
             lampRow.AddLamp(lampHigh);
             lampRow.SwitchOn();
-            lampLow.SetBrightness(2);
-            lampHigh.SetBrightness(8);
+            lampLow.SetBrightness(new Brightness(2));
+            lampHigh.SetBrightness(new Brightness(8));
             Assert.Equal(lampLow.Id, lampRow.FindLampWithMinIntensity().Id);
         }
 
@@ -184,7 +185,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp1 = new Lamp("L1");
             lampRow.AddLamp(lamp1);
             lampRow.SwitchOn();
-            lamp1.SetBrightness(5);
+            lamp1.SetBrightness(new Brightness(5));
             Assert.Single(lampRow.FindLampsByIntensityRange(4, 6));
         }
 
@@ -196,7 +197,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp l2 = new Lamp("L2");
             lampRow.AddLamp(l1); lampRow.AddLamp(l2);
             lampRow.SwitchOn();
-            l1.SetBrightness(8); l2.SetBrightness(3);
+            l1.SetBrightness(new Brightness(8)); l2.SetBrightness(new Brightness(3));
             List<AbstractLamp> sorted = lampRow.SortByIntensity(false);
             Assert.Equal(3, sorted[0].CurrentBrightness.Value);
         }
@@ -209,7 +210,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp l2 = new Lamp("L2");
             lampRow.AddLamp(l1); lampRow.AddLamp(l2);
             lampRow.SwitchOn();
-            l1.SetBrightness(8); l2.SetBrightness(3);
+            l1.SetBrightness(new Brightness(8)); l2.SetBrightness(new Brightness(3));
             List<AbstractLamp> sorted = lampRow.SortByIntensity(true);
             Assert.Equal(8, sorted[0].CurrentBrightness.Value);
         }
@@ -239,7 +240,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp = new Lamp("L1");
             lampRow.AddLamp(lamp);
             lampRow.SwitchOn();
-            lampRow.SetIntensityForLamp(lamp.Id, 4);
+            lampRow.SetIntensityForLamp(lamp.Id, new Brightness(4));
             Assert.Equal(4, lamp.CurrentBrightness.Value);
         }
 
@@ -250,7 +251,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp = new Lamp("LampName");
             lampRow.AddLamp(lamp);
             lampRow.SwitchOn();
-            lampRow.SetIntensityForLamp("LampName", 7);
+            lampRow.SetIntensityForLamp("LampName", new Brightness(7));
             Assert.Equal(7, lamp.CurrentBrightness.Value);
         }
 

@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         public void Constructor_InitializesStandardLimit()
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
-            Assert.Equal(10, ecoLamp.MaxBrightness);
+            Assert.Equal(10, ecoLamp.MaxBrightness.Value);
         }
 
         [Fact]
@@ -39,7 +40,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.SwitchPowerSaveMode();
-            Assert.Equal(5, ecoLamp.MaxBrightness);
+            Assert.Equal(5, ecoLamp.MaxBrightness.Value);
         }
 
         [Fact]
@@ -47,7 +48,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(10);
+            ecoLamp.SetBrightness(new Brightness(10));
             ecoLamp.SwitchPowerSaveMode();
             Assert.Equal(5, ecoLamp.CurrentBrightness.Value);
         }
@@ -67,7 +68,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.SwitchPowerSaveMode();
             ecoLamp.SwitchPowerSaveMode();
-            Assert.Equal(10, ecoLamp.MaxBrightness);
+            Assert.Equal(10, ecoLamp.MaxBrightness.Value);
         }
 
         [Fact]
@@ -75,7 +76,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(10);
+            ecoLamp.SetBrightness(new Brightness(10));
             ecoLamp.IncreaseBrightness();
             Assert.Equal(10, ecoLamp.CurrentBrightness.Value);
         }
@@ -86,7 +87,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
             ecoLamp.SwitchPowerSaveMode();
-            ecoLamp.SetBrightness(5);
+            ecoLamp.SetBrightness(new Brightness(5));
             ecoLamp.IncreaseBrightness();
             Assert.Equal(5, ecoLamp.CurrentBrightness.Value);
         }
@@ -96,7 +97,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(1);
+            ecoLamp.SetBrightness(new Brightness(1));
             ecoLamp.DecreaseBrightness();
             Assert.Equal(1, ecoLamp.CurrentBrightness.Value);
         }
@@ -106,7 +107,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(15);
+            ecoLamp.SetBrightness(new Brightness(15));
             Assert.Equal(10, ecoLamp.CurrentBrightness.Value);
         }
 
@@ -115,7 +116,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(-5);
+            ecoLamp.SetBrightness(new Brightness(-5));
             Assert.Equal(1, ecoLamp.CurrentBrightness.Value);
         }
 
@@ -141,20 +142,20 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.Rename("LampadaEco");
-            Assert.Equal("LampadaEco", ecoLamp.Name);
+            Assert.Equal("LampadaEco", ecoLamp.Name.String);
         }
 
         [Fact]
         public void IsEco_IsInitiallyFalseByCostruttoreBase()
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
-            Assert.False(ecoLamp.IsEco); 
+            Assert.False(ecoLamp.IsEco);
         }
 
         [Fact]
         public void MinBrightness_IsAlwaysOne()
         {
-            Assert.Equal(1, AbstractLamp.MinBrightness);
+            Assert.Equal(1, AbstractLamp.MinBrightness.Value);
         }
 
         [Fact]
@@ -192,7 +193,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
             DateTime marker = ecoLamp.LastModifiedAtUtc;
-            ecoLamp.SetBrightness(7);
+            ecoLamp.SetBrightness(new Brightness(7));
             Assert.NotEqual(marker, ecoLamp.LastModifiedAtUtc);
         }
 
@@ -222,7 +223,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         public void GetName_ReturnsCorrectString()
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
-            Assert.Equal("EcoLamp", ecoLamp.GetName());
+            Assert.Equal("EcoLamp", ecoLamp.Name.String);
         }
 
         [Fact]
@@ -236,7 +237,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         public void SetBrightness_WhenOff_DoesNotChangeValue()
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
-            ecoLamp.SetBrightness(9);
+            ecoLamp.SetBrightness(new Brightness(9));
             Assert.Equal(1, ecoLamp.CurrentBrightness.Value);
         }
 
@@ -253,7 +254,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             EcoLamp ecoLamp = new EcoLamp("EcoLamp");
             ecoLamp.TurnOn();
-            ecoLamp.SetBrightness(5);
+            ecoLamp.SetBrightness(new Brightness(5));
             ecoLamp.TurnOff();
             ecoLamp.DecreaseBrightness();
             Assert.Equal(5, ecoLamp.CurrentBrightness.Value);

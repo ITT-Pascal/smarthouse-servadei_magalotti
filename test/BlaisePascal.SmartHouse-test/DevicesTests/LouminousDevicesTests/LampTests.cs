@@ -1,6 +1,7 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         [Fact]
         public void MaxBrightness_IsExactlyTen()
         {
-            Assert.Equal(10, Lamp.MaxBrightness);
+            Assert.Equal(10, Lamp.MaxBrightness.Value);
         }
 
         [Fact]
@@ -29,7 +30,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(8);
+            lamp.SetBrightness(new Brightness(8));
             Assert.Equal(8, lamp.CurrentBrightness.Value);
         }
 
@@ -38,7 +39,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(15);
+            lamp.SetBrightness(new Brightness(15));
             Assert.Equal(10, lamp.CurrentBrightness.Value);
         }
 
@@ -47,7 +48,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(0);
+            lamp.SetBrightness(new Brightness(0));
             Assert.Equal(1, lamp.CurrentBrightness.Value);
         }
 
@@ -56,7 +57,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(5);
+            lamp.SetBrightness(new Brightness(5));
             lamp.IncreaseBrightness();
             Assert.Equal(6, lamp.CurrentBrightness.Value);
         }
@@ -66,7 +67,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(10);
+            lamp.SetBrightness(new Brightness(10));
             lamp.IncreaseBrightness();
             Assert.Equal(10, lamp.CurrentBrightness.Value);
         }
@@ -76,7 +77,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(5);
+            lamp.SetBrightness(new Brightness(5));
             lamp.DecreaseBrightness();
             Assert.Equal(4, lamp.CurrentBrightness.Value);
         }
@@ -86,7 +87,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
-            lamp.SetBrightness(1);
+            lamp.SetBrightness(new Brightness(1));
             lamp.DecreaseBrightness();
             Assert.Equal(1, lamp.CurrentBrightness.Value);
         }
@@ -121,7 +122,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
         {
             Lamp lamp = new Lamp("Lamp");
             lamp.Rename("LampadaSoggiorno");
-            Assert.Equal("LampadaSoggiorno", lamp.Name);
+            Assert.Equal("LampadaSoggiorno", lamp.Name.String);
         }
 
         [Fact]
@@ -130,7 +131,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             Lamp lamp = new Lamp("Lamp");
             lamp.TurnOn();
             DateTime marker = lamp.LastModifiedAtUtc;
-            lamp.SetBrightness(3);
+            lamp.SetBrightness(new Brightness(3));
             Assert.NotEqual(marker, lamp.LastModifiedAtUtc);
         }
 

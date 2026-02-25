@@ -1,5 +1,7 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,19 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class EcoLamp : AbstractLamp
     {
-        private const int PowerSaveLimit = 5;
-        private const int StandardLimit = 10;
+        private const Brightness PowerSaveLimit = 5;
+        private const Brightness StandardLimit = 10;
         private const int AutoPowerSaveMinutes = 180;
 
-        public int MaxBrightness { get; private set; }
+        public Brightness MaxBrightness { get; private set; }
         public bool IsPowerSaveMode { get; private set; }
         public DateTime TurnOnHours { get; private set; }
 
-        public EcoLamp(string name) : base(name)
+        public EcoLamp(Name name) : base(name)
         {
             MaxBrightness = StandardLimit;
             IsPowerSaveMode = false;
-            if (CurrentBrightness.Value > MaxBrightness)
+            if (CurrentBrightness.Value > MaxBrightness.Value)
             {
                 base.SetBrightness(MaxBrightness);
             }
@@ -52,11 +54,11 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             if (Status == DeviceStatus.On)
             {
                 int nextValue = CurrentBrightness.Value + 1;
-                if (nextValue >= MaxBrightness)
+                if (nextValue >= MaxBrightness.Value)
                 {
-                    nextValue = MaxBrightness;
+                    nextValue = MaxBrightness.Value;
                 }
-                base.SetBrightness(nextValue);
+                base.SetBrightness(new Brightness(nextValue));
             }
         }
 
@@ -65,20 +67,20 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             if (Status == DeviceStatus.On)
             {
                 int nextValue = CurrentBrightness.Value - 1;
-                if (nextValue < MinBrightness)
+                if (nextValue < MinBrightness.Value)
                 {
-                    nextValue = MinBrightness;
+                    nextValue = MinBrightness.Value;
                 }
-                base.SetBrightness(nextValue);
+                base.SetBrightness(new Brightness(nextValue));
             }
         }
 
-        public override void SetBrightness(int brightness)
+        public override void SetBrightness(Brightness brightness)
         {
             if (Status == DeviceStatus.On)
             {
-                if (brightness > MaxBrightness) brightness = MaxBrightness;
-                if (brightness < MinBrightness) brightness = MinBrightness;
+                if (brightness.Value > MaxBrightness.Value) brightness = MaxBrightness;
+                if (brightness.Value < MinBrightness.Value) brightness = MinBrightness;
                 base.SetBrightness(brightness);
             }
         }
@@ -89,7 +91,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             {
                 IsPowerSaveMode = true;
                 MaxBrightness = PowerSaveLimit;
-                if (CurrentBrightness.Value > MaxBrightness)
+                if (CurrentBrightness.Value > MaxBrightness.Value)
                 {
                     base.SetBrightness(MaxBrightness);
                 }

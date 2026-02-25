@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Interfaces;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
@@ -12,12 +13,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public abstract class AbstractLamp : AbstractDevice
     {
-        public const int MinBrightness = 1;
+        public const Brightness MinBrightness = 1;
 
         public Brightness CurrentBrightness { get; protected set; }
         public bool IsEco { get; protected set; }
 
-        public AbstractLamp(Guid id, string name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc): base(id, name, status, createdAtUtc, lastModifiedAtUtc) 
+        public AbstractLamp(Guid id, Name name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc) : base(id, name, status, createdAtUtc, lastModifiedAtUtc)
         {
             Id = id;
             Name = name;
@@ -27,31 +28,30 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             LastModifiedAtUtc = lastModifiedAtUtc;
         }
 
-        public AbstractLamp(string name) : base(name)
+        public AbstractLamp(Name name) : base(name)
         {
             CurrentBrightness = new Brightness(MinBrightness);
             IsEco = false;
         }
 
-        public AbstractLamp(Guid id, string name, bool isEco) : base(name, id)
+        public AbstractLamp(Guid id, Name name, bool isEco) : base(name, id)
         {
             IsEco = isEco;
             CurrentBrightness = new Brightness(MinBrightness);
         }
 
-        protected AbstractLamp(Guid id, string name, DeviceStatus status, DateTime createdAtUtc)
+        public AbstractLamp(Guid id, Name name, DeviceStatus status, DateTime createdAtUtc)
         {
             Id = id;
             Name = name;
             Status = status;
             CreatedAtUtc = createdAtUtc;
         }
-
-        public virtual void SetBrightness(int value)
+        public virtual void SetBrightness(Brightness value)
         {
             if (Status == DeviceStatus.On)
             {
-                CurrentBrightness = new Brightness(value);
+                CurrentBrightness = value;
                 UpdateLastModified();
             }
         }
@@ -80,6 +80,6 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         }
 
         public Guid GetId() { return Id; }
-        public string GetName() { return Name; }
+        public string GetName() { return Name.ToString(); }
     }
 }

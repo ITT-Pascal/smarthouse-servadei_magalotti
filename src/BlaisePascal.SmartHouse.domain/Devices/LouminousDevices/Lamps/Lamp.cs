@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 
@@ -8,25 +9,22 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps
     {
         public const int MaxBrightness = 10;
 
-        public Lamp(Guid id, string name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
+        public Lamp(Guid id, Name name, DeviceStatus status, Brightness brightness, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
             : base(id, name, status, brightness, createdAtUtc, lastModifiedAtUtc)
         {
         }
-        public Lamp(string name) : base(name)
+        public Lamp(Name name) : base(name)
         {
             IsEco = false;
             if (CurrentBrightness.Value < MinBrightness)
-                SetBrightness(MinBrightness);
+                SetBrightness(new Brightness(MinBrightness));
         }
 
-        public override void SetBrightness(int brightness)
+        public override void SetBrightness(Brightness brightness)
         {
             if (Status == DeviceStatus.On)
             {
-                if (brightness > MaxBrightness) brightness = MaxBrightness;
-                if (brightness < MinBrightness) brightness = MinBrightness;
-
-                CurrentBrightness = new Brightness(brightness);
+                CurrentBrightness = brightness;
                 UpdateLastModified();
             }
         }

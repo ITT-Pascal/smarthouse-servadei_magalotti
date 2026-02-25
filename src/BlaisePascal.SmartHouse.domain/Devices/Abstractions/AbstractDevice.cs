@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
     public abstract class AbstractDevice : IDevice
     {
         public Guid Id { get; protected set; }
-        public string Name { get; protected set; }
+        public Name Name { get; protected set; }
         public DeviceStatus Status { get; protected set; }
         public bool IsOn => Status == DeviceStatus.On;
         public DateTime CreatedAtUtc { get; protected set; }
         public DateTime LastModifiedAtUtc { get; protected set; }
 
-        public AbstractDevice(Guid id, string name, DeviceStatus status, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
+        public AbstractDevice(Guid id, Name name, DeviceStatus status, DateTime createdAtUtc, DateTime lastModifiedAtUtc)
         {
             Id = id;
             Name = name;
@@ -25,10 +26,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             LastModifiedAtUtc = lastModifiedAtUtc;
         }
 
-        public AbstractDevice(string name)
+        public AbstractDevice(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new InvalidOperationException("Name cannot be empty or whitespace.");
+            if (name == null)
+                throw new InvalidOperationException("Name cannot be null.");
 
             Id = Guid.NewGuid();
             Name = name;
@@ -37,10 +38,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             LastModifiedAtUtc = DateTime.UtcNow;
         }
 
-        public AbstractDevice(string name, Guid id)
+        public AbstractDevice(Name name, Guid id)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new InvalidOperationException("Name cannot be empty or whitespace.");
+            if (name == null)
+                throw new InvalidOperationException("Name cannot be null.");
 
             if (id == Guid.Empty)
                 throw new InvalidOperationException("Id cannot be empty.");
@@ -59,10 +60,10 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions
             CreatedAtUtc = DateTime.UtcNow;
         }
 
-        public virtual void Rename(string newName)
+        public virtual void Rename(Name newName)
         {
-            if (string.IsNullOrWhiteSpace(newName))
-                throw new InvalidOperationException("New name cannot be empty.");
+            if (newName == null)
+                throw new InvalidOperationException("New name cannot be null.");
 
             if (Name == newName)
                 throw new InvalidOperationException("New name cannot be the same as the current name.");

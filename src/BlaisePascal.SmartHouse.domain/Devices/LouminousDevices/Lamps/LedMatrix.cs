@@ -1,5 +1,7 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
-using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -17,7 +19,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public LedMatrix(string name, int height, int width) : base(name)
+        public LedMatrix(Name name, int height, int width) : base(name)
         {
             if (height <= 0) throw new ArgumentException("Height must be greater than 0");
             if (width <= 0) throw new ArgumentException("Width must be greater than 0");
@@ -27,7 +29,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             Matrix = new AbstractLamp?[height, width];
         }
 
-        public LedMatrix(string name, Guid id)
+        public LedMatrix(Name name, Guid id)
             : base(name, id)
         {
             Height = Matrix.GetLength(0);
@@ -46,9 +48,9 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        public void RemoveLamp(string name)
+        public void RemoveLamp(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Invalid name");
+            if (name == null) throw new ArgumentException("Invalid name");
 
             for (int r = 0; r < Height; r++)
             {
@@ -56,7 +58,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
                 {
                     if (Matrix[r, c]?.Name == name)
                     {
-                        Matrix[r, c] =  null;
+                        Matrix[r, c] = null;
                         UpdateLastModified();
                         return;
                     }
@@ -126,7 +128,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        public void SwitchOnOneLamp(string name)
+        public void SwitchOnOneLamp(Name name)
         {
             GetLamp(name).TurnOn();
             UpdateLastModified();
@@ -138,13 +140,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        public void SwitchOffOneLamp(string name)
+        public void SwitchOffOneLamp(Name name)
         {
             GetLamp(name).TurnOff();
             UpdateLastModified();
         }
 
-        public void SetBrightness(int newbrightness)
+        public void SetBrightness(Brightness newbrightness)
         {
             foreach (AbstractLamp lamp in Matrix)
             {
@@ -154,13 +156,13 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             UpdateLastModified();
         }
 
-        public void SetBrightnessOneLamp(int newbrightness, Guid id)
+        public void SetBrightnessOneLamp(Brightness newbrightness, Guid id)
         {
             GetLamp(id).SetBrightness(newbrightness);
             UpdateLastModified();
         }
 
-        public void SetBrightnessOneLamp(int newbrightness, string name)
+        public void SetBrightnessOneLamp(Brightness newbrightness, Name name)
         {
             GetLamp(name).SetBrightness(newbrightness);
             UpdateLastModified();
@@ -230,7 +232,7 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
             throw new ArgumentException("No lamps with this guid");
         }
 
-        private AbstractLamp GetLamp(string name)
+        private AbstractLamp GetLamp(Name name)
         {
             for (int r = 0; r < Height; r++)
             {
@@ -256,4 +258,3 @@ namespace BlaisePascal.SmartHouse.Domain.LuminuosDevice
         }
     }
 }
-

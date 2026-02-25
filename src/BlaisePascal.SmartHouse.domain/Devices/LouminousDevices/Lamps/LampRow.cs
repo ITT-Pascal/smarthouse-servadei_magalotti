@@ -1,6 +1,8 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices;
 using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,12 +18,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
     {
         private List<AbstractLamp> _lamps;
 
-        public LampRow(string name) : base(name)
+        public LampRow(Name name) : base(name)
         {
             _lamps = new List<AbstractLamp>();
         }
 
-        public LampRow(string name, Guid id)
+        public LampRow(Name name, Guid id)
             : base(name, id)
         {
             _lamps = new List<AbstractLamp>();
@@ -47,9 +49,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void SwitchOn(string name)
+        public void SwitchOn(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (name == null) return;
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Name == name)
@@ -81,9 +83,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void SwitchOff(string name)
+        public void SwitchOff(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (name == null) return;
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Name == name)
@@ -124,9 +126,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void RemoveLamp(string name)
+        public void RemoveLamp(Name name)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (name == null) return;
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Name == name)
@@ -147,7 +149,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void SetIntensityForAllLamps(int intensity)
+        public void SetIntensityForAllLamps(Brightness intensity)
         {
             for (int i = 0; i < _lamps.Count; i++)
             {
@@ -156,7 +158,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             UpdateLastModified();
         }
 
-        public void SetIntensityForLamp(Guid id, int intensity)
+        public void SetIntensityForLamp(Guid id, Brightness intensity)
         {
             var lamp = FindLampById(id);
             if (lamp != null)
@@ -166,9 +168,9 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             }
         }
 
-        public void SetIntensityForLamp(string name, int intensity)
+        public void SetIntensityForLamp(Name name, Brightness intensity)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (name == null) return;
             for (int i = 0; i < _lamps.Count; i++)
             {
                 if (_lamps[i].Name == name)

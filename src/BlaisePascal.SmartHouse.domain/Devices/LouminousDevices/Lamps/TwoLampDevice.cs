@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         public AbstractLamp Lamp1 { get; private set; }
         public AbstractLamp Lamp2 { get; private set; }
 
-        public TwoLampsDevice(string name, AbstractLamp lamp1, AbstractLamp lamp2) : base(name)
+        public TwoLampsDevice(Name name, AbstractLamp lamp1, AbstractLamp lamp2) : base(name)
         {
             if (lamp1 == null) throw new ArgumentNullException(nameof(lamp1));
             if (lamp2 == null) throw new ArgumentNullException(nameof(lamp2));
@@ -24,7 +25,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
             Lamp2 = lamp2;
         }
 
-        public TwoLampsDevice(string name, Guid id, AbstractLamp lamp1, AbstractLamp lamp2)
+        public TwoLampsDevice(Name name, Guid id, AbstractLamp lamp1, AbstractLamp lamp2)
             : base(name, id)
         {
             Lamp1 = lamp1;

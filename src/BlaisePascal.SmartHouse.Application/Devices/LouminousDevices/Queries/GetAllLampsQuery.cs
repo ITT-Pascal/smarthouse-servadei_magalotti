@@ -1,4 +1,7 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+﻿using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Dto;
+using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Mappers;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,9 +20,11 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Que
             _lampRepository = lampRepository;
         }
 
-        public List<AbstractLamp> Execute()
+        public List<LampDto> Execute()
         {
-            return _lampRepository.GetAllLamps();
+            List<AbstractLamp> lamps = _lampRepository.GetAllLamps();
+
+            return lamps.Select(lamp => LampMapper.ToDto(lamp)).ToList();
         }
     }
 }

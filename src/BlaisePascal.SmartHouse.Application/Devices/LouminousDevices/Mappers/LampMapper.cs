@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Abstractions.Mappers;
 using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Dto;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.ValueObjects;
@@ -13,12 +14,12 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Map
 {
     public static class LampMapper
     {
-        public static LampDto ToDto(Lamp lamp)
+        public static LampDto ToDto(AbstractLamp lamp)
         {
             return new LampDto
             {
                 Id = lamp.Id,
-                Name = lamp.Name,
+                Name = lamp.Name.String,
                 DeviceStatus = DeviceStatusMapper.ToDto(lamp.Status),
                 Brightness = lamp.CurrentBrightness.Value,
                 CreatedAtUtc = lamp.CreatedAtUtc,
@@ -30,7 +31,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Map
         {
             return new Lamp(
                 dto.Id,
-                dto.Name,
+                Name.Create(dto.Name!),
                 DeviceStatusMapper.ToDomain(dto.DeviceStatus),
                 new Brightness(dto.Brightness),
                 dto.CreatedAtUtc,

@@ -10,4 +10,12 @@
     <ProjectReference Include="..\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Devices\Doors\Abstractions\" />
+    <Folder Include="Devices\Doors\Commands\" />
+    <Folder Include="Devices\Doors\Mappers\" />
+    <Folder Include="Devices\Doors\Dto\" />
+    <Folder Include="Devices\Doors\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,7 @@
 ﻿using BlaisePascal.SmartHouse.Application.Devices.CCTVs.Abstractions.Mappers;
 using BlaisePascal.SmartHouse.Application.Devices.CCTVs.Dto;
 using BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Abstractions.Mappers;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.CCTVs;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.CCTVs.Mappers
             return new CctvDto
             {
                 Id = cctv.Id,
-                Name = cctv.Name,
+                Name = cctv.Name.String,
                 DeviceStatus = DeviceStatusMapper.ToDto(cctv.Status),
                 CurrentMode = CctvModeMapper.ToDto(cctv.CurrentMode),
                 Password = cctv.Password.Value,
@@ -31,7 +32,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.CCTVs.Mappers
         {
             return new Cctv(
                 dto.Id,
-                dto.Name,
+                Name.Create(dto.Name!),
                 DeviceStatusMapper.ToDomain(dto.DeviceStatus),
                 CctvModeMapper.ToDomain(dto.CurrentMode),
                 dto.Password,

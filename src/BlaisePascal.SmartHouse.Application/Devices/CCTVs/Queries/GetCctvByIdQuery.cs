@@ -1,4 +1,6 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.CCTVs;
+﻿using BlaisePascal.SmartHouse.Application.Devices.CCTVs.Dto;
+using BlaisePascal.SmartHouse.Application.Devices.CCTVs.Mappers;
+using BlaisePascal.SmartHouse.Domain.Devices.CCTVs;
 using BlaisePascal.SmartHouse.Domain.Devices.CCTVs.Repositories;
 using System;
 using System.Collections.Generic;
@@ -17,9 +19,10 @@ namespace BlaisePascal.SmartHouse.Application.Devices.CCTVs.Queries
             _cctvRepository = cctvRepository;
         }
 
-        public Cctv Execute(Guid id)
+        public CctvDto Execute(Guid id)
         {
-            return _cctvRepository.GetById(id);
+            Cctv cctv = _cctvRepository.GetById(id);
+            return CctvMapper.ToDto(cctv);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.CCTVs.Records;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
         public CctvPassword Password { get; private set; }
         public bool IsLocked { get; private set; }
 
-        public Cctv(string name, string password) : base(name)
+        public Cctv(Name name, string password) : base(name)
         {
             CurrentMode = CctvMode.Idle;
             Password = new CctvPassword(password);
             IsLocked = true;
         }
 
-        public Cctv(Guid id, string name, DeviceStatus status, CctvMode mode, string password, bool isLocked)
+        public Cctv(Guid id, Name name, DeviceStatus status, CctvMode mode, string password, bool isLocked)
             : base(name, id)
         {
             Status = status;
@@ -31,7 +32,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.CCTVs
             IsLocked = isLocked;
         }
 
-        public Cctv(string name) : base(name)
+        public Cctv(Name name) : base(name)
         {
         }
 

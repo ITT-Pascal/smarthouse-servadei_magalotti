@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,18 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
         private const double DefaultDimmerStep = 0.5;
         public ThermostatMode Mode { get; private set; }
 
-        public Thermostat(string name, double initialTemp) : base(name, initialTemp)
+        public Thermostat(Name name, double initialTemp) : base(name, initialTemp)
         {
             Mode = ThermostatMode.Standby;
         }
 
-        public Thermostat(Guid id, string name, DeviceStatus status, double currentTemp, ThermostatMode mode)
+        public Thermostat(Guid id, Name name, DeviceStatus status, double currentTemp, ThermostatMode mode)
             : base(id, name, status, currentTemp)
         {
             Mode = mode;
         }
 
-        public Thermostat(string name) : base(name)
+        public Thermostat(Name name) : base(name)
         {
         }
 

@@ -15,7 +15,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces
         bool IsOn { get; }
         DateTime CreatedAtUtc { get; }
         DateTime LastModifiedAtUtc { get; }
-        void Rename(string newName);
+        void Rename(Name newName);
         void TurnOn();
         void TurnOff();
         void Toggle();

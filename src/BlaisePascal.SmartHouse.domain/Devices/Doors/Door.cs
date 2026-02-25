@@ -1,5 +1,6 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
 using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.Interfaces;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.Doors.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Doors
         public bool IsLocked { get; private set; }
         public DoorCode Code { get; private set; }
 
-        public Door(string name, string code) : base(name)
+        public Door(Name name, string code) : base(name)
         {
             IsOpen = false;
             IsLocked = false;
             Code = new DoorCode(code);
         }
 
-        public Door(Guid id, string name, DeviceStatus status, bool isOpen, bool isLocked, string code)
+        public Door(Guid id, Name name, DeviceStatus status, bool isOpen, bool isLocked, string code)
             : base(name, id)
         {
             Status = status;
@@ -31,7 +32,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Doors
             Code = new DoorCode(code);
         }
 
-        public Door(string name) : base(name)
+        public Door(Name name) : base(name)
         {
         }
 

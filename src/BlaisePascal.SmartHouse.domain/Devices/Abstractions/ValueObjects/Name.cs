@@ -15,10 +15,12 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects
             if (!string.IsNullOrWhiteSpace(name))
                 String = name;
             else
-                throw new ArgumentException("The name cannot be null or empty");
+                throw new InvalidOperationException("The name cannot be null or empty");
         }
 
         public static Name Create(string name) => new Name(name);
-
+        public static implicit operator Name(string name) => new Name(name);
+        public static implicit operator string(Name name) => name?.String;
+        public override string ToString() => String;
     }
 }

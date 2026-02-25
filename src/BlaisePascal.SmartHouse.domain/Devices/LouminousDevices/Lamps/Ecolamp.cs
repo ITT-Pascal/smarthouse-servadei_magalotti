@@ -11,8 +11,8 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public class EcoLamp : AbstractLamp
     {
-        private const Brightness PowerSaveLimit = 5;
-        private const Brightness StandardLimit = 10;
+        public static readonly Brightness PowerSaveLimit = new Brightness(5);
+        public static readonly Brightness StandardLimit = new Brightness(10);
         private const int AutoPowerSaveMinutes = 180;
 
         public Brightness MaxBrightness { get; private set; }

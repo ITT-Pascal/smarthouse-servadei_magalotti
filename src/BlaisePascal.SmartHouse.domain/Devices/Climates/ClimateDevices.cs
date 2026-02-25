@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates.Interfaces;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates.ValueObjects;
 using System;
@@ -13,19 +14,19 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
     {
         public Temperature CurrentTemperature { get; protected set; }
 
-        protected ClimateDevice(string name, double initialTemp) : base(name)
+        protected ClimateDevice(Name name, double initialTemp) : base(name)
         {
             CurrentTemperature = new Temperature(initialTemp);
         }
 
-        protected ClimateDevice(Guid id, string name, DeviceStatus status, double currentTemp)
+        protected ClimateDevice(Guid id, Name name, DeviceStatus status, double currentTemp)
             : base(name, id)
         {
             Status = status;
             CurrentTemperature = new Temperature(currentTemp);
         }
 
-        public ClimateDevice(string name) : base(name)
+        public ClimateDevice(Name name) : base(name)
         {
         }
 

@@ -13,7 +13,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 {
     public abstract class AbstractLamp : AbstractDevice
     {
-        public const Brightness MinBrightness = 1;
+        public static readonly Brightness MinBrightness = new Brightness(1);
 
         public Brightness CurrentBrightness { get; protected set; }
         public bool IsEco { get; protected set; }
@@ -30,14 +30,14 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
 
         public AbstractLamp(Name name) : base(name)
         {
-            CurrentBrightness = new Brightness(MinBrightness);
+            CurrentBrightness = new Brightness(MinBrightness.Value);
             IsEco = false;
         }
 
         public AbstractLamp(Guid id, Name name, bool isEco) : base(name, id)
         {
             IsEco = isEco;
-            CurrentBrightness = new Brightness(MinBrightness);
+            CurrentBrightness = new Brightness(MinBrightness.Value);
         }
 
         public AbstractLamp(Guid id, Name name, DeviceStatus status, DateTime createdAtUtc)

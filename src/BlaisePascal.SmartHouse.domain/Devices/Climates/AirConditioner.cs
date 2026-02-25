@@ -1,4 +1,5 @@
 ﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions;
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,18 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
     {
         public AirConditionerMode Mode { get; private set; }
 
-        public AirConditioner(string name, double initialTemp) : base(name, initialTemp)
+        public AirConditioner(Name name, double initialTemp) : base(name, initialTemp)
         {
             Mode = AirConditionerMode.Auto;
         }
 
-        public AirConditioner(Guid id, string name, DeviceStatus status, double currentTemp, AirConditionerMode mode)
+        public AirConditioner(Guid id, Name name, DeviceStatus status, double currentTemp, AirConditionerMode mode)
             : base(id, name, status, currentTemp)
         {
             Mode = mode;
         }
 
-        public AirConditioner(string name) : base(name)
+        public AirConditioner(Name name) : base(name)
         {
         }
 

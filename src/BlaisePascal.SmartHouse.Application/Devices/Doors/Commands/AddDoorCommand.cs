@@ -1,5 +1,4 @@
-﻿
-using BlaisePascal.SmartHouse.Domain.Devices.Doors;
+﻿using BlaisePascal.SmartHouse.Domain.Devices.Doors;
 using BlaisePascal.SmartHouse.Domain.Devices.Doors.DoorRepository;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlaisePascal.SmartHouse.Application.Devices.Doors
+namespace BlaisePascal.SmartHouse.Application.Devices.Doors.Commands
 {
     public class AddDoorCommand
     {

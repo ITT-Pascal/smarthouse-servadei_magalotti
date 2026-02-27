@@ -1,4 +1,5 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
+﻿
+using BlaisePascal.SmartHouse.Domain.Devices.Abstractions.ValueObjects;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
@@ -12,18 +13,18 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
 {
     public class InMemoryLampRepository : ILampRepository
     {
-        private readonly List<AbstractLamp> _lamps;
+        private readonly List<Lamp> _lamps;
 
         public InMemoryLampRepository()
         {
-            _lamps = new List<AbstractLamp>
+            _lamps = new List<Lamp>
             {
                 new Lamp("CrazyLamp"),
                 new Lamp("PulgaLamp")
             };
         }
 
-        public void AddLamp(AbstractLamp lamp)
+        public void AddLamp(Lamp lamp)
         {
             if (lamp == null)
                 throw new ArgumentNullException(nameof(lamp));
@@ -33,34 +34,33 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
 
         public void DeleteLamp(Guid id)
         {
-            var lampToRemove = GetLampById(id);
+            Lamp? lampToRemove = GetLampById(id);
             if (lampToRemove != null)
             {
                 _lamps.Remove(lampToRemove);
             }
         }
 
-        public List<AbstractLamp> GetAllLamps()
+        public List<Lamp> GetAllLamps()
         {
             return _lamps.ToList();
         }
 
-        public AbstractLamp GetLampById(Guid id)
+        public Lamp GetLampById(Guid id)
         {
-            return _lamps.FirstOrDefault(lamp => lamp.Id == id);
+            foreach (Lamp l in _lamps)
+            {
+                if (l.Id == id)
+                {
+                    return l;
+                }
+            }
+            throw new ArgumentException($"Lamp with id {id} not found.");
         }
 
-        public void UpdateLamp(AbstractLamp lamp)
+        public void UpdateLamp(Lamp lamp)
         {
-            if (lamp == null)
-                throw new ArgumentNullException(nameof(lamp));
-
-            int index = _lamps.FindIndex(l => l.Id == lamp.Id);
-
-            if (index != -1)
-            {
-                _lamps[index] = lamp;
-            }
+            //!TODO
         }
     }
 }

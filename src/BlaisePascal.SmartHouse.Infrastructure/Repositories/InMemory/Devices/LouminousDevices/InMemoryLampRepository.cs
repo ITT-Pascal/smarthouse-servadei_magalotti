@@ -43,7 +43,7 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
 
         public List<Lamp> GetAllLamps()
         {
-            return _lamps.ToList();
+            return _lamps;
         }
 
         public Lamp GetLampById(Guid id)

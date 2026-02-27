@@ -22,9 +22,12 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Que
 
         public LampDto Execute(Guid id)
         {
-            AbstractLamp lamp = _lampRepository.GetLampById(id);
+            var lamp = _lampRepository.GetLampById(id);
 
             return LampMapper.ToDto(lamp);
         }
+
+
+
     }
 }

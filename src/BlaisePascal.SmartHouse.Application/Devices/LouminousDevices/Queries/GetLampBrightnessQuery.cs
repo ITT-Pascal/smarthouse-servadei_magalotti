@@ -21,7 +21,7 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Que
 
         public LampDto Execute(Guid lampId)
         {
-            AbstractLamp lamp = _lampRepository.GetLampById(lampId);
+            var lamp = _lampRepository.GetLampById(lampId);
 
             if (lamp == null)
             {

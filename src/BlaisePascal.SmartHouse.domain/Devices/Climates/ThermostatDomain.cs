@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Domain.Devices.Climates
 {
-    public class Thermostat : ClimateDevice
+    public class ThermostatDomain : ClimateDevice
     {
         private const double DefaultDimmerStep = 0.5;
         public ThermostatMode Mode { get; private set; }
 
-        public Thermostat(Name name, double initialTemp) : base(name, initialTemp)
+        public ThermostatDomain(Name name, double initialTemp) : base(name, initialTemp)
         {
             Mode = ThermostatMode.Standby;
         }
 
-        public Thermostat(Guid id, Name name, DeviceStatus status, double currentTemp, ThermostatMode mode)
+        public ThermostatDomain(Guid id, Name name, DeviceStatus status, double currentTemp, ThermostatMode mode)
             : base(id, name, status, currentTemp)
         {
             Mode = mode;
         }
 
-        public Thermostat(Name name) : base(name)
+        public ThermostatDomain(Name name) : base(name)
         {
         }
 

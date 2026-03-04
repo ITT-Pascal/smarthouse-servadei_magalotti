@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Application\BlaisePascal.SmartHouse.Application.csproj" />
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.domain\BlaisePascal.SmartHouse.Domain.csproj" />
+    <ProjectReference Include="..\BlaisePascal.SmartHouse.Infrastructure\BlaisePascal.SmartHouse.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

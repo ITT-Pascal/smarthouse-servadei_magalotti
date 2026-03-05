@@ -13,11 +13,9 @@ namespace BlaisePascal.SmartHouse.Application.Devices.Thermostats.Command
         {
             _thermostatRepository = thermostatRepository;
         }
-
         public void Execute(string name, double initialTemp)
         {
-            // Crea l'entità usando il costruttore del Domain
-            var thermostat = new ThermostatDomain(Name.Create(name), initialTemp);
+            var thermostat = new ThermostatDomain(name, initialTemp);
             _thermostatRepository.Add(thermostat);
         }
     }

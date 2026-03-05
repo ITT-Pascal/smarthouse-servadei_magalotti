@@ -1,10 +1,6 @@
-﻿using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
+﻿using System;
+using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices;
 using BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Commands
 {
@@ -19,7 +15,10 @@ namespace BlaisePascal.SmartHouse.Application.Devices.LouminousDevices.Lamps.Com
 
         public void Execute(Guid lampId)
         {
+            // Ora GetLampById restituisce un AbstractLamp
             var lamp = _lampRepository.GetLampById(lampId);
+
+            // Possiamo verificare in sicurezza se l'astrazione è in realtà una EcoLamp
             if (lamp != null && lamp is EcoLamp ecoLamp)
             {
                 ecoLamp.ShouldBeActivatedPowerSaveMode();

@@ -1,5 +1,4 @@
 ﻿using BlaisePascal.SmartHouse.Application.Devices.Thermostat.Dto;
-using BlaisePascal.SmartHouse.Application.Devices.Thermostat.Dto;
 using BlaisePascal.SmartHouse.Application.Devices.Thermostats.Mappers;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates;
 using BlaisePascal.SmartHouse.Domain.Devices.Climates.Interfaces;

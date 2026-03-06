@@ -18,8 +18,8 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
            
             _lamps = new List<AbstractLamp>
             {
-                new Lamp("CrazyLamp"),
-                new Lamp("PulgaLamp")
+                new Lamp("PestoLamp"),
+                new Lamp("PeloLamp")
             };
         }
 

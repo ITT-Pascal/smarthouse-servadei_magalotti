@@ -22,10 +22,11 @@ namespace BlaisePascal.SmartHouse.Console
             {
                 Clear();
                 controller.GetAllLamps();
-                ShowMenu();
-
+                controller.ShowMenu();
+                ForegroundColor = ConsoleColor.Green;
                 WriteLine("Select an option:");
-                string choice = ReadLine();
+                ResetColor();
+                string? choice = ReadLine();
 
                 WriteLine();
 
@@ -38,15 +39,18 @@ namespace BlaisePascal.SmartHouse.Console
                         controller.RemoveLamp();
                         break;
                     case "3":
-                        controller.SwitchOn();
-                        break;
-                    case "4":
-                        controller.SwitchOff();
-                        break;
-                    case "5":
                         controller.ChangeIntensity();
                         break;
-                    case "0":
+                    case "4":
+                        controller.SwitchOn();
+                        break;
+                    case "5":
+                        controller.SwitchOff();
+                        break;
+                    case "6":
+                        controller.GetAllLamps();   
+                        break;  
+                    case "7":
                         exit = true;
                         break;
                     default:
@@ -62,14 +66,6 @@ namespace BlaisePascal.SmartHouse.Console
                 WriteLine();
                 WriteLine("Press any key to continue...");
                 ReadKey();
-               
-                
             }   
-
-
-
-
-        }
-
-
    }
+}

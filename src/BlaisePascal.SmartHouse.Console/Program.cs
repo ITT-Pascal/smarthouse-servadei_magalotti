@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace BlaisePascal.SmartHouse.Console
 {
@@ -19,14 +20,14 @@ namespace BlaisePascal.SmartHouse.Console
 
             while (!exit)
             {
-                Console.Clear();
+                Clear();
                 controller.GetAllLamps();
                 ShowMenu();
 
-                Console.WriteLine("Select an option:");
-                string choice = Console.ReadLine();
+                WriteLine("Select an option:");
+                string choice = ReadLine();
 
-                Console.WriteLine();
+                WriteLine();
 
                 switch (choice)
                 {
@@ -49,7 +50,7 @@ namespace BlaisePascal.SmartHouse.Console
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Invalid option. Please try again.");
+                        WriteLine("Invalid option. Please try again.");
                         break;
                 }
                 Pause();
@@ -58,10 +59,10 @@ namespace BlaisePascal.SmartHouse.Console
             
             static void Pause()
             {
-                Console.WriteLine();
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            Console.WriteLine;
+                WriteLine();
+                WriteLine("Press any key to continue...");
+                ReadKey();
+               
                 
             }   
 

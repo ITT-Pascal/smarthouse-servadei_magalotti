@@ -23,6 +23,7 @@ namespace BlaisePascal.SmartHouse.Console
                 Clear();
                 controller.GetAllLamps();
                 controller.ShowMenu();
+
                 ForegroundColor = ConsoleColor.Green;
                 WriteLine("Select an option:");
                 ResetColor();
@@ -33,31 +34,50 @@ namespace BlaisePascal.SmartHouse.Console
                 switch (choice)
                 {
                     case "1":
+                        Clear();
                         controller.AddLamp();
                         break;
                     case "2":
+                        Clear();
                         controller.RemoveLamp();
                         break;
                     case "3":
-                        controller.ChangeIntensity();
+                        Clear();
+                        controller.ChangeBrightness();
                         break;
                     case "4":
+                        Clear();
                         controller.SwitchOn();
                         break;
                     case "5":
+                        Clear();
                         controller.SwitchOff();
                         break;
                     case "6":
+                        Clear();
                         controller.GetAllLamps();   
                         break;  
                     case "7":
+                        Clear();
+                        controller.GetLampById();
+                        break;
+                    case "8":
+                        Clear();
+                        controller.GetLampByName();
+                        break;
+                    case "9":
+                        Clear();
                         exit = true;
                         break;
                     default:
+                        Clear();
                         WriteLine("Invalid option. Please try again.");
                         break;
                 }
-                Pause();
+                if (!exit)
+                {
+                    Pause();
+                }
             }
         }
             

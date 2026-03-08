@@ -31,12 +31,19 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
             _lamps.Add(lamp);
         }
 
-        public void DeleteLamp(Guid id)
+        public void RemoveLamp(Guid id)
         {
-            AbstractLamp? lampToRemove = GetLampById(id);
-            if (lampToRemove != null)
+            try
             {
-                _lamps.Remove(lampToRemove);
+                AbstractLamp? lampToRemove = GetLampById(id);
+                if (lampToRemove != null)
+                {
+                    _lamps.Remove(lampToRemove);
+                }
+            }
+            catch (ArgumentException)
+            {
+ 
             }
         }
 
@@ -57,13 +64,29 @@ namespace BlaisePascal.SmartHouse.Infrastructure.Repositories.InMemory.Devices.L
             throw new ArgumentException($"Lamp with id {id} not found.");
         }
 
+        public AbstractLamp GetLampByName(Name name)
+        {
+            foreach (AbstractLamp l in _lamps)
+            {
+                if (l.Name.ToString().ToLower() == name.ToString().ToLower())
+                {
+                    return l;
+                }
+            }
+            throw new ArgumentException($"Lamp with name '{name}' not found.");
+        }
+
         public void UpdateLamp(AbstractLamp lamp)
         {
-            //!TODO: implementazione per aggiornare la lampada nella lista
-            var existingLampIndex = _lamps.FindIndex(l => l.Id == lamp.Id);
-            if (existingLampIndex != -1)
+            if (lamp == null) return;
+
+            for (int i = 0; i < _lamps.Count; i++)
             {
-                _lamps[existingLampIndex] = lamp;
+                if (_lamps[i].Id == lamp.Id)
+                {
+                    _lamps[i] = lamp;
+                    return; 
+                }
             }
         }
     }

@@ -73,6 +73,21 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
                 UpdateLastModified();
             }
         }
+        public virtual void DimmerBrightness(Brightness brightness)
+        {
+            if (Status == DeviceStatus.On)
+            {
+                int newBrightness = CurrentBrightness.Value + brightness;
+
+                if (newBrightness < MinBrightness.Value)
+                {
+                    newBrightness = MinBrightness.Value;
+                }
+
+                SetBrightness(new Brightness(newBrightness));
+                UpdateLastModified();
+            }
+        }
 
         public override void Toggle()
         {

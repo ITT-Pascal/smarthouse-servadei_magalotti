@@ -22,35 +22,39 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps
 
         public override void SetBrightness(Brightness brightness)
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
-                CurrentBrightness = brightness;
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }
+
+            CurrentBrightness = brightness;
+            UpdateLastModified();
         }
 
         public override void IncreaseBrightness()
         {
             if (Status == DeviceStatus.On)
             {
-                int newValue = CurrentBrightness.Value + 1;
-                if (newValue > MaxBrightness.Value) newValue = MaxBrightness.Value;
-
-                CurrentBrightness = new Brightness(newValue);
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }
+            int newValue = CurrentBrightness.Value + 1;
+            if (newValue > MaxBrightness.Value) newValue = MaxBrightness.Value;
+
+            CurrentBrightness = new Brightness(newValue);
+            UpdateLastModified();
         }
 
         public override void DecreaseBrightness()
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
-                int newValue = CurrentBrightness.Value - 1;
-                if (newValue < MinBrightness.Value) newValue = MinBrightness.Value;
-
-                CurrentBrightness = new Brightness(newValue);
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }
+            int newValue = CurrentBrightness.Value - 1;
+            if (newValue < MinBrightness.Value) newValue = MinBrightness.Value;
+
+            CurrentBrightness = new Brightness(newValue);
+            UpdateLastModified();
         }
     }
 }        

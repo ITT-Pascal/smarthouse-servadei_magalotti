@@ -49,29 +49,35 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices
         }
         public virtual void SetBrightness(Brightness value)
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
-                CurrentBrightness = value;
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }
+
+            CurrentBrightness = value;
+            UpdateLastModified();
         }
 
         public virtual void IncreaseBrightness()
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
-                CurrentBrightness = new Brightness(CurrentBrightness.Value + 1);
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");   
             }
+            
+            CurrentBrightness = new Brightness(CurrentBrightness.Value + 1);
+            UpdateLastModified();
         }
 
         public virtual void DecreaseBrightness()
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
-                CurrentBrightness = new Brightness(CurrentBrightness.Value - 1);
-                UpdateLastModified();
+                throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }
+
+            CurrentBrightness = new Brightness(CurrentBrightness.Value - 1);
+            UpdateLastModified();
         }
         public virtual void DimmerBrightness(Brightness brightness)
         {

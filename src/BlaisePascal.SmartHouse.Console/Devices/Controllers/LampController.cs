@@ -285,7 +285,7 @@ public class LampController
         Console.WriteLine("Enter new brightness (0-10):");
         int brightness;
 
-        if (!int.TryParse(Console.ReadLine(), out brightness))
+        if (!int.TryParse(Console.ReadLine(), out brightness) || brightness < 0 || brightness > 10)
         {
             Console.WriteLine("Invalid input. Please enter a number between 0 and 10.");
             return;
@@ -298,8 +298,11 @@ public class LampController
         }
         catch (InvalidOperationException ex)
         {
-            Console.WriteLine($"Error updating lamp brightness: {ex.Message}");
-
+            Console.WriteLine($"{ex.Message}");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Invalid Brightness value: {ex.Message}");
         }
     }
     public void ShowMenu()

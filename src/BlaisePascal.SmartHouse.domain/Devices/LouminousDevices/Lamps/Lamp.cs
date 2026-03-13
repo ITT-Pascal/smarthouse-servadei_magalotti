@@ -33,7 +33,7 @@ namespace BlaisePascal.SmartHouse.Domain.Devices.LouminousDevices.Lamps
 
         public override void IncreaseBrightness()
         {
-            if (Status == DeviceStatus.On)
+            if (Status == DeviceStatus.Off)
             {
                 throw new InvalidOperationException("Cannot change brightness when the lamp is off.");
             }

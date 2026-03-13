@@ -51,7 +51,7 @@ namespace BlaisePascal.SmartHouse.Domain.UnitTest.DevicesTests.LouminousDevicesT
             lamp.SetBrightness(new Brightness(0));
             Assert.Equal(1, lamp.CurrentBrightness.Value);
         }
-
+        
         [Fact]
         public void IncreaseBrightness_IncrementsByOne()
         {
